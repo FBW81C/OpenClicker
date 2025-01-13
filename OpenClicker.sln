@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenClicker", "OpenClicker\OpenClicker.csproj", "{871C43C1-7342-4374-8C24-027C3FA0FA06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenClicker.Core", "OpenClicker.Core\OpenClicker.Core.csproj", "{0D56FF7F-46C1-4C16-8625-C7736290A8DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{871C43C1-7342-4374-8C24-027C3FA0FA06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{871C43C1-7342-4374-8C24-027C3FA0FA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{871C43C1-7342-4374-8C24-027C3FA0FA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{871C43C1-7342-4374-8C24-027C3FA0FA06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D56FF7F-46C1-4C16-8625-C7736290A8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D56FF7F-46C1-4C16-8625-C7736290A8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D56FF7F-46C1-4C16-8625-C7736290A8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D56FF7F-46C1-4C16-8625-C7736290A8DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
