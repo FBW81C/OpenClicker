@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using OpenClicker.Core.models;
 
 namespace OpenClicker;
 
@@ -27,22 +28,48 @@ static class Program
         ApplicationConfiguration.Initialize();
         Application.Run(new Main());
     }
-
+    
     public static void LeftClick()
     {
+        LeftDown();
+        LeftUp();
+    }
+    public static void LeftDown()
+    {
         mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, IntPtr.Zero);
+    }
+    public static void LeftUp()
+    {
         mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, IntPtr.Zero);
     }
 
     public static void RightClick()
     {
+        RightDown();
+        RightUp();
+    }
+    public static void RightDown()
+    {
         mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, IntPtr.Zero);
+    }
+    public static void RightUp()
+    {
         mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, IntPtr.Zero);
     }
-
+    
     public static void MiddleClick()
     {
+        MiddleDown();
+        MiddleUp();
+    }
+
+    public static void MiddleDown()
+    {
         mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, IntPtr.Zero);
+    }
+
+    public static void MiddleUp()
+    {
         mouse_event(MOUSEEVENTF_MIDDLEUP, 0, 0, 0, IntPtr.Zero);
     }
 

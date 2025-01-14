@@ -249,6 +249,7 @@ partial class Main
         cb_clickType.Name = "cb_clickType";
         cb_clickType.Size = new System.Drawing.Size(67, 23);
         cb_clickType.TabIndex = 3;
+        cb_clickType.SelectedIndexChanged += cb_clickType_SelectedIndexChanged;
         cb_clickType.SelectionChangeCommitted += cb_clickType_SelectionChangeCommitted;
         cb_clickType.KeyPress += cb_KeyPress;
         // 
@@ -276,6 +277,7 @@ partial class Main
         cb_mouseButton.Name = "cb_mouseButton";
         cb_mouseButton.Size = new System.Drawing.Size(67, 23);
         cb_mouseButton.TabIndex = 0;
+        cb_mouseButton.SelectedIndexChanged += cb_mouseButton_SelectedIndexChanged;
         cb_mouseButton.KeyPress += cb_KeyPress;
         // 
         // gp_delay

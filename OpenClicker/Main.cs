@@ -1,3 +1,5 @@
+using System.Reflection.Metadata;
+using System.Runtime.InteropServices.Marshalling;
 using OpenClicker.Core.models;
 using Timer = System.Windows.Forms.Timer;
 
@@ -12,6 +14,8 @@ public partial class Main : Form
     private int _clickCount = 0;
     private MouseButtonItem _selectedMouseButton = new();
     private ClickType _selectedClickType = new(ClickTypes.Single);
+    
+    private readonly ClickType _clickTypeHold = new(ClickTypes.Hold);
     
     public Main()
     {
@@ -43,14 +47,22 @@ public partial class Main : Form
             */
 
         // Clicktypes
-        var clickTypes = Enum.GetValues(typeof(ClickTypes))
-            .Cast<ClickTypes>()
-            .Select(c => new ClickType(c))
-            .ToArray();
+        // Unnessesary complex but dynammic
+        // var clickTypes = Enum.GetValues(typeof(ClickTypes))
+        //     .Cast<ClickTypes>()
+        //     .Select(c => new ClickType(c))
+        //     .ToArray();
+        var clickTypes = new[]
+        {
+            new ClickType(ClickTypes.Single),
+            new ClickType(ClickTypes.Double),
+            _clickTypeHold
+        };
         cb_clickType.Items.AddRange(clickTypes);
         cb_clickType.DisplayMember = "DisplayName";
         cb_clickType.SelectedIndex = 0;
-
+        
+        
         // Mouse buttons
         var buttons = new[]
         {
@@ -66,19 +78,40 @@ public partial class Main : Form
 
     private void btn_start_Click(object sender, EventArgs e)
     {
+        // Checks and sets to ensure integrity 
         if (_timer.Enabled || _isClicking)
         {
             return;
         }
         btn_start.Enabled = false;
 
+        cb_clickType.Items.Remove(_clickTypeHold);
+        
         _clickCount = 0;
         _isClicking = true;
 
+        // Actual code
+        var delay = (int)nup_delay_mili.Value +
+                    (int)nup_delay_sec.Value * 1000 +
+                    (int)nup_min.Value * 60 * 1000 +
+                    (int)nup_delay_h.Value * 60 * 60 * 1000;
+        
+        // Progress bar
+        pb_progress.Minimum = 0;
+        pb_progress.Maximum = rb_times.Checked ? (int)nup_times.Value : 10000;
+        pb_progress.Value = rb_times.Checked? 0 : 9999;
+
+        // TODO: holding and releasing, time (countdown, maybe another groupbox with h,min,sec,mili)
+        // if (_selectedClickType.Type == ClickTypes.Hold)
+        // {
+        //     StartHolding(delay);
+        //     return;
+        // }
+        
         var interval = (int)nup_mili.Value +
-                        (int)nup_sec.Value * 1000 +
-                        (int)nup_min.Value * 60 * 1000 +
-                        (int)nup_hours.Value * 60 * 60 * 1000;
+                       (int)nup_sec.Value * 1000 +
+                       (int)nup_min.Value * 60 * 1000 +
+                       (int)nup_hours.Value * 60 * 60 * 1000;
         if (interval <= 0)
         {
             MessageBox.Show("Interval must be greater than 0");
@@ -87,36 +120,11 @@ public partial class Main : Form
             return;
         }
         
-        var delay = (int)nup_delay_mili.Value +
-                    (int)nup_delay_sec.Value * 1000 +
-                    (int)nup_min.Value * 60 * 1000 +
-                    (int)nup_delay_h.Value * 60 * 60 * 1000;
-        
-        var button = cb_mouseButton.SelectedItem;
-        if (button is MouseButtonItem buttonItem)
-        {
-            _selectedMouseButton = buttonItem;
-        }
-        else{ _selectedMouseButton = new MouseButtonItem();}
-        
-        var clickType = cb_clickType.SelectedItem;
-        if (clickType is ClickType clickType1)
-        {
-            _selectedClickType = clickType1;   
-        }
-        else { _selectedClickType = new ClickType(ClickTypes.Single); }
-        
-        // Progress bar
-        pb_progress.Minimum = 0;
-        pb_progress.Maximum = rb_times.Checked ? (int)nup_times.Value : 10000;
-        pb_progress.Value = rb_times.Checked? 0 : 9999;
-        
         _timer.Interval = interval;
         _timer.Tick -= Timer_Tick;
         _timer.Tick += Timer_Tick;
      
         StartTimerWithDelay(delay);
-        // _timer.Start();
     }
 
     private async void StartTimerWithDelay(int delay)
@@ -169,6 +177,43 @@ public partial class Main : Form
         }
     }
 
+    private async void StartHolding(int delay)
+    {
+        await Task.Delay(delay);
+        switch (_selectedMouseButton.Value)
+        {
+            case MouseButtons.Left:
+                Program.LeftDown();
+                break;
+            case MouseButtons.Right:
+                Program.RightDown();
+                break;
+            case MouseButtons.Middle:
+                Program.MiddleDown();
+                break;
+            default:
+                return;
+        }
+    }
+
+    private void StopHolding()
+    {
+        switch (_selectedMouseButton.Value)
+        {
+            case MouseButtons.Left:
+                Program.LeftUp();
+                break;
+            case MouseButtons.Right:
+                Program.RightUp();
+                break;
+            case MouseButtons.Middle:
+                Program.MiddleUp();
+                break;
+            default:
+                return;
+        }
+    }
+
     private void btn_stop_Click(object sender, EventArgs e)
     {
         StopTimer();
@@ -180,6 +225,7 @@ public partial class Main : Form
         _timer.Stop();
         btn_start.Enabled = true;
         pb_progress.Value = 0;
+        cb_clickType.Items.Add(_clickTypeHold);
     }
 
     private void nup_KeyPress(object sender, KeyPressEventArgs e)
@@ -211,5 +257,25 @@ public partial class Main : Form
             nup_min.Enabled = true;
             nup_hours.Enabled = true;
         }
+    }
+
+    private void cb_mouseButton_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var button = cb_mouseButton.SelectedItem;
+        if (button is MouseButtonItem buttonItem)
+        {
+            _selectedMouseButton = buttonItem;
+        }
+        else{ _selectedMouseButton = new MouseButtonItem();}
+    }
+
+    private void cb_clickType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var clickType = cb_clickType.SelectedItem;
+        if (clickType is ClickType clickType1)
+        {
+            _selectedClickType = clickType1;   
+        }
+        else { _selectedClickType = new ClickType(ClickTypes.Single); }
     }
 }
