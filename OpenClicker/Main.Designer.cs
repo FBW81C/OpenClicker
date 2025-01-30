@@ -60,6 +60,15 @@ partial class Main
         lbl_delay_min = new System.Windows.Forms.Label();
         lbl_delay_h = new System.Windows.Forms.Label();
         pb_progress = new System.Windows.Forms.ProgressBar();
+        gp_duration = new System.Windows.Forms.GroupBox();
+        nup_duration_sec = new System.Windows.Forms.NumericUpDown();
+        nup_duration_min = new System.Windows.Forms.NumericUpDown();
+        nup_duration_h = new System.Windows.Forms.NumericUpDown();
+        nup_duration_mili = new System.Windows.Forms.NumericUpDown();
+        label2 = new System.Windows.Forms.Label();
+        label3 = new System.Windows.Forms.Label();
+        label4 = new System.Windows.Forms.Label();
+        label5 = new System.Windows.Forms.Label();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_min).BeginInit();
@@ -73,6 +82,11 @@ partial class Main
         ((System.ComponentModel.ISupportInitialize)nup_delay_min).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_delay_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_delay_mili).BeginInit();
+        gp_duration.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)nup_duration_sec).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_duration_min).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_duration_h).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_duration_mili).BeginInit();
         SuspendLayout();
         // 
         // gp_interval
@@ -372,11 +386,97 @@ partial class Main
         pb_progress.Size = new System.Drawing.Size(349, 25);
         pb_progress.TabIndex = 6;
         // 
+        // gp_duration
+        // 
+        gp_duration.Controls.Add(nup_duration_sec);
+        gp_duration.Controls.Add(nup_duration_min);
+        gp_duration.Controls.Add(nup_duration_h);
+        gp_duration.Controls.Add(nup_duration_mili);
+        gp_duration.Controls.Add(label2);
+        gp_duration.Controls.Add(label3);
+        gp_duration.Controls.Add(label4);
+        gp_duration.Controls.Add(label5);
+        gp_duration.Location = new System.Drawing.Point(12, 251);
+        gp_duration.Name = "gp_duration";
+        gp_duration.Size = new System.Drawing.Size(489, 62);
+        gp_duration.TabIndex = 7;
+        gp_duration.TabStop = false;
+        gp_duration.Text = "Duration (Only for Click Type = Holding)";
+        // 
+        // nup_duration_sec
+        // 
+        nup_duration_sec.Location = new System.Drawing.Point(222, 25);
+        nup_duration_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_duration_sec.Name = "nup_duration_sec";
+        nup_duration_sec.Size = new System.Drawing.Size(54, 23);
+        nup_duration_sec.TabIndex = 11;
+        nup_duration_sec.KeyPress += nup_KeyPress;
+        // 
+        // nup_duration_min
+        // 
+        nup_duration_min.Location = new System.Drawing.Point(111, 25);
+        nup_duration_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_duration_min.Name = "nup_duration_min";
+        nup_duration_min.Size = new System.Drawing.Size(54, 23);
+        nup_duration_min.TabIndex = 10;
+        nup_duration_min.KeyPress += nup_KeyPress;
+        // 
+        // nup_duration_h
+        // 
+        nup_duration_h.Location = new System.Drawing.Point(10, 25);
+        nup_duration_h.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_duration_h.Name = "nup_duration_h";
+        nup_duration_h.Size = new System.Drawing.Size(54, 23);
+        nup_duration_h.TabIndex = 9;
+        nup_duration_h.KeyPress += nup_KeyPress;
+        // 
+        // nup_duration_mili
+        // 
+        nup_duration_mili.Location = new System.Drawing.Point(342, 25);
+        nup_duration_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_duration_mili.Name = "nup_duration_mili";
+        nup_duration_mili.Size = new System.Drawing.Size(54, 23);
+        nup_duration_mili.TabIndex = 8;
+        nup_duration_mili.KeyPress += nup_KeyPress;
+        // 
+        // label2
+        // 
+        label2.Location = new System.Drawing.Point(402, 27);
+        label2.Name = "label2";
+        label2.Size = new System.Drawing.Size(73, 16);
+        label2.TabIndex = 7;
+        label2.Text = "Milliseconds";
+        // 
+        // label3
+        // 
+        label3.Location = new System.Drawing.Point(282, 27);
+        label3.Name = "label3";
+        label3.Size = new System.Drawing.Size(54, 16);
+        label3.TabIndex = 6;
+        label3.Text = "Seconds";
+        // 
+        // label4
+        // 
+        label4.Location = new System.Drawing.Point(171, 28);
+        label4.Name = "label4";
+        label4.Size = new System.Drawing.Size(54, 16);
+        label4.TabIndex = 5;
+        label4.Text = "Minutes";
+        // 
+        // label5
+        // 
+        label5.Location = new System.Drawing.Point(70, 27);
+        label5.Name = "label5";
+        label5.Size = new System.Drawing.Size(39, 16);
+        label5.TabIndex = 1;
+        label5.Text = "Hours";
+        // 
         // Main
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(515, 450);
+        Controls.Add(gp_duration);
         Controls.Add(pb_progress);
         Controls.Add(gp_delay);
         Controls.Add(gp_options);
@@ -399,8 +499,23 @@ partial class Main
         ((System.ComponentModel.ISupportInitialize)nup_delay_min).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_delay_h).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_delay_mili).EndInit();
+        gp_duration.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)nup_duration_sec).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_duration_min).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_duration_h).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_duration_mili).EndInit();
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.GroupBox gp_duration;
+    private System.Windows.Forms.NumericUpDown nup_duration_sec;
+    private System.Windows.Forms.NumericUpDown nup_duration_min;
+    private System.Windows.Forms.NumericUpDown nup_duration_h;
+    private System.Windows.Forms.NumericUpDown nup_duration_mili;
+    private System.Windows.Forms.Label label2;
+    private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.Label label5;
 
     private System.Windows.Forms.ProgressBar pb_progress;
 
