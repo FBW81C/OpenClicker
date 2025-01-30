@@ -62,6 +62,12 @@ public partial class Main : Form
         cb_clickType.DisplayMember = "DisplayName";
         cb_clickType.SelectedIndex = 0;
         
+        // Disable duration becasue clickType default is single not holding
+        var value = cb_clickType.SelectedItem == _clickTypeHold;
+        nup_duration_h.Enabled = value;
+        nup_duration_min.Enabled = value;
+        nup_duration_sec.Enabled = value;
+        nup_duration_mili.Enabled = value;
         
         // Mouse buttons
         var buttons = new[]
@@ -84,9 +90,10 @@ public partial class Main : Form
             return;
         }
         btn_start.Enabled = false;
-
-        cb_clickType.Items.Remove(_clickTypeHold);
-        
+        if (_selectedClickType.Type != ClickTypes.Hold)
+        {
+            cb_clickType.Items.Remove(_clickTypeHold); // Prohibit user from changing to hold while active
+        }
         _clickCount = 0;
         _isClicking = true;
 
@@ -95,18 +102,25 @@ public partial class Main : Form
                     (int)nup_delay_sec.Value * 1000 +
                     (int)nup_min.Value * 60 * 1000 +
                     (int)nup_delay_h.Value * 60 * 60 * 1000;
+        if (delay < 0)
+        {
+            MessageBox.Show("Delay cannot be negative.");
+            btn_start.Enabled = true;
+            _isClicking = false;
+            return;
+        }
+        
+        // TODO: holding and releasing, time (countdown, maybe another groupbox with h,min,sec,mili)
+        if (_selectedClickType.Type == ClickTypes.Hold)
+        {
+            StartHolding(delay);
+            return;
+        }
         
         // Progress bar
         pb_progress.Minimum = 0;
         pb_progress.Maximum = rb_times.Checked ? (int)nup_times.Value : 10000;
         pb_progress.Value = rb_times.Checked? 0 : 9999;
-
-        // TODO: holding and releasing, time (countdown, maybe another groupbox with h,min,sec,mili)
-        // if (_selectedClickType.Type == ClickTypes.Hold)
-        // {
-        //     StartHolding(delay);
-        //     return;
-        // }
         
         var interval = (int)nup_mili.Value +
                        (int)nup_sec.Value * 1000 +
@@ -179,6 +193,18 @@ public partial class Main : Form
 
     private async void StartHolding(int delay)
     {
+        var duration = (int)nup_duration_mili.Value +
+                       (int)nup_duration_sec.Value * 1000 +
+                       (int)nup_duration_min.Value * 60 * 1000 +
+                       (int)nup_duration_h.Value * 60 * 60 * 1000;
+        if (duration <= 0)
+        {
+            MessageBox.Show("Duration must be greater than 0");
+            btn_start.Enabled = true;
+            _isClicking = false;
+            return;
+        }
+        
         await Task.Delay(delay);
         switch (_selectedMouseButton.Value)
         {
@@ -194,10 +220,16 @@ public partial class Main : Form
             default:
                 return;
         }
+        
+        await Task.Delay(duration);
+        StopHolding();
     }
 
     private void StopHolding()
     {
+        _isClicking = false;
+        btn_start.Enabled = true;
+        pb_progress.Value = 0;
         switch (_selectedMouseButton.Value)
         {
             case MouseButtons.Left:
@@ -216,7 +248,14 @@ public partial class Main : Form
 
     private void btn_stop_Click(object sender, EventArgs e)
     {
-        StopTimer();
+        if (_selectedClickType.Type == ClickTypes.Hold)
+        {
+            StopHolding();
+        }
+        else
+        {
+            StopTimer();
+        }
     }
 
     private void StopTimer()
@@ -245,17 +284,37 @@ public partial class Main : Form
         
         if (clickType.Type == ClickTypes.Hold)
         {
+            // Interval
             nup_mili.Enabled = false;
             nup_sec.Enabled = false;
             nup_min.Enabled = false;
             nup_hours.Enabled = false;
+            // Radiobuttons
+            rb_times.Enabled = false;
+            nup_times.Enabled = false;
+            rb_infinite.Enabled = false;
+            // Duration
+            nup_duration_h.Enabled = true;
+            nup_duration_min.Enabled = true;
+            nup_duration_sec.Enabled = true;
+            nup_duration_mili.Enabled = true;
         }
         else
         {
+            // Interval
             nup_mili.Enabled = true;
             nup_sec.Enabled = true;
             nup_min.Enabled = true;
             nup_hours.Enabled = true;
+            // Radiobuttons
+            rb_times.Enabled = true;
+            nup_times.Enabled = true;
+            rb_infinite.Enabled = true;
+            // Duration
+            nup_duration_h.Enabled = false;
+            nup_duration_min.Enabled = false;
+            nup_duration_sec.Enabled = false;
+            nup_duration_mili.Enabled = false;
         }
     }
 
