@@ -69,6 +69,14 @@ partial class Main
         label3 = new System.Windows.Forms.Label();
         label4 = new System.Windows.Forms.Label();
         label5 = new System.Windows.Forms.Label();
+        gp_clickPos = new System.Windows.Forms.GroupBox();
+        btn_pickLocation = new System.Windows.Forms.Button();
+        nup_clickingPos_Y = new System.Windows.Forms.NumericUpDown();
+        lbl_clickingPos_Y = new System.Windows.Forms.Label();
+        nup_clickingPos_X = new System.Windows.Forms.NumericUpDown();
+        lbl_clickingPos_X = new System.Windows.Forms.Label();
+        rb_XY = new System.Windows.Forms.RadioButton();
+        rb_currentPos = new System.Windows.Forms.RadioButton();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_min).BeginInit();
@@ -87,6 +95,9 @@ partial class Main
         ((System.ComponentModel.ISupportInitialize)nup_duration_min).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_mili).BeginInit();
+        gp_clickPos.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)nup_clickingPos_Y).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_clickingPos_X).BeginInit();
         SuspendLayout();
         // 
         // gp_interval
@@ -471,11 +482,86 @@ partial class Main
         label5.TabIndex = 1;
         label5.Text = "Hours";
         // 
+        // gp_clickPos
+        // 
+        gp_clickPos.Controls.Add(btn_pickLocation);
+        gp_clickPos.Controls.Add(nup_clickingPos_Y);
+        gp_clickPos.Controls.Add(lbl_clickingPos_Y);
+        gp_clickPos.Controls.Add(nup_clickingPos_X);
+        gp_clickPos.Controls.Add(lbl_clickingPos_X);
+        gp_clickPos.Controls.Add(rb_XY);
+        gp_clickPos.Controls.Add(rb_currentPos);
+        gp_clickPos.Location = new System.Drawing.Point(15, 321);
+        gp_clickPos.Name = "gp_clickPos";
+        gp_clickPos.Size = new System.Drawing.Size(485, 86);
+        gp_clickPos.TabIndex = 8;
+        gp_clickPos.TabStop = false;
+        gp_clickPos.Text = "Clicking Position";
+        // 
+        // btn_pickLocation
+        // 
+        btn_pickLocation.Location = new System.Drawing.Point(219, 51);
+        btn_pickLocation.Name = "btn_pickLocation";
+        btn_pickLocation.Size = new System.Drawing.Size(104, 25);
+        btn_pickLocation.TabIndex = 6;
+        btn_pickLocation.Text = "Pick Location";
+        btn_pickLocation.UseVisualStyleBackColor = true;
+        // 
+        // nup_clickingPos_Y
+        // 
+        nup_clickingPos_Y.Location = new System.Drawing.Point(143, 52);
+        nup_clickingPos_Y.Name = "nup_clickingPos_Y";
+        nup_clickingPos_Y.Size = new System.Drawing.Size(73, 23);
+        nup_clickingPos_Y.TabIndex = 5;
+        // 
+        // lbl_clickingPos_Y
+        // 
+        lbl_clickingPos_Y.Location = new System.Drawing.Point(126, 55);
+        lbl_clickingPos_Y.Name = "lbl_clickingPos_Y";
+        lbl_clickingPos_Y.Size = new System.Drawing.Size(23, 23);
+        lbl_clickingPos_Y.TabIndex = 4;
+        lbl_clickingPos_Y.Text = "Y";
+        // 
+        // nup_clickingPos_X
+        // 
+        nup_clickingPos_X.Location = new System.Drawing.Point(44, 52);
+        nup_clickingPos_X.Name = "nup_clickingPos_X";
+        nup_clickingPos_X.Size = new System.Drawing.Size(72, 23);
+        nup_clickingPos_X.TabIndex = 3;
+        // 
+        // lbl_clickingPos_X
+        // 
+        lbl_clickingPos_X.Location = new System.Drawing.Point(26, 55);
+        lbl_clickingPos_X.Name = "lbl_clickingPos_X";
+        lbl_clickingPos_X.Size = new System.Drawing.Size(18, 23);
+        lbl_clickingPos_X.TabIndex = 2;
+        lbl_clickingPos_X.Text = "X";
+        // 
+        // rb_XY
+        // 
+        rb_XY.Location = new System.Drawing.Point(10, 51);
+        rb_XY.Name = "rb_XY";
+        rb_XY.Size = new System.Drawing.Size(104, 24);
+        rb_XY.TabIndex = 1;
+        rb_XY.TabStop = true;
+        rb_XY.UseVisualStyleBackColor = true;
+        // 
+        // rb_currentPos
+        // 
+        rb_currentPos.Location = new System.Drawing.Point(10, 22);
+        rb_currentPos.Name = "rb_currentPos";
+        rb_currentPos.Size = new System.Drawing.Size(156, 24);
+        rb_currentPos.TabIndex = 0;
+        rb_currentPos.TabStop = true;
+        rb_currentPos.Text = "Current Cursor Position";
+        rb_currentPos.UseVisualStyleBackColor = true;
+        // 
         // Main
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(515, 450);
+        Controls.Add(gp_clickPos);
         Controls.Add(gp_duration);
         Controls.Add(pb_progress);
         Controls.Add(gp_delay);
@@ -504,8 +590,23 @@ partial class Main
         ((System.ComponentModel.ISupportInitialize)nup_duration_min).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_h).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_mili).EndInit();
+        gp_clickPos.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)nup_clickingPos_Y).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_clickingPos_X).EndInit();
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Button btn_pickLocation;
+
+    private System.Windows.Forms.NumericUpDown nup_clickingPos_Y;
+
+    private System.Windows.Forms.Label lbl_clickingPos_X;
+    private System.Windows.Forms.NumericUpDown nup_clickingPos_X;
+    private System.Windows.Forms.Label lbl_clickingPos_Y;
+
+    private System.Windows.Forms.GroupBox gp_clickPos;
+    private System.Windows.Forms.RadioButton rb_currentPos;
+    private System.Windows.Forms.RadioButton rb_XY;
 
     private System.Windows.Forms.GroupBox gp_duration;
     private System.Windows.Forms.NumericUpDown nup_duration_sec;
