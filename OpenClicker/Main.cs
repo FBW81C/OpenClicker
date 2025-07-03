@@ -163,6 +163,18 @@ public partial class Main : Form
             }
         }
         
+        // Clicking Position
+        /*if (rb_XY.Checked)
+        {
+            var text = "";
+            foreach (var screen in Screen.AllScreens)
+            {
+                text += screen.Bounds;
+            }
+            MessageBox.Show(text);
+            Program.SetCursorPosition((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value);
+        }*/
+        
         switch (_selectedMouseButton.Value) // Clicking
         {
             case MouseButtons.Left:
