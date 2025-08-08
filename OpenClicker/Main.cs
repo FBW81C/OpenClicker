@@ -1,12 +1,11 @@
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices.Marshalling;
-using OpenClicker.Core.models;
+using OpenClicker.Models;
 using Timer = System.Windows.Forms.Timer;
 
 namespace OpenClicker;
 
-// Ideas:
-// Add starting delay
+// dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true
 public partial class Main : Form
 {
     private Timer _timer = new() { Interval = 1000 };
@@ -14,9 +13,9 @@ public partial class Main : Form
     private int _clickCount = 0;
     private MouseButtonItem _selectedMouseButton = new();
     private ClickType _selectedClickType = new(ClickTypes.Single);
-    
+
     private readonly ClickType _clickTypeHold = new(ClickTypes.Hold);
-    
+
     public Main()
     {
         InitializeComponent();
@@ -25,10 +24,10 @@ public partial class Main : Form
     private void Main_Load(object sender, EventArgs e)
     {
         rb_infinite.Checked = true;
-        
+
         cb_clickType.Items.Clear();
         cb_mouseButton.Items.Clear();
-        
+
         /*
          * Goofy code. I can't really access ALL buttons on a mouse with example 10 buttons.
          * I can only access Left,Right,Middle,X1,X2
@@ -61,14 +60,14 @@ public partial class Main : Form
         cb_clickType.Items.AddRange(clickTypes);
         cb_clickType.DisplayMember = "DisplayName";
         cb_clickType.SelectedIndex = 0;
-        
+
         // Disable duration becasue clickType default is single not holding
         var value = cb_clickType.SelectedItem == _clickTypeHold;
         nup_duration_h.Enabled = value;
         nup_duration_min.Enabled = value;
         nup_duration_sec.Enabled = value;
         nup_duration_mili.Enabled = value;
-        
+
         // Mouse buttons
         var buttons = new[]
         {
@@ -76,10 +75,12 @@ public partial class Main : Form
             new MouseButtonItem {Value = MouseButtons.Right, DisplayName = "Right"},
             new MouseButtonItem {Value = MouseButtons.Middle, DisplayName = "Middle"}
         };
-        
+
         cb_mouseButton.Items.AddRange(buttons);
         cb_mouseButton.DisplayMember = "DisplayName";
         cb_mouseButton.SelectedIndex = 0;
+
+        rb_currentPos.Checked = true;
     }
 
     private void btn_start_Click(object sender, EventArgs e)
@@ -98,6 +99,19 @@ public partial class Main : Form
         _isClicking = true;
 
         // Actual code
+
+        // Clicking Position
+        //if (rb_XY.Checked)
+        //{
+        //    var text = "";
+        //    foreach (var screen in Screen.AllScreens)
+        //    {
+        //        text += screen.Bounds;
+        //    }
+        //    MessageBox.Show(text);
+        //    Program.SetCursorPosition((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value);
+        //}
+
         var delay = (int)nup_delay_mili.Value +
                     (int)nup_delay_sec.Value * 1000 +
                     (int)nup_min.Value * 60 * 1000 +
@@ -109,19 +123,19 @@ public partial class Main : Form
             _isClicking = false;
             return;
         }
-        
+
         // TODO: holding and releasing, time (countdown, maybe another groupbox with h,min,sec,mili)
         if (_selectedClickType.Type == ClickTypes.Hold)
         {
             StartHolding(delay);
             return;
         }
-        
+
         // Progress bar
         pb_progress.Minimum = 0;
         pb_progress.Maximum = rb_times.Checked ? (int)nup_times.Value : 10000;
-        pb_progress.Value = rb_times.Checked? 0 : 9999;
-        
+        pb_progress.Value = rb_times.Checked ? 0 : 9999;
+
         var interval = (int)nup_mili.Value +
                        (int)nup_sec.Value * 1000 +
                        (int)nup_min.Value * 60 * 1000 +
@@ -133,21 +147,25 @@ public partial class Main : Form
             _isClicking = false;
             return;
         }
-        
+
         _timer.Interval = interval;
         _timer.Tick -= Timer_Tick;
         _timer.Tick += Timer_Tick;
-     
+
         StartTimerWithDelay(delay);
     }
 
     private async void StartTimerWithDelay(int delay)
     {
         await Task.Delay(delay);
+        if (rb_XY.Checked)
+        {
+            Program.SetCursorPosition((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value);
+        }
         Timer_Tick(this, EventArgs.Empty); // invoking now, because it will wait "interval" before starting timer
         _timer.Start();
     }
-    
+
     private void Timer_Tick(object? sender, EventArgs e)
     {
         if (!_isClicking) return;
@@ -162,19 +180,12 @@ public partial class Main : Form
                 return; // I have the fear that the code won't do the right thing
             }
         }
-        
-        // Clicking Position
-        /*if (rb_XY.Checked)
+
+        if (rb_XY.Checked)
         {
-            var text = "";
-            foreach (var screen in Screen.AllScreens)
-            {
-                text += screen.Bounds;
-            }
-            MessageBox.Show(text);
             Program.SetCursorPosition((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value);
-        }*/
-        
+        }
+
         switch (_selectedMouseButton.Value) // Clicking
         {
             case MouseButtons.Left:
@@ -216,7 +227,7 @@ public partial class Main : Form
             _isClicking = false;
             return;
         }
-        
+
         await Task.Delay(delay);
         switch (_selectedMouseButton.Value)
         {
@@ -232,7 +243,7 @@ public partial class Main : Form
             default:
                 return;
         }
-        
+
         await Task.Delay(duration);
         StopHolding();
     }
@@ -293,7 +304,7 @@ public partial class Main : Form
     private void cb_clickType_SelectionChangeCommitted(object sender, EventArgs e)
     {
         if (cb_clickType.SelectedItem is not ClickType clickType) return;
-        
+
         if (clickType.Type == ClickTypes.Hold)
         {
             // Interval
@@ -337,7 +348,7 @@ public partial class Main : Form
         {
             _selectedMouseButton = buttonItem;
         }
-        else{ _selectedMouseButton = new MouseButtonItem();}
+        else { _selectedMouseButton = new MouseButtonItem(); }
     }
 
     private void cb_clickType_SelectedIndexChanged(object sender, EventArgs e)
@@ -345,8 +356,26 @@ public partial class Main : Form
         var clickType = cb_clickType.SelectedItem;
         if (clickType is ClickType clickType1)
         {
-            _selectedClickType = clickType1;   
+            _selectedClickType = clickType1;
         }
         else { _selectedClickType = new ClickType(ClickTypes.Single); }
+    }
+
+    private void btn_pickLocation_Click(object sender, EventArgs e)
+    {
+        using (var overlay = new OverlayForm())
+        {
+            overlay.ShowDialog(); // Modal
+            if (overlay.PointCaptured)
+            {
+                Point clickedPoint = overlay.CapturedPoint;
+                nup_clickingPos_X.Value = clickedPoint.X;
+                nup_clickingPos_Y.Value = clickedPoint.Y;
+            }
+            else
+            {
+                // MessageBox.Show("Capture cancelled.");
+            }
+        }
     }
 }
