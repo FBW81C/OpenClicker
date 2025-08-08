@@ -8,8 +8,4 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\OpenClicker.Core\OpenClicker.Core.csproj" />
-    </ItemGroup>
-
 </Project>
