@@ -29,54 +29,54 @@ partial class Main
     /// </summary>
     private void InitializeComponent()
     {
-        gp_interval = new System.Windows.Forms.GroupBox();
-        nup_sec = new System.Windows.Forms.NumericUpDown();
-        nup_min = new System.Windows.Forms.NumericUpDown();
-        nup_hours = new System.Windows.Forms.NumericUpDown();
-        nup_mili = new System.Windows.Forms.NumericUpDown();
-        lb_msec = new System.Windows.Forms.Label();
-        lb_sec = new System.Windows.Forms.Label();
-        lb_Minutes = new System.Windows.Forms.Label();
-        lb_Hours = new System.Windows.Forms.Label();
-        gp_repeat = new System.Windows.Forms.GroupBox();
-        nup_times = new System.Windows.Forms.NumericUpDown();
-        label1 = new System.Windows.Forms.Label();
-        rb_times = new System.Windows.Forms.RadioButton();
-        rb_infinite = new System.Windows.Forms.RadioButton();
-        btn_start = new System.Windows.Forms.Button();
-        btn_stop = new System.Windows.Forms.Button();
-        gp_options = new System.Windows.Forms.GroupBox();
-        cb_clickType = new System.Windows.Forms.ComboBox();
-        lbl_clickType = new System.Windows.Forms.Label();
-        lbl_mouseButton = new System.Windows.Forms.Label();
-        cb_mouseButton = new System.Windows.Forms.ComboBox();
-        gp_delay = new System.Windows.Forms.GroupBox();
-        nup_delay_sec = new System.Windows.Forms.NumericUpDown();
-        nup_delay_min = new System.Windows.Forms.NumericUpDown();
-        nup_delay_h = new System.Windows.Forms.NumericUpDown();
-        nup_delay_mili = new System.Windows.Forms.NumericUpDown();
-        lbl_delay_mili = new System.Windows.Forms.Label();
-        lbl_delay_sec = new System.Windows.Forms.Label();
-        lbl_delay_min = new System.Windows.Forms.Label();
-        lbl_delay_h = new System.Windows.Forms.Label();
-        pb_progress = new System.Windows.Forms.ProgressBar();
-        gp_duration = new System.Windows.Forms.GroupBox();
-        nup_duration_sec = new System.Windows.Forms.NumericUpDown();
-        nup_duration_min = new System.Windows.Forms.NumericUpDown();
-        nup_duration_h = new System.Windows.Forms.NumericUpDown();
-        nup_duration_mili = new System.Windows.Forms.NumericUpDown();
-        label2 = new System.Windows.Forms.Label();
-        label3 = new System.Windows.Forms.Label();
-        label4 = new System.Windows.Forms.Label();
-        label5 = new System.Windows.Forms.Label();
-        gp_clickPos = new System.Windows.Forms.GroupBox();
-        btn_pickLocation = new System.Windows.Forms.Button();
-        nup_clickingPos_Y = new System.Windows.Forms.NumericUpDown();
-        lbl_clickingPos_Y = new System.Windows.Forms.Label();
-        nup_clickingPos_X = new System.Windows.Forms.NumericUpDown();
-        lbl_clickingPos_X = new System.Windows.Forms.Label();
-        rb_XY = new System.Windows.Forms.RadioButton();
-        rb_currentPos = new System.Windows.Forms.RadioButton();
+        gp_interval = new GroupBox();
+        nup_sec = new NumericUpDown();
+        nup_min = new NumericUpDown();
+        nup_hours = new NumericUpDown();
+        nup_mili = new NumericUpDown();
+        lb_msec = new Label();
+        lb_sec = new Label();
+        lb_Minutes = new Label();
+        lb_Hours = new Label();
+        gp_repeat = new GroupBox();
+        nup_times = new NumericUpDown();
+        label1 = new Label();
+        rb_times = new RadioButton();
+        rb_infinite = new RadioButton();
+        btn_start = new Button();
+        btn_stop = new Button();
+        gp_options = new GroupBox();
+        cb_clickType = new ComboBox();
+        lbl_clickType = new Label();
+        lbl_mouseButton = new Label();
+        cb_mouseButton = new ComboBox();
+        gp_delay = new GroupBox();
+        nup_delay_sec = new NumericUpDown();
+        nup_delay_min = new NumericUpDown();
+        nup_delay_h = new NumericUpDown();
+        nup_delay_mili = new NumericUpDown();
+        lbl_delay_mili = new Label();
+        lbl_delay_sec = new Label();
+        lbl_delay_min = new Label();
+        lbl_delay_h = new Label();
+        pb_progress = new ProgressBar();
+        gp_duration = new GroupBox();
+        nup_duration_sec = new NumericUpDown();
+        nup_duration_min = new NumericUpDown();
+        nup_duration_h = new NumericUpDown();
+        nup_duration_mili = new NumericUpDown();
+        label2 = new Label();
+        label3 = new Label();
+        label4 = new Label();
+        label5 = new Label();
+        gp_clickPos = new GroupBox();
+        btn_pickLocation = new Button();
+        nup_clickingPos_Y = new NumericUpDown();
+        lbl_clickingPos_Y = new Label();
+        nup_clickingPos_X = new NumericUpDown();
+        lbl_clickingPos_X = new Label();
+        rb_XY = new RadioButton();
+        rb_currentPos = new RadioButton();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_min).BeginInit();
@@ -110,78 +110,78 @@ partial class Main
         gp_interval.Controls.Add(lb_sec);
         gp_interval.Controls.Add(lb_Minutes);
         gp_interval.Controls.Add(lb_Hours);
-        gp_interval.Location = new System.Drawing.Point(12, 12);
+        gp_interval.Location = new Point(12, 12);
         gp_interval.Name = "gp_interval";
-        gp_interval.Size = new System.Drawing.Size(489, 62);
+        gp_interval.Size = new Size(489, 62);
         gp_interval.TabIndex = 0;
         gp_interval.TabStop = false;
         gp_interval.Text = "Click Interval";
         // 
         // nup_sec
         // 
-        nup_sec.Location = new System.Drawing.Point(222, 25);
+        nup_sec.Location = new Point(222, 25);
         nup_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_sec.Name = "nup_sec";
-        nup_sec.Size = new System.Drawing.Size(54, 23);
+        nup_sec.Size = new Size(54, 23);
         nup_sec.TabIndex = 11;
         nup_sec.KeyPress += nup_KeyPress;
         // 
         // nup_min
         // 
-        nup_min.Location = new System.Drawing.Point(111, 25);
+        nup_min.Location = new Point(111, 25);
         nup_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_min.Name = "nup_min";
-        nup_min.Size = new System.Drawing.Size(54, 23);
+        nup_min.Size = new Size(54, 23);
         nup_min.TabIndex = 10;
         nup_min.KeyPress += nup_KeyPress;
         // 
         // nup_hours
         // 
-        nup_hours.Location = new System.Drawing.Point(10, 25);
+        nup_hours.Location = new Point(10, 25);
         nup_hours.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_hours.Name = "nup_hours";
-        nup_hours.Size = new System.Drawing.Size(54, 23);
+        nup_hours.Size = new Size(54, 23);
         nup_hours.TabIndex = 9;
         nup_hours.KeyPress += nup_KeyPress;
         // 
         // nup_mili
         // 
-        nup_mili.Location = new System.Drawing.Point(342, 25);
+        nup_mili.Location = new Point(342, 25);
         nup_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_mili.Name = "nup_mili";
-        nup_mili.Size = new System.Drawing.Size(54, 23);
+        nup_mili.Size = new Size(54, 23);
         nup_mili.TabIndex = 8;
         nup_mili.KeyPress += nup_KeyPress;
         // 
         // lb_msec
         // 
-        lb_msec.Location = new System.Drawing.Point(402, 27);
+        lb_msec.Location = new Point(402, 27);
         lb_msec.Name = "lb_msec";
-        lb_msec.Size = new System.Drawing.Size(73, 16);
+        lb_msec.Size = new Size(73, 16);
         lb_msec.TabIndex = 7;
         lb_msec.Text = "Milliseconds";
         // 
         // lb_sec
         // 
-        lb_sec.Location = new System.Drawing.Point(282, 27);
+        lb_sec.Location = new Point(282, 27);
         lb_sec.Name = "lb_sec";
-        lb_sec.Size = new System.Drawing.Size(54, 16);
+        lb_sec.Size = new Size(54, 16);
         lb_sec.TabIndex = 6;
         lb_sec.Text = "Seconds";
         // 
         // lb_Minutes
         // 
-        lb_Minutes.Location = new System.Drawing.Point(171, 28);
+        lb_Minutes.Location = new Point(171, 28);
         lb_Minutes.Name = "lb_Minutes";
-        lb_Minutes.Size = new System.Drawing.Size(54, 16);
+        lb_Minutes.Size = new Size(54, 16);
         lb_Minutes.TabIndex = 5;
         lb_Minutes.Text = "Minutes";
         // 
         // lb_Hours
         // 
-        lb_Hours.Location = new System.Drawing.Point(70, 27);
+        lb_Hours.Location = new Point(70, 27);
         lb_Hours.Name = "lb_Hours";
-        lb_Hours.Size = new System.Drawing.Size(39, 16);
+        lb_Hours.Size = new Size(39, 16);
         lb_Hours.TabIndex = 1;
         lb_Hours.Text = "Hours";
         // 
@@ -191,44 +191,44 @@ partial class Main
         gp_repeat.Controls.Add(label1);
         gp_repeat.Controls.Add(rb_times);
         gp_repeat.Controls.Add(rb_infinite);
-        gp_repeat.Location = new System.Drawing.Point(12, 80);
+        gp_repeat.Location = new Point(12, 80);
         gp_repeat.Name = "gp_repeat";
-        gp_repeat.Size = new System.Drawing.Size(264, 97);
+        gp_repeat.Size = new Size(264, 97);
         gp_repeat.TabIndex = 1;
         gp_repeat.TabStop = false;
         gp_repeat.Text = "Click Repeat";
         // 
         // nup_times
         // 
-        nup_times.Location = new System.Drawing.Point(33, 57);
+        nup_times.Location = new Point(33, 57);
         nup_times.Maximum = new decimal(new int[] { 1316134912, 2328, 0, 0 });
         nup_times.Name = "nup_times";
-        nup_times.Size = new System.Drawing.Size(53, 23);
+        nup_times.Size = new Size(53, 23);
         nup_times.TabIndex = 4;
         nup_times.KeyPress += nup_KeyPress;
         // 
         // label1
         // 
-        label1.Location = new System.Drawing.Point(92, 59);
+        label1.Location = new Point(92, 59);
         label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(56, 19);
+        label1.Size = new Size(56, 19);
         label1.TabIndex = 3;
         label1.Text = "Times";
         // 
         // rb_times
         // 
-        rb_times.Location = new System.Drawing.Point(10, 52);
+        rb_times.Location = new Point(10, 52);
         rb_times.Name = "rb_times";
-        rb_times.Size = new System.Drawing.Size(124, 29);
+        rb_times.Size = new Size(124, 29);
         rb_times.TabIndex = 1;
         rb_times.TabStop = true;
         rb_times.UseVisualStyleBackColor = true;
         // 
         // rb_infinite
         // 
-        rb_infinite.Location = new System.Drawing.Point(10, 22);
+        rb_infinite.Location = new Point(10, 22);
         rb_infinite.Name = "rb_infinite";
-        rb_infinite.Size = new System.Drawing.Size(146, 24);
+        rb_infinite.Size = new Size(146, 24);
         rb_infinite.TabIndex = 0;
         rb_infinite.TabStop = true;
         rb_infinite.Text = "Infinite (Until stopped)";
@@ -236,9 +236,9 @@ partial class Main
         // 
         // btn_start
         // 
-        btn_start.Location = new System.Drawing.Point(12, 413);
+        btn_start.Location = new Point(12, 413);
         btn_start.Name = "btn_start";
-        btn_start.Size = new System.Drawing.Size(64, 25);
+        btn_start.Size = new Size(64, 25);
         btn_start.TabIndex = 2;
         btn_start.Text = "Start";
         btn_start.UseVisualStyleBackColor = true;
@@ -246,9 +246,9 @@ partial class Main
         // 
         // btn_stop
         // 
-        btn_stop.Location = new System.Drawing.Point(82, 413);
+        btn_stop.Location = new Point(82, 413);
         btn_stop.Name = "btn_stop";
-        btn_stop.Size = new System.Drawing.Size(64, 25);
+        btn_stop.Size = new Size(64, 25);
         btn_stop.TabIndex = 3;
         btn_stop.Text = "Stop";
         btn_stop.UseVisualStyleBackColor = true;
@@ -260,9 +260,9 @@ partial class Main
         gp_options.Controls.Add(lbl_clickType);
         gp_options.Controls.Add(lbl_mouseButton);
         gp_options.Controls.Add(cb_mouseButton);
-        gp_options.Location = new System.Drawing.Point(282, 80);
+        gp_options.Location = new Point(282, 80);
         gp_options.Name = "gp_options";
-        gp_options.Size = new System.Drawing.Size(219, 97);
+        gp_options.Size = new Size(219, 97);
         gp_options.TabIndex = 4;
         gp_options.TabStop = false;
         gp_options.Text = "Click Options";
@@ -270,9 +270,9 @@ partial class Main
         // cb_clickType
         // 
         cb_clickType.FormattingEnabled = true;
-        cb_clickType.Location = new System.Drawing.Point(107, 56);
+        cb_clickType.Location = new Point(107, 56);
         cb_clickType.Name = "cb_clickType";
-        cb_clickType.Size = new System.Drawing.Size(67, 23);
+        cb_clickType.Size = new Size(67, 23);
         cb_clickType.TabIndex = 3;
         cb_clickType.SelectedIndexChanged += cb_clickType_SelectedIndexChanged;
         cb_clickType.SelectionChangeCommitted += cb_clickType_SelectionChangeCommitted;
@@ -280,17 +280,17 @@ partial class Main
         // 
         // lbl_clickType
         // 
-        lbl_clickType.Location = new System.Drawing.Point(12, 59);
+        lbl_clickType.Location = new Point(12, 59);
         lbl_clickType.Name = "lbl_clickType";
-        lbl_clickType.Size = new System.Drawing.Size(86, 16);
+        lbl_clickType.Size = new Size(86, 16);
         lbl_clickType.TabIndex = 2;
         lbl_clickType.Text = "Click Type";
         // 
         // lbl_mouseButton
         // 
-        lbl_mouseButton.Location = new System.Drawing.Point(9, 27);
+        lbl_mouseButton.Location = new Point(9, 27);
         lbl_mouseButton.Name = "lbl_mouseButton";
-        lbl_mouseButton.Size = new System.Drawing.Size(92, 16);
+        lbl_mouseButton.Size = new Size(92, 16);
         lbl_mouseButton.TabIndex = 1;
         lbl_mouseButton.Text = "Mouse Button";
         // 
@@ -298,9 +298,9 @@ partial class Main
         // 
         cb_mouseButton.FormattingEnabled = true;
         cb_mouseButton.Items.AddRange(new object[] { "Left", "Right", "Middle" });
-        cb_mouseButton.Location = new System.Drawing.Point(107, 24);
+        cb_mouseButton.Location = new Point(107, 24);
         cb_mouseButton.Name = "cb_mouseButton";
-        cb_mouseButton.Size = new System.Drawing.Size(67, 23);
+        cb_mouseButton.Size = new Size(67, 23);
         cb_mouseButton.TabIndex = 0;
         cb_mouseButton.SelectedIndexChanged += cb_mouseButton_SelectedIndexChanged;
         cb_mouseButton.KeyPress += cb_KeyPress;
@@ -315,86 +315,86 @@ partial class Main
         gp_delay.Controls.Add(lbl_delay_sec);
         gp_delay.Controls.Add(lbl_delay_min);
         gp_delay.Controls.Add(lbl_delay_h);
-        gp_delay.Location = new System.Drawing.Point(12, 183);
+        gp_delay.Location = new Point(12, 183);
         gp_delay.Name = "gp_delay";
-        gp_delay.Size = new System.Drawing.Size(489, 62);
+        gp_delay.Size = new Size(489, 62);
         gp_delay.TabIndex = 5;
         gp_delay.TabStop = false;
         gp_delay.Text = "Starting Delay";
         // 
         // nup_delay_sec
         // 
-        nup_delay_sec.Location = new System.Drawing.Point(222, 25);
+        nup_delay_sec.Location = new Point(222, 25);
         nup_delay_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_delay_sec.Name = "nup_delay_sec";
-        nup_delay_sec.Size = new System.Drawing.Size(54, 23);
+        nup_delay_sec.Size = new Size(54, 23);
         nup_delay_sec.TabIndex = 11;
         nup_delay_sec.KeyPress += nup_KeyPress;
         // 
         // nup_delay_min
         // 
-        nup_delay_min.Location = new System.Drawing.Point(111, 25);
+        nup_delay_min.Location = new Point(111, 25);
         nup_delay_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_delay_min.Name = "nup_delay_min";
-        nup_delay_min.Size = new System.Drawing.Size(54, 23);
+        nup_delay_min.Size = new Size(54, 23);
         nup_delay_min.TabIndex = 10;
         nup_delay_min.KeyPress += nup_KeyPress;
         // 
         // nup_delay_h
         // 
-        nup_delay_h.Location = new System.Drawing.Point(10, 25);
+        nup_delay_h.Location = new Point(10, 25);
         nup_delay_h.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_delay_h.Name = "nup_delay_h";
-        nup_delay_h.Size = new System.Drawing.Size(54, 23);
+        nup_delay_h.Size = new Size(54, 23);
         nup_delay_h.TabIndex = 9;
         nup_delay_h.KeyPress += nup_KeyPress;
         // 
         // nup_delay_mili
         // 
-        nup_delay_mili.Location = new System.Drawing.Point(342, 25);
+        nup_delay_mili.Location = new Point(342, 25);
         nup_delay_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_delay_mili.Name = "nup_delay_mili";
-        nup_delay_mili.Size = new System.Drawing.Size(54, 23);
+        nup_delay_mili.Size = new Size(54, 23);
         nup_delay_mili.TabIndex = 8;
         nup_delay_mili.KeyPress += nup_KeyPress;
         // 
         // lbl_delay_mili
         // 
-        lbl_delay_mili.Location = new System.Drawing.Point(402, 27);
+        lbl_delay_mili.Location = new Point(402, 27);
         lbl_delay_mili.Name = "lbl_delay_mili";
-        lbl_delay_mili.Size = new System.Drawing.Size(73, 16);
+        lbl_delay_mili.Size = new Size(73, 16);
         lbl_delay_mili.TabIndex = 7;
         lbl_delay_mili.Text = "Milliseconds";
         // 
         // lbl_delay_sec
         // 
-        lbl_delay_sec.Location = new System.Drawing.Point(282, 27);
+        lbl_delay_sec.Location = new Point(282, 27);
         lbl_delay_sec.Name = "lbl_delay_sec";
-        lbl_delay_sec.Size = new System.Drawing.Size(54, 16);
+        lbl_delay_sec.Size = new Size(54, 16);
         lbl_delay_sec.TabIndex = 6;
         lbl_delay_sec.Text = "Seconds";
         // 
         // lbl_delay_min
         // 
-        lbl_delay_min.Location = new System.Drawing.Point(171, 28);
+        lbl_delay_min.Location = new Point(171, 28);
         lbl_delay_min.Name = "lbl_delay_min";
-        lbl_delay_min.Size = new System.Drawing.Size(54, 16);
+        lbl_delay_min.Size = new Size(54, 16);
         lbl_delay_min.TabIndex = 5;
         lbl_delay_min.Text = "Minutes";
         // 
         // lbl_delay_h
         // 
-        lbl_delay_h.Location = new System.Drawing.Point(70, 27);
+        lbl_delay_h.Location = new Point(70, 27);
         lbl_delay_h.Name = "lbl_delay_h";
-        lbl_delay_h.Size = new System.Drawing.Size(39, 16);
+        lbl_delay_h.Size = new Size(39, 16);
         lbl_delay_h.TabIndex = 1;
         lbl_delay_h.Text = "Hours";
         // 
         // pb_progress
         // 
-        pb_progress.Location = new System.Drawing.Point(152, 413);
+        pb_progress.Location = new Point(152, 413);
         pb_progress.Name = "pb_progress";
-        pb_progress.Size = new System.Drawing.Size(349, 25);
+        pb_progress.Size = new Size(349, 25);
         pb_progress.TabIndex = 6;
         // 
         // gp_duration
@@ -407,78 +407,78 @@ partial class Main
         gp_duration.Controls.Add(label3);
         gp_duration.Controls.Add(label4);
         gp_duration.Controls.Add(label5);
-        gp_duration.Location = new System.Drawing.Point(12, 251);
+        gp_duration.Location = new Point(12, 251);
         gp_duration.Name = "gp_duration";
-        gp_duration.Size = new System.Drawing.Size(489, 62);
+        gp_duration.Size = new Size(489, 62);
         gp_duration.TabIndex = 7;
         gp_duration.TabStop = false;
         gp_duration.Text = "Duration (Only for Click Type = Holding)";
         // 
         // nup_duration_sec
         // 
-        nup_duration_sec.Location = new System.Drawing.Point(222, 25);
+        nup_duration_sec.Location = new Point(222, 25);
         nup_duration_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_duration_sec.Name = "nup_duration_sec";
-        nup_duration_sec.Size = new System.Drawing.Size(54, 23);
+        nup_duration_sec.Size = new Size(54, 23);
         nup_duration_sec.TabIndex = 11;
         nup_duration_sec.KeyPress += nup_KeyPress;
         // 
         // nup_duration_min
         // 
-        nup_duration_min.Location = new System.Drawing.Point(111, 25);
+        nup_duration_min.Location = new Point(111, 25);
         nup_duration_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_duration_min.Name = "nup_duration_min";
-        nup_duration_min.Size = new System.Drawing.Size(54, 23);
+        nup_duration_min.Size = new Size(54, 23);
         nup_duration_min.TabIndex = 10;
         nup_duration_min.KeyPress += nup_KeyPress;
         // 
         // nup_duration_h
         // 
-        nup_duration_h.Location = new System.Drawing.Point(10, 25);
+        nup_duration_h.Location = new Point(10, 25);
         nup_duration_h.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_duration_h.Name = "nup_duration_h";
-        nup_duration_h.Size = new System.Drawing.Size(54, 23);
+        nup_duration_h.Size = new Size(54, 23);
         nup_duration_h.TabIndex = 9;
         nup_duration_h.KeyPress += nup_KeyPress;
         // 
         // nup_duration_mili
         // 
-        nup_duration_mili.Location = new System.Drawing.Point(342, 25);
+        nup_duration_mili.Location = new Point(342, 25);
         nup_duration_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_duration_mili.Name = "nup_duration_mili";
-        nup_duration_mili.Size = new System.Drawing.Size(54, 23);
+        nup_duration_mili.Size = new Size(54, 23);
         nup_duration_mili.TabIndex = 8;
         nup_duration_mili.KeyPress += nup_KeyPress;
         // 
         // label2
         // 
-        label2.Location = new System.Drawing.Point(402, 27);
+        label2.Location = new Point(402, 27);
         label2.Name = "label2";
-        label2.Size = new System.Drawing.Size(73, 16);
+        label2.Size = new Size(73, 16);
         label2.TabIndex = 7;
         label2.Text = "Milliseconds";
         // 
         // label3
         // 
-        label3.Location = new System.Drawing.Point(282, 27);
+        label3.Location = new Point(282, 27);
         label3.Name = "label3";
-        label3.Size = new System.Drawing.Size(54, 16);
+        label3.Size = new Size(54, 16);
         label3.TabIndex = 6;
         label3.Text = "Seconds";
         // 
         // label4
         // 
-        label4.Location = new System.Drawing.Point(171, 28);
+        label4.Location = new Point(171, 28);
         label4.Name = "label4";
-        label4.Size = new System.Drawing.Size(54, 16);
+        label4.Size = new Size(54, 16);
         label4.TabIndex = 5;
         label4.Text = "Minutes";
         // 
         // label5
         // 
-        label5.Location = new System.Drawing.Point(70, 27);
+        label5.Location = new Point(70, 27);
         label5.Name = "label5";
-        label5.Size = new System.Drawing.Size(39, 16);
+        label5.Size = new Size(39, 16);
         label5.TabIndex = 1;
         label5.Text = "Hours";
         // 
@@ -491,66 +491,73 @@ partial class Main
         gp_clickPos.Controls.Add(lbl_clickingPos_X);
         gp_clickPos.Controls.Add(rb_XY);
         gp_clickPos.Controls.Add(rb_currentPos);
-        gp_clickPos.Location = new System.Drawing.Point(15, 321);
+        gp_clickPos.Location = new Point(15, 321);
         gp_clickPos.Name = "gp_clickPos";
-        gp_clickPos.Size = new System.Drawing.Size(485, 86);
+        gp_clickPos.Size = new Size(485, 86);
         gp_clickPos.TabIndex = 8;
         gp_clickPos.TabStop = false;
         gp_clickPos.Text = "Clicking Position";
         // 
         // btn_pickLocation
         // 
-        btn_pickLocation.Location = new System.Drawing.Point(219, 51);
+        btn_pickLocation.Location = new Point(222, 52);
         btn_pickLocation.Name = "btn_pickLocation";
-        btn_pickLocation.Size = new System.Drawing.Size(104, 25);
+        btn_pickLocation.Size = new Size(104, 25);
         btn_pickLocation.TabIndex = 6;
         btn_pickLocation.Text = "Pick Location";
         btn_pickLocation.UseVisualStyleBackColor = true;
+        btn_pickLocation.Click += btn_pickLocation_Click;
         // 
         // nup_clickingPos_Y
         // 
-        nup_clickingPos_Y.Location = new System.Drawing.Point(143, 52);
+        nup_clickingPos_Y.Location = new Point(143, 52);
+        nup_clickingPos_Y.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+        nup_clickingPos_Y.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
         nup_clickingPos_Y.Name = "nup_clickingPos_Y";
-        nup_clickingPos_Y.Size = new System.Drawing.Size(73, 23);
+        nup_clickingPos_Y.Size = new Size(73, 23);
         nup_clickingPos_Y.TabIndex = 5;
+        nup_clickingPos_Y.KeyPress += nup_KeyPress;
         // 
         // lbl_clickingPos_Y
         // 
-        lbl_clickingPos_Y.Location = new System.Drawing.Point(126, 55);
+        lbl_clickingPos_Y.Location = new Point(126, 55);
         lbl_clickingPos_Y.Name = "lbl_clickingPos_Y";
-        lbl_clickingPos_Y.Size = new System.Drawing.Size(23, 23);
+        lbl_clickingPos_Y.Size = new Size(23, 23);
         lbl_clickingPos_Y.TabIndex = 4;
         lbl_clickingPos_Y.Text = "Y";
         // 
         // nup_clickingPos_X
         // 
-        nup_clickingPos_X.Location = new System.Drawing.Point(44, 52);
+        nup_clickingPos_X.Location = new Point(44, 52);
+        nup_clickingPos_X.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+        nup_clickingPos_X.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
         nup_clickingPos_X.Name = "nup_clickingPos_X";
-        nup_clickingPos_X.Size = new System.Drawing.Size(72, 23);
+        nup_clickingPos_X.Size = new Size(72, 23);
         nup_clickingPos_X.TabIndex = 3;
+        nup_clickingPos_X.KeyPress += nup_KeyPress;
         // 
         // lbl_clickingPos_X
         // 
-        lbl_clickingPos_X.Location = new System.Drawing.Point(26, 55);
+        lbl_clickingPos_X.Location = new Point(26, 55);
         lbl_clickingPos_X.Name = "lbl_clickingPos_X";
-        lbl_clickingPos_X.Size = new System.Drawing.Size(18, 23);
+        lbl_clickingPos_X.Size = new Size(18, 23);
         lbl_clickingPos_X.TabIndex = 2;
         lbl_clickingPos_X.Text = "X";
         // 
         // rb_XY
         // 
-        rb_XY.Location = new System.Drawing.Point(10, 51);
+        rb_XY.Location = new Point(10, 51);
         rb_XY.Name = "rb_XY";
-        rb_XY.Size = new System.Drawing.Size(104, 24);
+        rb_XY.Size = new Size(104, 24);
         rb_XY.TabIndex = 1;
         rb_XY.TabStop = true;
         rb_XY.UseVisualStyleBackColor = true;
         // 
         // rb_currentPos
         // 
-        rb_currentPos.Location = new System.Drawing.Point(10, 22);
+        rb_currentPos.Location = new Point(10, 22);
         rb_currentPos.Name = "rb_currentPos";
-        rb_currentPos.Size = new System.Drawing.Size(156, 24);
+        rb_currentPos.Size = new Size(156, 24);
         rb_currentPos.TabIndex = 0;
         rb_currentPos.TabStop = true;
         rb_currentPos.Text = "Current Cursor Position";
@@ -558,9 +565,9 @@ partial class Main
         // 
         // Main
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(515, 450);
+        AutoScaleDimensions = new SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new Size(515, 450);
         Controls.Add(gp_clickPos);
         Controls.Add(gp_duration);
         Controls.Add(pb_progress);
@@ -570,6 +577,7 @@ partial class Main
         Controls.Add(btn_start);
         Controls.Add(gp_repeat);
         Controls.Add(gp_interval);
+        Name = "Main";
         Text = "OpenClicker";
         Load += Main_Load;
         gp_interval.ResumeLayout(false);

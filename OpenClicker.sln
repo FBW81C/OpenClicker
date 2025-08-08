@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenClicker", "OpenClicker\OpenClicker.csproj", "{871C43C1-7342-4374-8C24-027C3FA0FA06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenClicker.Core", "OpenClicker.Core\OpenClicker.Core.csproj", "{0D56FF7F-46C1-4C16-8625-C7736290A8DF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,4 +1,4 @@
-﻿namespace OpenClicker.Core.models;
+﻿namespace OpenClicker.Models;
 
 public enum MouseEvent
 {

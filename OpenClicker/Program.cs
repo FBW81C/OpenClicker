@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using OpenClicker.Core.models;
 
 namespace OpenClicker;
 
