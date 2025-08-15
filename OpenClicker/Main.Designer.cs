@@ -567,7 +567,7 @@ partial class Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(515, 450);
+        ClientSize = new Size(507, 450);
         Controls.Add(gp_clickPos);
         Controls.Add(gp_duration);
         Controls.Add(pb_progress);
@@ -577,6 +577,8 @@ partial class Main
         Controls.Add(btn_start);
         Controls.Add(gp_repeat);
         Controls.Add(gp_interval);
+        MaximumSize = new Size(523, 489);
+        MinimumSize = new Size(523, 489);
         Name = "Main";
         Text = "OpenClicker";
         Load += Main_Load;

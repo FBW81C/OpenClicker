@@ -99,19 +99,6 @@ public partial class Main : Form
         _isClicking = true;
 
         // Actual code
-
-        // Clicking Position
-        //if (rb_XY.Checked)
-        //{
-        //    var text = "";
-        //    foreach (var screen in Screen.AllScreens)
-        //    {
-        //        text += screen.Bounds;
-        //    }
-        //    MessageBox.Show(text);
-        //    Program.SetCursorPosition((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value);
-        //}
-
         var delay = (int)nup_delay_mili.Value +
                     (int)nup_delay_sec.Value * 1000 +
                     (int)nup_min.Value * 60 * 1000 +
@@ -131,7 +118,7 @@ public partial class Main : Form
             return;
         }
 
-        // Progress bar
+        // Progress bar, set to rb_times.Checked or almost full if not checked
         pb_progress.Minimum = 0;
         pb_progress.Maximum = rb_times.Checked ? (int)nup_times.Value : 10000;
         pb_progress.Value = rb_times.Checked ? 0 : 9999;
