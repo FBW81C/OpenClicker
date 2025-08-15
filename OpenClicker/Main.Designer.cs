@@ -29,6 +29,7 @@ partial class Main
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
         gp_interval = new GroupBox();
         nup_sec = new NumericUpDown();
         nup_min = new NumericUpDown();
@@ -577,6 +578,7 @@ partial class Main
         Controls.Add(btn_start);
         Controls.Add(gp_repeat);
         Controls.Add(gp_interval);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         MaximumSize = new Size(523, 489);
         MinimumSize = new Size(523, 489);
         Name = "Main";
