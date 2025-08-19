@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices.Marshalling;
 using OpenClicker.Models;
@@ -23,34 +24,25 @@ public partial class Main : Form
 
     private void Main_Load(object sender, EventArgs e)
     {
+        btn_stop.Enabled = false;
+
+        SetClickTypes();
+        SetMouseButtons();
+
+        // Disable duration becasue clickType default is single not holding
+        var isClickTypeHolding = cb_clickType.SelectedItem == _clickTypeHold;
+        nup_duration_h.Enabled = isClickTypeHolding;
+        nup_duration_min.Enabled = isClickTypeHolding;
+        nup_duration_sec.Enabled = isClickTypeHolding;
+        nup_duration_mili.Enabled = isClickTypeHolding;
+
         rb_infinite.Checked = true;
+        rb_currentPos.Checked = true;
+    }
 
+    private void SetClickTypes()
+    {
         cb_clickType.Items.Clear();
-        cb_mouseButton.Items.Clear();
-
-        /*
-         * Goofy code. I can't really access ALL buttons on a mouse with example 10 buttons.
-         * I can only access Left,Right,Middle,X1,X2
-         * makes therefore no sense to make it dynamically
-         * If you want to add dynamic support: here is my approach, good luck!
-      
-            var buttons = Enum.GetValues(typeof(MouseButtons)) //
-                .Cast<MouseButtons>()
-                .Where(b => b != MouseButtons.None) // Removes None
-                .Select(b => new MouseButtonItem
-                {
-                    Value = b,
-                    DisplayName = b.ToString()
-                })
-                .ToArray();   
-            */
-
-        // Clicktypes
-        // Unnessesary complex but dynammic
-        // var clickTypes = Enum.GetValues(typeof(ClickTypes))
-        //     .Cast<ClickTypes>()
-        //     .Select(c => new ClickType(c))
-        //     .ToArray();
         var clickTypes = new[]
         {
             new ClickType(ClickTypes.Single),
@@ -60,15 +52,10 @@ public partial class Main : Form
         cb_clickType.Items.AddRange(clickTypes);
         cb_clickType.DisplayMember = "DisplayName";
         cb_clickType.SelectedIndex = 0;
-
-        // Disable duration becasue clickType default is single not holding
-        var value = cb_clickType.SelectedItem == _clickTypeHold;
-        nup_duration_h.Enabled = value;
-        nup_duration_min.Enabled = value;
-        nup_duration_sec.Enabled = value;
-        nup_duration_mili.Enabled = value;
-
-        // Mouse buttons
+    }
+    private void SetMouseButtons()
+    {
+        cb_mouseButton.Items.Clear();
         var buttons = new[]
         {
             new MouseButtonItem {Value = MouseButtons.Left, DisplayName = "Left"},
@@ -79,10 +66,8 @@ public partial class Main : Form
         cb_mouseButton.Items.AddRange(buttons);
         cb_mouseButton.DisplayMember = "DisplayName";
         cb_mouseButton.SelectedIndex = 0;
-
-        rb_currentPos.Checked = true;
     }
-
+    
     private void btn_start_Click(object sender, EventArgs e)
     {
         // Checks and sets to ensure integrity 
@@ -91,6 +76,7 @@ public partial class Main : Form
             return;
         }
         btn_start.Enabled = false;
+        btn_stop.Enabled = true;
         if (_selectedClickType.Type != ClickTypes.Hold)
         {
             cb_clickType.Items.Remove(_clickTypeHold); // Prohibit user from changing to hold while active
@@ -101,59 +87,53 @@ public partial class Main : Form
         // Actual code
         var delay = (int)nup_delay_mili.Value +
                     (int)nup_delay_sec.Value * 1000 +
-                    (int)nup_min.Value * 60 * 1000 +
+                    (int)nup_delay_min.Value * 60 * 1000 +
                     (int)nup_delay_h.Value * 60 * 60 * 1000;
         if (delay < 0)
         {
-            MessageBox.Show("Delay cannot be negative.");
-            btn_start.Enabled = true;
-            _isClicking = false;
+            MessageBox.Show("Delay cannot be negative!");
+            Reset();
             return;
         }
 
-        // TODO: holding and releasing, time (countdown, maybe another groupbox with h,min,sec,mili)
         if (_selectedClickType.Type == ClickTypes.Hold)
         {
             StartHolding(delay);
             return;
         }
+        StartTimer(delay);
+    }
 
-        // Progress bar, set to rb_times.Checked or almost full if not checked
-        pb_progress.Minimum = 0;
-        pb_progress.Maximum = rb_times.Checked ? (int)nup_times.Value : 10000;
-        pb_progress.Value = rb_times.Checked ? 0 : 9999;
-
+    private async void StartTimer(int delay)
+    {
         var interval = (int)nup_mili.Value +
                        (int)nup_sec.Value * 1000 +
                        (int)nup_min.Value * 60 * 1000 +
                        (int)nup_hours.Value * 60 * 60 * 1000;
         if (interval <= 0)
         {
-            MessageBox.Show("Interval must be greater than 0");
-            btn_start.Enabled = true;
-            _isClicking = false;
+            MessageBox.Show("Interval must be greater than 0!");
+            Reset();
             return;
         }
 
+        pb_progress.Maximum = rb_times.Checked ? (int)nup_times.Value : 10000;
+        pb_progress.Value = rb_times.Checked ? 0 : 9999;
+
         _timer.Interval = interval;
-        _timer.Tick -= Timer_Tick;
-        _timer.Tick += Timer_Tick;
+        _timer.Tick -= ClickingTimer_Tick;
+        _timer.Tick += ClickingTimer_Tick;
 
-        StartTimerWithDelay(delay);
-    }
-
-    private async void StartTimerWithDelay(int delay)
-    {
         await Task.Delay(delay);
         if (rb_XY.Checked)
         {
             Program.SetCursorPosition((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value);
         }
-        Timer_Tick(this, EventArgs.Empty); // invoking now, because it will wait "interval" before starting timer
+        ClickingTimer_Tick(this, EventArgs.Empty); // invoking now, because it will wait "interval" before starting timer
         _timer.Start();
     }
 
-    private void Timer_Tick(object? sender, EventArgs e)
+    private void ClickingTimer_Tick(object? sender, EventArgs e)
     {
         if (!_isClicking) return;
 
@@ -209,13 +189,16 @@ public partial class Main : Form
                        (int)nup_duration_h.Value * 60 * 60 * 1000;
         if (duration <= 0)
         {
-            MessageBox.Show("Duration must be greater than 0");
-            btn_start.Enabled = true;
-            _isClicking = false;
+            MessageBox.Show("Duration must be greater than 0!");
+            Reset();
             return;
         }
 
+        cb_clickType.Enabled = false;
+
         await Task.Delay(delay);
+        if (!_isClicking) return; // check for safty, user could have stopped
+        StartProgressAsync(duration);
         switch (_selectedMouseButton.Value)
         {
             case MouseButtons.Left:
@@ -235,11 +218,23 @@ public partial class Main : Form
         StopHolding();
     }
 
+    private async void StartProgressAsync(int duration)
+    {
+        pb_progress.Minimum = 0;
+        pb_progress.Maximum = duration;
+        pb_progress.Value = 0;
+
+        const int step = 50; // refresh every 50ms
+        for (int elapsed = 0; elapsed < duration; elapsed += step)
+        {
+            if (!_isClicking) return;
+            pb_progress.Value = elapsed;
+            await Task.Delay(step);
+        }
+    }
+
     private void StopHolding()
     {
-        _isClicking = false;
-        btn_start.Enabled = true;
-        pb_progress.Value = 0;
         switch (_selectedMouseButton.Value)
         {
             case MouseButtons.Left:
@@ -252,40 +247,44 @@ public partial class Main : Form
                 Program.MiddleUp();
                 break;
             default:
-                return;
+                break;
         }
+
+        cb_clickType.Enabled = true;
+        Reset();
     }
 
     private void btn_stop_Click(object sender, EventArgs e)
     {
         if (_selectedClickType.Type == ClickTypes.Hold)
-        {
             StopHolding();
-        }
         else
-        {
             StopTimer();
-        }
     }
 
     private void StopTimer()
     {
-        _isClicking = false;
         _timer.Stop();
-        btn_start.Enabled = true;
+        Reset();
+    }
+
+    private void Reset()
+    {
+        _isClicking = false;
         pb_progress.Value = 0;
-        cb_clickType.Items.Add(_clickTypeHold);
+
+        if (!cb_clickType.Items.Contains(_clickTypeHold)) 
+        {
+            cb_clickType.Items.Add(_clickTypeHold);
+        }
+
+        btn_start.Enabled = true;
+        btn_stop.Enabled = false;
     }
 
     private void nup_KeyPress(object sender, KeyPressEventArgs e)
     {
         e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-    }
-
-    private void cb_KeyPress(object sender, KeyPressEventArgs e)
-    {
-        // e.Handled = false; I don't know why this doesn't work... it works on nup_KeyPress(...) 
-        e.KeyChar = (char)Keys.None; // Don't allow changes to text
     }
 
     private void cb_clickType_SelectionChangeCommitted(object sender, EventArgs e)
@@ -294,38 +293,37 @@ public partial class Main : Form
 
         if (clickType.Type == ClickTypes.Hold)
         {
-            // Interval
-            nup_mili.Enabled = false;
-            nup_sec.Enabled = false;
-            nup_min.Enabled = false;
-            nup_hours.Enabled = false;
-            // Radiobuttons
-            rb_times.Enabled = false;
-            nup_times.Enabled = false;
-            rb_infinite.Enabled = false;
-            // Duration
-            nup_duration_h.Enabled = true;
-            nup_duration_min.Enabled = true;
-            nup_duration_sec.Enabled = true;
-            nup_duration_mili.Enabled = true;
+            EnableInterval(false);
+            EnableClickRepeat(false);
+            EnableDuration(true);
         }
         else
         {
-            // Interval
-            nup_mili.Enabled = true;
-            nup_sec.Enabled = true;
-            nup_min.Enabled = true;
-            nup_hours.Enabled = true;
-            // Radiobuttons
-            rb_times.Enabled = true;
-            nup_times.Enabled = true;
-            rb_infinite.Enabled = true;
-            // Duration
-            nup_duration_h.Enabled = false;
-            nup_duration_min.Enabled = false;
-            nup_duration_sec.Enabled = false;
-            nup_duration_mili.Enabled = false;
+            EnableInterval(true);
+            EnableClickRepeat(true);
+            EnableDuration(false);
         }
+    }
+
+    private void EnableInterval(bool enable)
+    {
+        nup_mili.Enabled = enable;
+        nup_sec.Enabled = enable;
+        nup_min.Enabled = enable;
+        nup_hours.Enabled = enable;
+    }
+    private void EnableClickRepeat(bool enable)
+    {
+        rb_times.Enabled = enable;
+        nup_times.Enabled = enable;
+        rb_infinite.Enabled = enable;
+    }
+    private void EnableDuration(bool enable)
+    {
+        nup_duration_h.Enabled = enable;
+        nup_duration_min.Enabled = enable;
+        nup_duration_sec.Enabled = enable;
+        nup_duration_mili.Enabled = enable;
     }
 
     private void cb_mouseButton_SelectedIndexChanged(object sender, EventArgs e)
