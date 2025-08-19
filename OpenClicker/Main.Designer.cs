@@ -270,6 +270,7 @@ partial class Main
         // 
         // cb_clickType
         // 
+        cb_clickType.DropDownStyle = ComboBoxStyle.DropDownList;
         cb_clickType.FormattingEnabled = true;
         cb_clickType.Location = new Point(107, 56);
         cb_clickType.Name = "cb_clickType";
@@ -277,7 +278,6 @@ partial class Main
         cb_clickType.TabIndex = 3;
         cb_clickType.SelectedIndexChanged += cb_clickType_SelectedIndexChanged;
         cb_clickType.SelectionChangeCommitted += cb_clickType_SelectionChangeCommitted;
-        cb_clickType.KeyPress += cb_KeyPress;
         // 
         // lbl_clickType
         // 
@@ -297,6 +297,7 @@ partial class Main
         // 
         // cb_mouseButton
         // 
+        cb_mouseButton.DropDownStyle = ComboBoxStyle.DropDownList;
         cb_mouseButton.FormattingEnabled = true;
         cb_mouseButton.Items.AddRange(new object[] { "Left", "Right", "Middle" });
         cb_mouseButton.Location = new Point(107, 24);
@@ -304,7 +305,6 @@ partial class Main
         cb_mouseButton.Size = new Size(67, 23);
         cb_mouseButton.TabIndex = 0;
         cb_mouseButton.SelectedIndexChanged += cb_mouseButton_SelectedIndexChanged;
-        cb_mouseButton.KeyPress += cb_KeyPress;
         // 
         // gp_delay
         // 
@@ -393,6 +393,7 @@ partial class Main
         // 
         // pb_progress
         // 
+        pb_progress.AccessibleDescription = "";
         pb_progress.Location = new Point(152, 413);
         pb_progress.Name = "pb_progress";
         pb_progress.Size = new Size(349, 25);
