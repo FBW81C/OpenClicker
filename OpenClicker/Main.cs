@@ -1,7 +1,9 @@
+using OpenClicker.models;
+using OpenClicker.Models;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices.Marshalling;
-using OpenClicker.Models;
+using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
 namespace OpenClicker;
@@ -67,7 +69,7 @@ public partial class Main : Form
         cb_mouseButton.DisplayMember = "DisplayName";
         cb_mouseButton.SelectedIndex = 0;
     }
-    
+
     private void btn_start_Click(object sender, EventArgs e)
     {
         // Checks and sets to ensure integrity 
@@ -273,7 +275,7 @@ public partial class Main : Form
         _isClicking = false;
         pb_progress.Value = 0;
 
-        if (!cb_clickType.Items.Contains(_clickTypeHold)) 
+        if (!cb_clickType.Items.Contains(_clickTypeHold))
         {
             cb_clickType.Items.Add(_clickTypeHold);
         }
@@ -361,6 +363,27 @@ public partial class Main : Form
             {
                 // MessageBox.Show("Capture cancelled.");
             }
+        }
+    }
+
+    // Multiple Clicks
+    private void btnAddPanel_Click(object sender, EventArgs e)
+    {
+        var clickControl = new ClickControl(flowLayoutPanel1);
+        flowLayoutPanel1.Controls.Add(clickControl);
+    }
+    private void ParseClicks()
+    {
+        var list = new List<Click>();
+        foreach (ClickControl cc  in flowLayoutPanel1.Controls)
+        {
+            list.Add(new Click
+            {
+                Position = new Point(0, 0),
+                ClickType = cc.ClickType.Type,
+                MouseButton = cc.MouseButton.Value,
+                Delay = new TimeSpan(0, 0, 0, 0, 1)
+            });
         }
     }
 }

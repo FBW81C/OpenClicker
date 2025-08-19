@@ -1,0 +1,67 @@
+﻿using OpenClicker.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace OpenClicker;
+
+public partial class ClickControl : UserControl
+{
+    private FlowLayoutPanel _parentContainer;
+
+    public ClickType ClickType => cb_ClickType.SelectedItem as ClickType ?? new ClickType(ClickTypes.Single);
+    public MouseButtonItem MouseButton => cb_MouseButton.SelectedItem as MouseButtonItem ?? new MouseButtonItem();
+
+    public ClickControl(FlowLayoutPanel parent)
+    {
+        InitializeComponent();
+        _parentContainer = parent;
+
+        SetClickTypes();
+        SetMouseButtons();
+    }
+
+    private void SetClickTypes()
+    {
+        var clickTypes = new[]
+        {
+            new ClickType(ClickTypes.Single),
+            new ClickType(ClickTypes.Double)
+        };
+        cb_ClickType.Items.Clear();
+        cb_ClickType.Items.AddRange(clickTypes);
+        cb_ClickType.DisplayMember = "DisplayName";
+        cb_ClickType.SelectedIndex = 0;
+    }
+    private void SetMouseButtons()
+    {
+        cb_MouseButton.Items.Clear();
+        var buttons = new[]
+        {
+            new MouseButtonItem {Value = MouseButtons.Left, DisplayName = "Left"},
+            new MouseButtonItem {Value = MouseButtons.Right, DisplayName = "Right"},
+            new MouseButtonItem {Value = MouseButtons.Middle, DisplayName = "Middle"}
+        };
+
+        cb_MouseButton.Items.AddRange(buttons);
+        cb_MouseButton.DisplayMember = "DisplayName";
+        cb_MouseButton.SelectedIndex = 0;
+    }
+
+    private void nup_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+    }
+
+    private void btn_delete_Click(object sender, EventArgs e)
+    {
+        _parentContainer.Controls.Remove(this);
+        this.Dispose();
+    }
+}

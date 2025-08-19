@@ -78,6 +78,11 @@ partial class Main
         lbl_clickingPos_X = new Label();
         rb_XY = new RadioButton();
         rb_currentPos = new RadioButton();
+        tabControl = new TabControl();
+        tabPageSingle = new TabPage();
+        tabPageMultiple = new TabPage();
+        btnAddPanel = new Button();
+        flowLayoutPanel1 = new FlowLayoutPanel();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_min).BeginInit();
@@ -99,6 +104,9 @@ partial class Main
         gp_clickPos.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_clickingPos_Y).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_clickingPos_X).BeginInit();
+        tabControl.SuspendLayout();
+        tabPageSingle.SuspendLayout();
+        tabPageMultiple.SuspendLayout();
         SuspendLayout();
         // 
         // gp_interval
@@ -111,7 +119,7 @@ partial class Main
         gp_interval.Controls.Add(lb_sec);
         gp_interval.Controls.Add(lb_Minutes);
         gp_interval.Controls.Add(lb_Hours);
-        gp_interval.Location = new Point(12, 12);
+        gp_interval.Location = new Point(17, 16);
         gp_interval.Name = "gp_interval";
         gp_interval.Size = new Size(489, 62);
         gp_interval.TabIndex = 0;
@@ -192,7 +200,7 @@ partial class Main
         gp_repeat.Controls.Add(label1);
         gp_repeat.Controls.Add(rb_times);
         gp_repeat.Controls.Add(rb_infinite);
-        gp_repeat.Location = new Point(12, 80);
+        gp_repeat.Location = new Point(17, 86);
         gp_repeat.Name = "gp_repeat";
         gp_repeat.Size = new Size(264, 97);
         gp_repeat.TabIndex = 1;
@@ -237,7 +245,7 @@ partial class Main
         // 
         // btn_start
         // 
-        btn_start.Location = new Point(12, 413);
+        btn_start.Location = new Point(13, 470);
         btn_start.Name = "btn_start";
         btn_start.Size = new Size(64, 25);
         btn_start.TabIndex = 2;
@@ -247,7 +255,7 @@ partial class Main
         // 
         // btn_stop
         // 
-        btn_stop.Location = new Point(82, 413);
+        btn_stop.Location = new Point(83, 470);
         btn_stop.Name = "btn_stop";
         btn_stop.Size = new Size(64, 25);
         btn_stop.TabIndex = 3;
@@ -261,9 +269,9 @@ partial class Main
         gp_options.Controls.Add(lbl_clickType);
         gp_options.Controls.Add(lbl_mouseButton);
         gp_options.Controls.Add(cb_mouseButton);
-        gp_options.Location = new Point(282, 80);
+        gp_options.Location = new Point(299, 86);
         gp_options.Name = "gp_options";
-        gp_options.Size = new Size(219, 97);
+        gp_options.Size = new Size(207, 97);
         gp_options.TabIndex = 4;
         gp_options.TabStop = false;
         gp_options.Text = "Click Options";
@@ -316,7 +324,7 @@ partial class Main
         gp_delay.Controls.Add(lbl_delay_sec);
         gp_delay.Controls.Add(lbl_delay_min);
         gp_delay.Controls.Add(lbl_delay_h);
-        gp_delay.Location = new Point(12, 183);
+        gp_delay.Location = new Point(19, 402);
         gp_delay.Name = "gp_delay";
         gp_delay.Size = new Size(489, 62);
         gp_delay.TabIndex = 5;
@@ -394,7 +402,7 @@ partial class Main
         // pb_progress
         // 
         pb_progress.AccessibleDescription = "";
-        pb_progress.Location = new Point(152, 413);
+        pb_progress.Location = new Point(153, 470);
         pb_progress.Name = "pb_progress";
         pb_progress.Size = new Size(349, 25);
         pb_progress.TabIndex = 6;
@@ -409,7 +417,7 @@ partial class Main
         gp_duration.Controls.Add(label3);
         gp_duration.Controls.Add(label4);
         gp_duration.Controls.Add(label5);
-        gp_duration.Location = new Point(12, 251);
+        gp_duration.Location = new Point(17, 189);
         gp_duration.Name = "gp_duration";
         gp_duration.Size = new Size(489, 62);
         gp_duration.TabIndex = 7;
@@ -493,9 +501,9 @@ partial class Main
         gp_clickPos.Controls.Add(lbl_clickingPos_X);
         gp_clickPos.Controls.Add(rb_XY);
         gp_clickPos.Controls.Add(rb_currentPos);
-        gp_clickPos.Location = new Point(15, 321);
+        gp_clickPos.Location = new Point(17, 257);
         gp_clickPos.Name = "gp_clickPos";
-        gp_clickPos.Size = new Size(485, 86);
+        gp_clickPos.Size = new Size(489, 86);
         gp_clickPos.TabIndex = 8;
         gp_clickPos.TabStop = false;
         gp_clickPos.Text = "Clicking Position";
@@ -565,22 +573,77 @@ partial class Main
         rb_currentPos.Text = "Current Cursor Position";
         rb_currentPos.UseVisualStyleBackColor = true;
         // 
+        // tabControl
+        // 
+        tabControl.Controls.Add(tabPageSingle);
+        tabControl.Controls.Add(tabPageMultiple);
+        tabControl.Location = new Point(12, 12);
+        tabControl.Name = "tabControl";
+        tabControl.SelectedIndex = 0;
+        tabControl.Size = new Size(496, 384);
+        tabControl.TabIndex = 9;
+        // 
+        // tabPageSingle
+        // 
+        tabPageSingle.Controls.Add(gp_interval);
+        tabPageSingle.Controls.Add(gp_clickPos);
+        tabPageSingle.Controls.Add(gp_repeat);
+        tabPageSingle.Controls.Add(gp_duration);
+        tabPageSingle.Controls.Add(gp_options);
+        tabPageSingle.Location = new Point(4, 24);
+        tabPageSingle.Name = "tabPageSingle";
+        tabPageSingle.Padding = new Padding(3);
+        tabPageSingle.Size = new Size(525, 356);
+        tabPageSingle.TabIndex = 0;
+        tabPageSingle.Text = "Single";
+        tabPageSingle.UseVisualStyleBackColor = true;
+        // 
+        // tabPageMultiple
+        // 
+        tabPageMultiple.Controls.Add(btnAddPanel);
+        tabPageMultiple.Controls.Add(flowLayoutPanel1);
+        tabPageMultiple.Location = new Point(4, 24);
+        tabPageMultiple.Name = "tabPageMultiple";
+        tabPageMultiple.Padding = new Padding(3);
+        tabPageMultiple.Size = new Size(488, 356);
+        tabPageMultiple.TabIndex = 1;
+        tabPageMultiple.Text = "Multiple";
+        tabPageMultiple.UseVisualStyleBackColor = true;
+        // 
+        // btnAddPanel
+        // 
+        btnAddPanel.Dock = DockStyle.Bottom;
+        btnAddPanel.Location = new Point(3, 330);
+        btnAddPanel.Name = "btnAddPanel";
+        btnAddPanel.Size = new Size(482, 23);
+        btnAddPanel.TabIndex = 1;
+        btnAddPanel.Text = "Add";
+        btnAddPanel.UseVisualStyleBackColor = true;
+        btnAddPanel.Click += btnAddPanel_Click;
+        // 
+        // flowLayoutPanel1
+        // 
+        flowLayoutPanel1.AutoScroll = true;
+        flowLayoutPanel1.Dock = DockStyle.Fill;
+        flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+        flowLayoutPanel1.Location = new Point(3, 3);
+        flowLayoutPanel1.Name = "flowLayoutPanel1";
+        flowLayoutPanel1.Size = new Size(482, 350);
+        flowLayoutPanel1.TabIndex = 0;
+        flowLayoutPanel1.WrapContents = false;
+        // 
         // Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(507, 450);
-        Controls.Add(gp_clickPos);
-        Controls.Add(gp_duration);
-        Controls.Add(pb_progress);
+        ClientSize = new Size(524, 511);
+        Controls.Add(tabControl);
         Controls.Add(gp_delay);
-        Controls.Add(gp_options);
+        Controls.Add(pb_progress);
         Controls.Add(btn_stop);
         Controls.Add(btn_start);
-        Controls.Add(gp_repeat);
-        Controls.Add(gp_interval);
         Icon = (Icon)resources.GetObject("$this.Icon");
-        MaximumSize = new Size(523, 489);
+        MaximumSize = new Size(2000, 2000);
         MinimumSize = new Size(523, 489);
         Name = "Main";
         Text = "OpenClicker";
@@ -606,6 +669,9 @@ partial class Main
         gp_clickPos.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)nup_clickingPos_Y).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_clickingPos_X).EndInit();
+        tabControl.ResumeLayout(false);
+        tabPageSingle.ResumeLayout(false);
+        tabPageMultiple.ResumeLayout(false);
         ResumeLayout(false);
     }
 
@@ -687,4 +753,10 @@ partial class Main
     private System.Windows.Forms.GroupBox gp_interval;
 
     #endregion
+
+    private TabControl tabControl;
+    private TabPage tabPageSingle;
+    private TabPage tabPageMultiple;
+    private FlowLayoutPanel flowLayoutPanel1;
+    private Button btnAddPanel;
 }
