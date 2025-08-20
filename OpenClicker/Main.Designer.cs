@@ -39,7 +39,7 @@ partial class Main
         lb_sec = new Label();
         lb_Minutes = new Label();
         lb_Hours = new Label();
-        gp_repeat = new GroupBox();
+        gb_repeatSingle = new GroupBox();
         nup_times = new NumericUpDown();
         label1 = new Label();
         rb_times = new RadioButton();
@@ -81,14 +81,20 @@ partial class Main
         tabControl = new TabControl();
         tabPageSingle = new TabPage();
         tabPageMultiple = new TabPage();
-        btnAddPanel = new Button();
+        gb_multiple_repeat = new GroupBox();
+        nud_multiple_times = new NumericUpDown();
+        lbl_multiple_times = new Label();
+        rb_multiple_times = new RadioButton();
+        rb_multiple_infinite = new RadioButton();
+        cb_multiple_currentPosition = new CheckBox();
+        btn_multiple_addClick = new Button();
         flowLayoutPanel1 = new FlowLayoutPanel();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_min).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_hours).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_mili).BeginInit();
-        gp_repeat.SuspendLayout();
+        gb_repeatSingle.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_times).BeginInit();
         gp_options.SuspendLayout();
         gp_delay.SuspendLayout();
@@ -107,10 +113,13 @@ partial class Main
         tabControl.SuspendLayout();
         tabPageSingle.SuspendLayout();
         tabPageMultiple.SuspendLayout();
+        gb_multiple_repeat.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)nud_multiple_times).BeginInit();
         SuspendLayout();
         // 
         // gp_interval
         // 
+        gp_interval.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         gp_interval.Controls.Add(nup_sec);
         gp_interval.Controls.Add(nup_min);
         gp_interval.Controls.Add(nup_hours);
@@ -128,6 +137,7 @@ partial class Main
         // 
         // nup_sec
         // 
+        nup_sec.AutoSize = true;
         nup_sec.Location = new Point(222, 25);
         nup_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_sec.Name = "nup_sec";
@@ -155,6 +165,8 @@ partial class Main
         // 
         // nup_mili
         // 
+        nup_mili.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        nup_mili.AutoSize = true;
         nup_mili.Location = new Point(342, 25);
         nup_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_mili.Name = "nup_mili";
@@ -164,6 +176,7 @@ partial class Main
         // 
         // lb_msec
         // 
+        lb_msec.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         lb_msec.Location = new Point(402, 27);
         lb_msec.Name = "lb_msec";
         lb_msec.Size = new Size(73, 16);
@@ -194,31 +207,34 @@ partial class Main
         lb_Hours.TabIndex = 1;
         lb_Hours.Text = "Hours";
         // 
-        // gp_repeat
+        // gb_repeatSingle
         // 
-        gp_repeat.Controls.Add(nup_times);
-        gp_repeat.Controls.Add(label1);
-        gp_repeat.Controls.Add(rb_times);
-        gp_repeat.Controls.Add(rb_infinite);
-        gp_repeat.Location = new Point(17, 86);
-        gp_repeat.Name = "gp_repeat";
-        gp_repeat.Size = new Size(264, 97);
-        gp_repeat.TabIndex = 1;
-        gp_repeat.TabStop = false;
-        gp_repeat.Text = "Click Repeat";
+        gb_repeatSingle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        gb_repeatSingle.Controls.Add(nup_times);
+        gb_repeatSingle.Controls.Add(label1);
+        gb_repeatSingle.Controls.Add(rb_times);
+        gb_repeatSingle.Controls.Add(rb_infinite);
+        gb_repeatSingle.Location = new Point(17, 86);
+        gb_repeatSingle.Name = "gb_repeatSingle";
+        gb_repeatSingle.Size = new Size(264, 97);
+        gb_repeatSingle.TabIndex = 1;
+        gb_repeatSingle.TabStop = false;
+        gb_repeatSingle.Text = "Click Repeat";
         // 
         // nup_times
         // 
-        nup_times.Location = new Point(33, 57);
+        nup_times.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        nup_times.Location = new Point(33, 56);
         nup_times.Maximum = new decimal(new int[] { 1316134912, 2328, 0, 0 });
         nup_times.Name = "nup_times";
-        nup_times.Size = new Size(53, 23);
+        nup_times.Size = new Size(132, 23);
         nup_times.TabIndex = 4;
         nup_times.KeyPress += nup_KeyPress;
         // 
         // label1
         // 
-        label1.Location = new Point(92, 59);
+        label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        label1.Location = new Point(171, 58);
         label1.Name = "label1";
         label1.Size = new Size(56, 19);
         label1.TabIndex = 3;
@@ -228,7 +244,7 @@ partial class Main
         // 
         rb_times.Location = new Point(10, 52);
         rb_times.Name = "rb_times";
-        rb_times.Size = new Size(124, 29);
+        rb_times.Size = new Size(248, 29);
         rb_times.TabIndex = 1;
         rb_times.TabStop = true;
         rb_times.UseVisualStyleBackColor = true;
@@ -237,14 +253,15 @@ partial class Main
         // 
         rb_infinite.Location = new Point(10, 22);
         rb_infinite.Name = "rb_infinite";
-        rb_infinite.Size = new Size(146, 24);
+        rb_infinite.Size = new Size(248, 24);
         rb_infinite.TabIndex = 0;
         rb_infinite.TabStop = true;
-        rb_infinite.Text = "Infinite (Until stopped)";
+        rb_infinite.Text = "Infinite";
         rb_infinite.UseVisualStyleBackColor = true;
         // 
         // btn_start
         // 
+        btn_start.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
         btn_start.Location = new Point(13, 470);
         btn_start.Name = "btn_start";
         btn_start.Size = new Size(64, 25);
@@ -255,6 +272,7 @@ partial class Main
         // 
         // btn_stop
         // 
+        btn_stop.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
         btn_stop.Location = new Point(83, 470);
         btn_stop.Name = "btn_stop";
         btn_stop.Size = new Size(64, 25);
@@ -265,13 +283,14 @@ partial class Main
         // 
         // gp_options
         // 
+        gp_options.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
         gp_options.Controls.Add(cb_clickType);
         gp_options.Controls.Add(lbl_clickType);
         gp_options.Controls.Add(lbl_mouseButton);
         gp_options.Controls.Add(cb_mouseButton);
-        gp_options.Location = new Point(299, 86);
+        gp_options.Location = new Point(287, 86);
         gp_options.Name = "gp_options";
-        gp_options.Size = new Size(207, 97);
+        gp_options.Size = new Size(219, 97);
         gp_options.TabIndex = 4;
         gp_options.TabStop = false;
         gp_options.Text = "Click Options";
@@ -282,7 +301,7 @@ partial class Main
         cb_clickType.FormattingEnabled = true;
         cb_clickType.Location = new Point(107, 56);
         cb_clickType.Name = "cb_clickType";
-        cb_clickType.Size = new Size(67, 23);
+        cb_clickType.Size = new Size(86, 23);
         cb_clickType.TabIndex = 3;
         cb_clickType.SelectedIndexChanged += cb_clickType_SelectedIndexChanged;
         cb_clickType.SelectionChangeCommitted += cb_clickType_SelectionChangeCommitted;
@@ -310,12 +329,13 @@ partial class Main
         cb_mouseButton.Items.AddRange(new object[] { "Left", "Right", "Middle" });
         cb_mouseButton.Location = new Point(107, 24);
         cb_mouseButton.Name = "cb_mouseButton";
-        cb_mouseButton.Size = new Size(67, 23);
+        cb_mouseButton.Size = new Size(86, 23);
         cb_mouseButton.TabIndex = 0;
         cb_mouseButton.SelectedIndexChanged += cb_mouseButton_SelectedIndexChanged;
         // 
         // gp_delay
         // 
+        gp_delay.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         gp_delay.Controls.Add(nup_delay_sec);
         gp_delay.Controls.Add(nup_delay_min);
         gp_delay.Controls.Add(nup_delay_h);
@@ -326,7 +346,7 @@ partial class Main
         gp_delay.Controls.Add(lbl_delay_h);
         gp_delay.Location = new Point(19, 402);
         gp_delay.Name = "gp_delay";
-        gp_delay.Size = new Size(489, 62);
+        gp_delay.Size = new Size(518, 62);
         gp_delay.TabIndex = 5;
         gp_delay.TabStop = false;
         gp_delay.Text = "Starting Delay";
@@ -402,13 +422,15 @@ partial class Main
         // pb_progress
         // 
         pb_progress.AccessibleDescription = "";
+        pb_progress.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         pb_progress.Location = new Point(153, 470);
         pb_progress.Name = "pb_progress";
-        pb_progress.Size = new Size(349, 25);
+        pb_progress.Size = new Size(384, 25);
         pb_progress.TabIndex = 6;
         // 
         // gp_duration
         // 
+        gp_duration.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         gp_duration.Controls.Add(nup_duration_sec);
         gp_duration.Controls.Add(nup_duration_min);
         gp_duration.Controls.Add(nup_duration_h);
@@ -494,6 +516,7 @@ partial class Main
         // 
         // gp_clickPos
         // 
+        gp_clickPos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         gp_clickPos.Controls.Add(btn_pickLocation);
         gp_clickPos.Controls.Add(nup_clickingPos_Y);
         gp_clickPos.Controls.Add(lbl_clickingPos_Y);
@@ -510,7 +533,7 @@ partial class Main
         // 
         // btn_pickLocation
         // 
-        btn_pickLocation.Location = new Point(222, 52);
+        btn_pickLocation.Location = new Point(284, 51);
         btn_pickLocation.Name = "btn_pickLocation";
         btn_pickLocation.Size = new Size(104, 25);
         btn_pickLocation.TabIndex = 6;
@@ -520,17 +543,17 @@ partial class Main
         // 
         // nup_clickingPos_Y
         // 
-        nup_clickingPos_Y.Location = new Point(143, 52);
+        nup_clickingPos_Y.Location = new Point(171, 52);
         nup_clickingPos_Y.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
         nup_clickingPos_Y.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
         nup_clickingPos_Y.Name = "nup_clickingPos_Y";
-        nup_clickingPos_Y.Size = new Size(73, 23);
+        nup_clickingPos_Y.Size = new Size(107, 23);
         nup_clickingPos_Y.TabIndex = 5;
         nup_clickingPos_Y.KeyPress += nup_KeyPress;
         // 
         // lbl_clickingPos_Y
         // 
-        lbl_clickingPos_Y.Location = new Point(126, 55);
+        lbl_clickingPos_Y.Location = new Point(157, 55);
         lbl_clickingPos_Y.Name = "lbl_clickingPos_Y";
         lbl_clickingPos_Y.Size = new Size(23, 23);
         lbl_clickingPos_Y.TabIndex = 4;
@@ -542,7 +565,7 @@ partial class Main
         nup_clickingPos_X.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
         nup_clickingPos_X.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
         nup_clickingPos_X.Name = "nup_clickingPos_X";
-        nup_clickingPos_X.Size = new Size(72, 23);
+        nup_clickingPos_X.Size = new Size(107, 23);
         nup_clickingPos_X.TabIndex = 3;
         nup_clickingPos_X.KeyPress += nup_KeyPress;
         // 
@@ -575,60 +598,124 @@ partial class Main
         // 
         // tabControl
         // 
+        tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         tabControl.Controls.Add(tabPageSingle);
         tabControl.Controls.Add(tabPageMultiple);
         tabControl.Location = new Point(12, 12);
         tabControl.Name = "tabControl";
         tabControl.SelectedIndex = 0;
-        tabControl.Size = new Size(496, 384);
+        tabControl.Size = new Size(525, 384);
         tabControl.TabIndex = 9;
         // 
         // tabPageSingle
         // 
         tabPageSingle.Controls.Add(gp_interval);
         tabPageSingle.Controls.Add(gp_clickPos);
-        tabPageSingle.Controls.Add(gp_repeat);
+        tabPageSingle.Controls.Add(gb_repeatSingle);
         tabPageSingle.Controls.Add(gp_duration);
         tabPageSingle.Controls.Add(gp_options);
         tabPageSingle.Location = new Point(4, 24);
         tabPageSingle.Name = "tabPageSingle";
         tabPageSingle.Padding = new Padding(3);
-        tabPageSingle.Size = new Size(525, 356);
+        tabPageSingle.Size = new Size(517, 356);
         tabPageSingle.TabIndex = 0;
         tabPageSingle.Text = "Single";
         tabPageSingle.UseVisualStyleBackColor = true;
         // 
         // tabPageMultiple
         // 
-        tabPageMultiple.Controls.Add(btnAddPanel);
+        tabPageMultiple.Controls.Add(gb_multiple_repeat);
+        tabPageMultiple.Controls.Add(cb_multiple_currentPosition);
+        tabPageMultiple.Controls.Add(btn_multiple_addClick);
         tabPageMultiple.Controls.Add(flowLayoutPanel1);
         tabPageMultiple.Location = new Point(4, 24);
         tabPageMultiple.Name = "tabPageMultiple";
         tabPageMultiple.Padding = new Padding(3);
-        tabPageMultiple.Size = new Size(488, 356);
+        tabPageMultiple.Size = new Size(517, 356);
         tabPageMultiple.TabIndex = 1;
         tabPageMultiple.Text = "Multiple";
         tabPageMultiple.UseVisualStyleBackColor = true;
         // 
-        // btnAddPanel
+        // gb_multiple_repeat
         // 
-        btnAddPanel.Dock = DockStyle.Bottom;
-        btnAddPanel.Location = new Point(3, 330);
-        btnAddPanel.Name = "btnAddPanel";
-        btnAddPanel.Size = new Size(482, 23);
-        btnAddPanel.TabIndex = 1;
-        btnAddPanel.Text = "Add";
-        btnAddPanel.UseVisualStyleBackColor = true;
-        btnAddPanel.Click += btnAddPanel_Click;
+        gb_multiple_repeat.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        gb_multiple_repeat.Controls.Add(nud_multiple_times);
+        gb_multiple_repeat.Controls.Add(lbl_multiple_times);
+        gb_multiple_repeat.Controls.Add(rb_multiple_times);
+        gb_multiple_repeat.Controls.Add(rb_multiple_infinite);
+        gb_multiple_repeat.Location = new Point(13, 228);
+        gb_multiple_repeat.Name = "gb_multiple_repeat";
+        gb_multiple_repeat.Size = new Size(498, 97);
+        gb_multiple_repeat.TabIndex = 3;
+        gb_multiple_repeat.TabStop = false;
+        gb_multiple_repeat.Text = "Repeat Pattern";
+        // 
+        // nud_multiple_times
+        // 
+        nud_multiple_times.Location = new Point(33, 57);
+        nud_multiple_times.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
+        nud_multiple_times.Name = "nud_multiple_times";
+        nud_multiple_times.Size = new Size(101, 23);
+        nud_multiple_times.TabIndex = 4;
+        // 
+        // lbl_multiple_times
+        // 
+        lbl_multiple_times.Location = new Point(140, 59);
+        lbl_multiple_times.Name = "lbl_multiple_times";
+        lbl_multiple_times.Size = new Size(56, 19);
+        lbl_multiple_times.TabIndex = 3;
+        lbl_multiple_times.Text = "Times";
+        // 
+        // rb_multiple_times
+        // 
+        rb_multiple_times.Location = new Point(10, 52);
+        rb_multiple_times.Name = "rb_multiple_times";
+        rb_multiple_times.Size = new Size(124, 29);
+        rb_multiple_times.TabIndex = 1;
+        rb_multiple_times.TabStop = true;
+        rb_multiple_times.UseVisualStyleBackColor = true;
+        // 
+        // rb_multiple_infinite
+        // 
+        rb_multiple_infinite.Location = new Point(10, 22);
+        rb_multiple_infinite.Name = "rb_multiple_infinite";
+        rb_multiple_infinite.Size = new Size(146, 24);
+        rb_multiple_infinite.TabIndex = 0;
+        rb_multiple_infinite.TabStop = true;
+        rb_multiple_infinite.Text = "Infinite (Until stopped)";
+        rb_multiple_infinite.UseVisualStyleBackColor = true;
+        // 
+        // cb_multiple_currentPosition
+        // 
+        cb_multiple_currentPosition.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+        cb_multiple_currentPosition.AutoSize = true;
+        cb_multiple_currentPosition.Location = new Point(6, 331);
+        cb_multiple_currentPosition.Name = "cb_multiple_currentPosition";
+        cb_multiple_currentPosition.Size = new Size(190, 19);
+        cb_multiple_currentPosition.TabIndex = 2;
+        cb_multiple_currentPosition.Text = "Click at current Cursor Position";
+        cb_multiple_currentPosition.UseVisualStyleBackColor = true;
+        cb_multiple_currentPosition.CheckedChanged += cb_multiple_currentPosition_CheckedChanged;
+        // 
+        // btn_multiple_addClick
+        // 
+        btn_multiple_addClick.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        btn_multiple_addClick.Location = new Point(3, 199);
+        btn_multiple_addClick.Name = "btn_multiple_addClick";
+        btn_multiple_addClick.Size = new Size(511, 23);
+        btn_multiple_addClick.TabIndex = 1;
+        btn_multiple_addClick.Text = "Add";
+        btn_multiple_addClick.UseVisualStyleBackColor = true;
+        btn_multiple_addClick.Click += btn_multiple_addClick_Click;
         // 
         // flowLayoutPanel1
         // 
+        flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         flowLayoutPanel1.AutoScroll = true;
-        flowLayoutPanel1.Dock = DockStyle.Fill;
         flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
         flowLayoutPanel1.Location = new Point(3, 3);
         flowLayoutPanel1.Name = "flowLayoutPanel1";
-        flowLayoutPanel1.Size = new Size(482, 350);
+        flowLayoutPanel1.Size = new Size(511, 190);
         flowLayoutPanel1.TabIndex = 0;
         flowLayoutPanel1.WrapContents = false;
         // 
@@ -636,24 +723,25 @@ partial class Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(524, 511);
+        ClientSize = new Size(546, 511);
         Controls.Add(tabControl);
         Controls.Add(gp_delay);
         Controls.Add(pb_progress);
         Controls.Add(btn_stop);
         Controls.Add(btn_start);
         Icon = (Icon)resources.GetObject("$this.Icon");
-        MaximumSize = new Size(2000, 2000);
-        MinimumSize = new Size(523, 489);
+        MaximumSize = new Size(562, 2000);
+        MinimumSize = new Size(562, 550);
         Name = "Main";
         Text = "OpenClicker";
         Load += Main_Load;
         gp_interval.ResumeLayout(false);
+        gp_interval.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)nup_sec).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_min).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_hours).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_mili).EndInit();
-        gp_repeat.ResumeLayout(false);
+        gb_repeatSingle.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)nup_times).EndInit();
         gp_options.ResumeLayout(false);
         gp_delay.ResumeLayout(false);
@@ -672,6 +760,9 @@ partial class Main
         tabControl.ResumeLayout(false);
         tabPageSingle.ResumeLayout(false);
         tabPageMultiple.ResumeLayout(false);
+        tabPageMultiple.PerformLayout();
+        gb_multiple_repeat.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)nud_multiple_times).EndInit();
         ResumeLayout(false);
     }
 
@@ -740,7 +831,7 @@ partial class Main
 
     private System.Windows.Forms.Button btn_start;
 
-    private System.Windows.Forms.GroupBox gp_repeat;
+    private System.Windows.Forms.GroupBox gb_repeatSingle;
 
     private System.Windows.Forms.Label lb_msec;
 
@@ -758,5 +849,11 @@ partial class Main
     private TabPage tabPageSingle;
     private TabPage tabPageMultiple;
     private FlowLayoutPanel flowLayoutPanel1;
-    private Button btnAddPanel;
+    private Button btn_multiple_addClick;
+    private CheckBox cb_multiple_currentPosition;
+    private GroupBox gb_multiple_repeat;
+    private NumericUpDown nud_multiple_times;
+    private Label lbl_multiple_times;
+    private RadioButton rb_multiple_times;
+    private RadioButton rb_multiple_infinite;
 }
