@@ -15,8 +15,13 @@ public partial class ClickControl : UserControl
 {
     private FlowLayoutPanel _parentContainer;
 
+    // Outputs
     public ClickType ClickType => cb_ClickType.SelectedItem as ClickType ?? new ClickType(ClickTypes.Single);
     public MouseButtonItem MouseButton => cb_MouseButton.SelectedItem as MouseButtonItem ?? new MouseButtonItem();
+    public Point Position => new Point((int)nud_X.Value, (int)nud_Y.Value);
+
+    // Inputs
+    public bool PickLocationEnabled { get => CanUsePickLocation(); set => SetCanUsePickLocation(value); }
 
     public ClickControl(FlowLayoutPanel parent)
     {
@@ -63,5 +68,29 @@ public partial class ClickControl : UserControl
     {
         _parentContainer.Controls.Remove(this);
         this.Dispose();
+    }
+
+    private void btn_PickLocation_Click(object sender, EventArgs e)
+    {
+        var location = PickLocation.GetLocation();
+        if (location != null)
+        {
+            nud_X.Value = location.Value.X;
+            nud_Y.Value = location.Value.Y;
+        }
+    }
+
+
+
+
+    private void SetCanUsePickLocation(bool enable)
+    {
+        nud_X.Enabled = enable;
+        nud_Y.Enabled = enable;
+        btn_PickLocation.Enabled = enable;
+    }
+    private bool CanUsePickLocation()
+    {
+        return nud_X.Enabled && nud_Y.Enabled && btn_PickLocation.Enabled;
     }
 }
