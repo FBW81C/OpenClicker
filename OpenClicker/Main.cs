@@ -373,15 +373,31 @@ public partial class Main : Form
     private void ParseClicks()
     {
         var list = new List<Click>();
-        foreach (ClickControl cc in flowLayoutPanel1.Controls)
+
+        if (tabControl.SelectedIndex == 0)
         {
             list.Add(new Click
             {
-                Position = cc.Position,
-                ClickType = cc.ClickType.Type,
-                MouseButton = cc.MouseButton.Value,
-                Delay = new TimeSpan(0, 0, 0, 0, 1)
+                Position = new Point((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value),
+                ClickType = _selectedClickType.Type,
+                MouseButton = _selectedMouseButton.Value,
+                Delay = (int)nup_mili.Value +
+                        (int)nup_sec.Value * 1000 +
+                        (int)nup_min.Value * 60 * 1000 +
+                        (int)nup_hours.Value * 60 * 60 * 1000
             });
+        } else
+        {
+            foreach (ClickControl cc in flowLayoutPanel1.Controls)
+            {
+                list.Add(new Click
+                {
+                    Position = cc.Position,
+                    ClickType = cc.ClickType.Type,
+                    MouseButton = cc.MouseButton.Value,
+                    Delay = cc.Delay
+                });
+            }
         }
 
         foreach (var click in list)
