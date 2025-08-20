@@ -40,6 +40,8 @@ public partial class Main : Form
 
         rb_infinite.Checked = true;
         rb_currentPos.Checked = true;
+
+        rb_multiple_infinite.Checked = true;
     }
 
     private void SetClickTypes()
@@ -72,6 +74,9 @@ public partial class Main : Form
 
     private void btn_start_Click(object sender, EventArgs e)
     {
+        ParseClicks();
+        return;
+
         // Checks and sets to ensure integrity 
         if (_timer.Enabled || _isClicking)
         {
@@ -350,40 +355,46 @@ public partial class Main : Form
 
     private void btn_pickLocation_Click(object sender, EventArgs e)
     {
-        using (var overlay = new OverlayForm())
+        var location = PickLocation.GetLocation();
+        if (location != null)
         {
-            overlay.ShowDialog(); // Modal
-            if (overlay.PointCaptured)
-            {
-                Point clickedPoint = overlay.CapturedPoint;
-                nup_clickingPos_X.Value = clickedPoint.X;
-                nup_clickingPos_Y.Value = clickedPoint.Y;
-            }
-            else
-            {
-                // MessageBox.Show("Capture cancelled.");
-            }
+            nup_clickingPos_X.Value = location.Value.X;
+            nup_clickingPos_Y.Value = location.Value.Y;
         }
     }
 
     // Multiple Clicks
-    private void btnAddPanel_Click(object sender, EventArgs e)
+    private void btn_multiple_addClick_Click(object sender, EventArgs e)
     {
         var clickControl = new ClickControl(flowLayoutPanel1);
         flowLayoutPanel1.Controls.Add(clickControl);
     }
+
     private void ParseClicks()
     {
         var list = new List<Click>();
-        foreach (ClickControl cc  in flowLayoutPanel1.Controls)
+        foreach (ClickControl cc in flowLayoutPanel1.Controls)
         {
             list.Add(new Click
             {
-                Position = new Point(0, 0),
+                Position = cc.Position,
                 ClickType = cc.ClickType.Type,
                 MouseButton = cc.MouseButton.Value,
                 Delay = new TimeSpan(0, 0, 0, 0, 1)
             });
+        }
+
+        foreach (var click in list)
+        {
+            MessageBox.Show($"{click.Position} {click.ClickType} {click.MouseButton} {click.Delay}");
+        }
+    }
+
+    private void cb_multiple_currentPosition_CheckedChanged(object sender, EventArgs e)
+    {
+        foreach (ClickControl cc in flowLayoutPanel1.Controls)
+        {
+            cc.PickLocationEnabled = !cb_multiple_currentPosition.Checked;
         }
     }
 }
