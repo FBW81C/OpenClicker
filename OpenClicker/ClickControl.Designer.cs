@@ -39,10 +39,10 @@
             btn_delete = new Button();
             btn_PickLocation = new Button();
             gp_interval = new GroupBox();
-            nup_sec = new NumericUpDown();
-            nup_min = new NumericUpDown();
-            nup_hours = new NumericUpDown();
-            nup_mili = new NumericUpDown();
+            nud_sec = new NumericUpDown();
+            nud_h = new NumericUpDown();
+            nud_min = new NumericUpDown();
+            nud_ms = new NumericUpDown();
             lb_msec = new Label();
             lb_sec = new Label();
             lb_Minutes = new Label();
@@ -50,10 +50,10 @@
             ((System.ComponentModel.ISupportInitialize)nud_X).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nud_Y).BeginInit();
             gp_interval.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nup_sec).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nup_min).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nup_hours).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nup_mili).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nud_sec).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nud_h).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nud_min).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nud_ms).BeginInit();
             SuspendLayout();
             // 
             // cb_MouseButton
@@ -153,10 +153,10 @@
             // 
             // gp_interval
             // 
-            gp_interval.Controls.Add(nup_sec);
-            gp_interval.Controls.Add(nup_min);
-            gp_interval.Controls.Add(nup_hours);
-            gp_interval.Controls.Add(nup_mili);
+            gp_interval.Controls.Add(nud_sec);
+            gp_interval.Controls.Add(nud_h);
+            gp_interval.Controls.Add(nud_min);
+            gp_interval.Controls.Add(nud_ms);
             gp_interval.Controls.Add(lb_msec);
             gp_interval.Controls.Add(lb_sec);
             gp_interval.Controls.Add(lb_Minutes);
@@ -168,37 +168,37 @@
             gp_interval.TabStop = false;
             gp_interval.Text = "Interval before next click";
             // 
-            // nup_sec
+            // nud_sec
             // 
-            nup_sec.Location = new Point(226, 20);
-            nup_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            nup_sec.Name = "nup_sec";
-            nup_sec.Size = new Size(72, 23);
-            nup_sec.TabIndex = 11;
+            nud_sec.Location = new Point(226, 20);
+            nud_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            nud_sec.Name = "nud_sec";
+            nud_sec.Size = new Size(72, 23);
+            nud_sec.TabIndex = 11;
             // 
-            // nup_min
+            // nud_h
             // 
-            nup_min.Location = new Point(6, 20);
-            nup_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            nup_min.Name = "nup_min";
-            nup_min.Size = new Size(72, 23);
-            nup_min.TabIndex = 10;
+            nud_h.Location = new Point(6, 20);
+            nud_h.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            nud_h.Name = "nud_h";
+            nud_h.Size = new Size(72, 23);
+            nud_h.TabIndex = 10;
             // 
-            // nup_hours
+            // nud_min
             // 
-            nup_hours.Location = new Point(113, 20);
-            nup_hours.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            nup_hours.Name = "nup_hours";
-            nup_hours.Size = new Size(72, 23);
-            nup_hours.TabIndex = 9;
+            nud_min.Location = new Point(113, 20);
+            nud_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            nud_min.Name = "nud_min";
+            nud_min.Size = new Size(72, 23);
+            nud_min.TabIndex = 9;
             // 
-            // nup_mili
+            // nud_ms
             // 
-            nup_mili.Location = new Point(334, 20);
-            nup_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            nup_mili.Name = "nup_mili";
-            nup_mili.Size = new Size(72, 23);
-            nup_mili.TabIndex = 8;
+            nud_ms.Location = new Point(334, 20);
+            nud_ms.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            nud_ms.Name = "nud_ms";
+            nud_ms.Size = new Size(72, 23);
+            nud_ms.TabIndex = 8;
             // 
             // lb_msec
             // 
@@ -252,10 +252,10 @@
             ((System.ComponentModel.ISupportInitialize)nud_X).EndInit();
             ((System.ComponentModel.ISupportInitialize)nud_Y).EndInit();
             gp_interval.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)nup_sec).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nup_min).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nup_hours).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nup_mili).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nud_sec).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nud_h).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nud_min).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nud_ms).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -273,10 +273,10 @@
         private Button btn_delete;
         private Button btn_PickLocation;
         private GroupBox gp_interval;
-        private NumericUpDown nup_sec;
-        private NumericUpDown nup_min;
-        private NumericUpDown nup_hours;
-        private NumericUpDown nup_mili;
+        private NumericUpDown nud_sec;
+        private NumericUpDown nud_h;
+        private NumericUpDown nud_min;
+        private NumericUpDown nud_ms;
         private Label lb_msec;
         private Label lb_sec;
         private Label lb_Minutes;

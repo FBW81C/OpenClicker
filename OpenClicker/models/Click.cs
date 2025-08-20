@@ -11,5 +11,5 @@ public class Click
     public Point Position { get; set; }
     public ClickTypes ClickType { get; set; }
     public MouseButtons MouseButton { get; set; }
-    public TimeSpan Delay { get; set; } // Delay after next click
+    public int Delay { get; set; } // Delay after next click
 }
