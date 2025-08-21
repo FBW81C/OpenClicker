@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenClicker.models;
+namespace OpenClicker.Models;
 public class Click
 {
-    public Point Position { get; set; }
+    public Point? Position { get; set; } = null; // null = at cursor position
     public ClickTypes ClickType { get; set; }
     public MouseButtons MouseButton { get; set; }
-    public int Delay { get; set; } // Delay after next click
+    public TimeSpan Delay { get; set; } // Delay after next click
 }

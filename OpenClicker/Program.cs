@@ -1,3 +1,4 @@
+using OpenClicker.Models;
 using System.Runtime.InteropServices;
 
 namespace OpenClicker;
@@ -28,52 +29,61 @@ static class Program
         Application.Run(new Main());
     }
     
-    public static void LeftClick()
+    private static void LeftClick()
     {
-        LeftDown();
-        LeftUp();
+        PressMouseButton(MOUSEEVENTF_LEFTDOWN);
+        PressMouseButton(MOUSEEVENTF_LEFTUP);
     }
-    public static void LeftDown()
+    private static void RightClick()
     {
-        mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, IntPtr.Zero);
+        PressMouseButton(MOUSEEVENTF_RIGHTDOWN);
+        PressMouseButton(MOUSEEVENTF_RIGHTUP);
     }
-    public static void LeftUp()
+    private static void MiddleClick()
     {
-        mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, IntPtr.Zero);
-    }
-
-    public static void RightClick()
-    {
-        RightDown();
-        RightUp();
-    }
-    public static void RightDown()
-    {
-        mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, IntPtr.Zero);
-    }
-    public static void RightUp()
-    {
-        mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, IntPtr.Zero);
-    }
-    
-    public static void MiddleClick()
-    {
-        MiddleDown();
-        MiddleUp();
+        PressMouseButton(MOUSEEVENTF_MIDDLEDOWN);
+        PressMouseButton(MOUSEEVENTF_MIDDLEUP);
     }
 
-    public static void MiddleDown()
+    private static void PressMouseButton(int button)
     {
-        mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, IntPtr.Zero);
+        mouse_event(button, 0, 0, 0, IntPtr.Zero);
     }
 
-    public static void MiddleUp()
+    public static void Click(ClickTypes type, MouseButtons button, Point? point = null, bool? twice = false)
     {
-        mouse_event(MOUSEEVENTF_MIDDLEUP, 0, 0, 0, IntPtr.Zero);
+        if (type == ClickTypes.Hold)
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (point != null)
+        {
+            SetCursorPos(point.Value.X, point.Value.Y);
+        }
+
+        ClickWithButton(button);
+        if (type == ClickTypes.Hold)
+        {
+            ClickWithButton(button);
+        }
     }
 
-    public static void SetCursorPosition(int x, int y)
+    private static void ClickWithButton(MouseButtons button)
     {
-        SetCursorPos(x, y);
+        switch (button)
+        {
+            case MouseButtons.Left:
+                LeftClick();
+                break;
+            case MouseButtons.Right:
+                RightClick();
+                break;
+            case MouseButtons.Middle:
+                MiddleClick();
+                break;
+            default:
+                break;
+        }
     }
 }
