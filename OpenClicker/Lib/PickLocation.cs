@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenClicker;
+namespace OpenClicker.Lib;
 
 public static class PickLocation
 {
