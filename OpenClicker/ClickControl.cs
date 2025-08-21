@@ -1,4 +1,5 @@
-﻿using OpenClicker.Models;
+﻿using OpenClicker.Lib;
+using OpenClicker.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,10 +20,11 @@ public partial class ClickControl : UserControl
     public ClickType ClickType => cb_ClickType.SelectedItem as ClickType ?? new ClickType(ClickTypes.Single);
     public MouseButtonItem MouseButton => cb_MouseButton.SelectedItem as MouseButtonItem ?? new MouseButtonItem();
     public Point Position => new Point((int)nud_X.Value, (int)nud_Y.Value);
-    public int Delay => (int)nud_ms.Value +
-                        (int)nud_sec.Value * 1000 +
-                        (int)nud_min.Value * 1000 * 60 +
-                        (int)nud_h.Value * 1000 * 60 * 60;
+    public TimeSpan Delay => new TimeSpan(0,
+                                (int)nud_h.Value,
+                                (int)nud_min.Value,
+                                (int)nud_sec.Value,
+                                (int)nud_ms.Value);
 
     // Inputs
     public bool PickLocationEnabled { get => CanUsePickLocation(); set => SetCanUsePickLocation(value); }
