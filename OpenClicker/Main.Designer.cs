@@ -1,4 +1,6 @@
-﻿namespace OpenClicker;
+﻿using OpenClicker.CustomComponents;
+
+namespace OpenClicker;
 
 partial class Main
 {
@@ -31,16 +33,16 @@ partial class Main
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
         gp_interval = new GroupBox();
-        nup_sec = new NumericUpDown();
-        nup_min = new NumericUpDown();
-        nup_hours = new NumericUpDown();
-        nup_mili = new NumericUpDown();
+        nup_hours = new NumericUpDownNoScroll();
+        nup_sec = new NumericUpDownNoScroll();
+        nup_min = new NumericUpDownNoScroll();
+        nup_mili = new NumericUpDownNoScroll();
         lb_msec = new Label();
         lb_sec = new Label();
         lb_Minutes = new Label();
         lb_Hours = new Label();
         gb_repeatSingle = new GroupBox();
-        nup_times = new NumericUpDown();
+        nup_times = new NumericUpDownNoScroll();
         label1 = new Label();
         rb_times = new RadioButton();
         rb_infinite = new RadioButton();
@@ -52,29 +54,29 @@ partial class Main
         lbl_mouseButton = new Label();
         cb_mouseButton = new ComboBox();
         gp_delay = new GroupBox();
-        nup_delay_sec = new NumericUpDown();
-        nup_delay_min = new NumericUpDown();
-        nup_delay_h = new NumericUpDown();
-        nup_delay_mili = new NumericUpDown();
+        nup_delay_sec = new NumericUpDownNoScroll();
+        nup_delay_min = new NumericUpDownNoScroll();
+        nup_delay_h = new NumericUpDownNoScroll();
+        nup_delay_mili = new NumericUpDownNoScroll();
         lbl_delay_mili = new Label();
         lbl_delay_sec = new Label();
         lbl_delay_min = new Label();
         lbl_delay_h = new Label();
         pb_progress = new ProgressBar();
         gp_duration = new GroupBox();
-        nup_duration_sec = new NumericUpDown();
-        nup_duration_min = new NumericUpDown();
-        nup_duration_h = new NumericUpDown();
-        nup_duration_mili = new NumericUpDown();
+        nup_duration_sec = new NumericUpDownNoScroll();
+        nup_duration_min = new NumericUpDownNoScroll();
+        nup_duration_h = new NumericUpDownNoScroll();
+        nup_duration_mili = new NumericUpDownNoScroll();
         label2 = new Label();
         label3 = new Label();
         label4 = new Label();
         label5 = new Label();
         gp_clickPos = new GroupBox();
         btn_pickLocation = new Button();
-        nup_clickingPos_Y = new NumericUpDown();
+        nup_clickingPos_Y = new NumericUpDownNoScroll();
         lbl_clickingPos_Y = new Label();
-        nup_clickingPos_X = new NumericUpDown();
+        nup_clickingPos_X = new NumericUpDownNoScroll();
         lbl_clickingPos_X = new Label();
         rb_XY = new RadioButton();
         rb_currentPos = new RadioButton();
@@ -82,7 +84,7 @@ partial class Main
         tabPageSingle = new TabPage();
         tabPageMultiple = new TabPage();
         gb_multiple_repeat = new GroupBox();
-        nud_multiple_times = new NumericUpDown();
+        nud_multiple_times = new NumericUpDownNoScroll();
         lbl_multiple_times = new Label();
         rb_multiple_times = new RadioButton();
         rb_multiple_infinite = new RadioButton();
@@ -90,9 +92,9 @@ partial class Main
         btn_multiple_addClick = new Button();
         flowLayoutPanel1 = new FlowLayoutPanel();
         gp_interval.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)nup_hours).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_min).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)nup_hours).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_mili).BeginInit();
         gb_repeatSingle.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_times).BeginInit();
@@ -120,9 +122,9 @@ partial class Main
         // gp_interval
         // 
         gp_interval.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        gp_interval.Controls.Add(nup_hours);
         gp_interval.Controls.Add(nup_sec);
         gp_interval.Controls.Add(nup_min);
-        gp_interval.Controls.Add(nup_hours);
         gp_interval.Controls.Add(nup_mili);
         gp_interval.Controls.Add(lb_msec);
         gp_interval.Controls.Add(lb_sec);
@@ -134,6 +136,14 @@ partial class Main
         gp_interval.TabIndex = 0;
         gp_interval.TabStop = false;
         gp_interval.Text = "Click Interval";
+        // 
+        // nup_hours
+        // 
+        nup_hours.Location = new Point(10, 25);
+        nup_hours.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_hours.Name = "nup_hours";
+        nup_hours.Size = new Size(55, 23);
+        nup_hours.TabIndex = 12;
         // 
         // nup_sec
         // 
@@ -153,15 +163,6 @@ partial class Main
         nup_min.Size = new Size(54, 23);
         nup_min.TabIndex = 10;
         nup_min.KeyPress += nup_KeyPress;
-        // 
-        // nup_hours
-        // 
-        nup_hours.Location = new Point(10, 25);
-        nup_hours.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-        nup_hours.Name = "nup_hours";
-        nup_hours.Size = new Size(54, 23);
-        nup_hours.TabIndex = 9;
-        nup_hours.KeyPress += nup_KeyPress;
         // 
         // nup_mili
         // 
@@ -737,9 +738,9 @@ partial class Main
         Load += Main_Load;
         gp_interval.ResumeLayout(false);
         gp_interval.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)nup_hours).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_sec).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_min).EndInit();
-        ((System.ComponentModel.ISupportInitialize)nup_hours).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_mili).EndInit();
         gb_repeatSingle.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)nup_times).EndInit();
@@ -768,10 +769,10 @@ partial class Main
 
     private System.Windows.Forms.Button btn_pickLocation;
 
-    private System.Windows.Forms.NumericUpDown nup_clickingPos_Y;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_clickingPos_Y;
 
     private System.Windows.Forms.Label lbl_clickingPos_X;
-    private System.Windows.Forms.NumericUpDown nup_clickingPos_X;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_clickingPos_X;
     private System.Windows.Forms.Label lbl_clickingPos_Y;
 
     private System.Windows.Forms.GroupBox gp_clickPos;
@@ -779,10 +780,10 @@ partial class Main
     private System.Windows.Forms.RadioButton rb_XY;
 
     private System.Windows.Forms.GroupBox gp_duration;
-    private System.Windows.Forms.NumericUpDown nup_duration_sec;
-    private System.Windows.Forms.NumericUpDown nup_duration_min;
-    private System.Windows.Forms.NumericUpDown nup_duration_h;
-    private System.Windows.Forms.NumericUpDown nup_duration_mili;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_duration_sec;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_duration_min;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_duration_h;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_duration_mili;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.Label label4;
@@ -790,13 +791,13 @@ partial class Main
 
     private System.Windows.Forms.ProgressBar pb_progress;
 
-    private System.Windows.Forms.NumericUpDown nup_delay_sec;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_delay_sec;
 
     private System.Windows.Forms.GroupBox gp_delay;
-    private System.Windows.Forms.NumericUpDown nup_sec;
-    private System.Windows.Forms.NumericUpDown nup_delay_min;
-    private System.Windows.Forms.NumericUpDown nup_delay_h;
-    private System.Windows.Forms.NumericUpDown nup_delay_mili;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_sec;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_delay_min;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_delay_h;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_delay_mili;
     private System.Windows.Forms.Label lbl_delay_mili;
     private System.Windows.Forms.Label lbl_delay_sec;
     private System.Windows.Forms.Label lbl_delay_min;
@@ -813,19 +814,17 @@ partial class Main
     private System.Windows.Forms.GroupBox gp_options;
 
     private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.NumericUpDown nup_times;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_times;
 
     private System.Windows.Forms.TextBox tb_times;
 
     private System.Windows.Forms.RadioButton rb_infinite;
     private System.Windows.Forms.RadioButton rb_times;
 
-    private System.Windows.Forms.NumericUpDown nup_min;
-    private System.Windows.Forms.NumericUpDown nup_seconds;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_min;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_seconds;
 
-    private System.Windows.Forms.NumericUpDown nup_hours;
-
-    private System.Windows.Forms.NumericUpDown nup_mili;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_mili;
 
     private System.Windows.Forms.Button btn_stop;
 
@@ -852,8 +851,9 @@ partial class Main
     private Button btn_multiple_addClick;
     private CheckBox cb_multiple_currentPosition;
     private GroupBox gb_multiple_repeat;
-    private NumericUpDown nud_multiple_times;
+    private NumericUpDownNoScroll nud_multiple_times;
     private Label lbl_multiple_times;
     private RadioButton rb_multiple_times;
     private RadioButton rb_multiple_infinite;
+    private CustomComponents.NumericUpDownNoScroll nup_hours;
 }

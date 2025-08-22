@@ -1,4 +1,6 @@
-﻿namespace OpenClicker
+﻿using OpenClicker.CustomComponents;
+
+namespace OpenClicker
 {
     partial class ClickControl
     {
@@ -32,17 +34,17 @@
             lbl_mouseButton = new Label();
             lbl_ClickType = new Label();
             cb_ClickType = new ComboBox();
-            nud_X = new NumericUpDown();
-            nud_Y = new NumericUpDown();
+            nud_X = new NumericUpDownNoScroll();
+            nud_Y = new NumericUpDownNoScroll();
             lbl_X = new Label();
             lbl_Y = new Label();
             btn_delete = new Button();
             btn_PickLocation = new Button();
             gp_interval = new GroupBox();
-            nud_sec = new NumericUpDown();
-            nud_h = new NumericUpDown();
-            nud_min = new NumericUpDown();
-            nud_ms = new NumericUpDown();
+            nud_sec = new NumericUpDownNoScroll();
+            nud_h = new NumericUpDownNoScroll();
+            nud_min = new NumericUpDownNoScroll();
+            nud_ms = new NumericUpDownNoScroll();
             lb_msec = new Label();
             lb_sec = new Label();
             lb_Minutes = new Label();
@@ -267,16 +269,16 @@
         private Label lbl_ClickType;
         private ComboBox cb_ClickType;
         private NumericUpDown nud_X;
-        private NumericUpDown nud_Y;
+        private NumericUpDownNoScroll nud_Y;
         private Label lbl_X;
         private Label lbl_Y;
         private Button btn_delete;
         private Button btn_PickLocation;
         private GroupBox gp_interval;
-        private NumericUpDown nud_sec;
-        private NumericUpDown nud_h;
-        private NumericUpDown nud_min;
-        private NumericUpDown nud_ms;
+        private NumericUpDownNoScroll nud_sec;
+        private NumericUpDownNoScroll nud_h;
+        private NumericUpDownNoScroll nud_min;
+        private NumericUpDownNoScroll nud_ms;
         private Label lb_msec;
         private Label lb_sec;
         private Label lb_Minutes;
