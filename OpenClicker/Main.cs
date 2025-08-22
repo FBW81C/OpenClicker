@@ -1,7 +1,6 @@
 using OpenClicker.Exceptions;
 using OpenClicker.Lib;
 using OpenClicker.Models;
-using OpenClicker.Models;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices.Marshalling;
@@ -13,9 +12,8 @@ namespace OpenClicker;
 // dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true
 public partial class Main : Form
 {
-    private Timer _timer = new() { Interval = 1000 };
-    private bool _isClicking = false;
-    private int _clickCount = 0;
+    private CancellationTokenSource _cts;
+
     private MouseButtonItem _selectedMouseButton = new();
     private ClickType _selectedClickType = new(ClickTypes.Single);
 
@@ -78,21 +76,24 @@ public partial class Main : Form
 
     private void btn_start_Click(object sender, EventArgs e)
     {
-        _pattern = ParseClicks();
-
-        // Checks and sets to ensure integrity 
-        if (_timer.Enabled || _isClicking)
+        try
         {
+            _pattern = ParseClicks();
+        }
+        catch (InvalidClickPatternException ex)
+        {
+            MessageBox.Show(ex.Message);
             return;
         }
+
+        // Checks and sets to ensure integrity 
         btn_start.Enabled = false;
         btn_stop.Enabled = true;
+
         if (_selectedClickType.Type != ClickTypes.Hold)
         {
             cb_clickType.Items.Remove(_clickTypeHold); // Prohibit user from changing to hold while active
         }
-        _clickCount = 0;
-        _isClicking = true;
 
         // Actual code
 
@@ -101,39 +102,43 @@ public partial class Main : Form
         //    StartHolding();
         //    return;
         //}
-        StartClicking();
+
+        _cts = new CancellationTokenSource();
+        _ = StartClicking(_cts.Token);
     }
 
-    private async void StartClicking()
+    private async Task StartClicking(CancellationToken token)
     {
-        pb_progress.Maximum = rb_times.Checked ? (int)nup_times.Value : 10000;
-        pb_progress.Value = rb_times.Checked ? 0 : 9999;
+        pb_progress.Maximum = _pattern.Repeat ?? 1000;
+        pb_progress.Value = _pattern.Repeat.HasValue ? 0 : 999;
 
-        await Task.Delay(_pattern.StartingDelay);
+        await Task.Delay(_pattern.StartingDelay, token);
 
         var clickCount = 0;
 
-        while (clickCount < _pattern.Repeat || _pattern.Repeat == null)
+        while ((clickCount < _pattern.Repeat || _pattern.Repeat == null) && !token.IsCancellationRequested)
         {
-            if (!_isClicking)
-            {
-                Reset();
-                return ;
-            }
-
-            await PlayPattern(_pattern.Clicks);
+            await PlayPattern(_pattern.Clicks, token);
+            
             clickCount++;
+            if (_pattern.Repeat != null) pb_progress.Value = clickCount;
         }
 
         Reset();
     }
 
-    private async Task PlayPattern(List<Click> clicks)
+    private async Task PlayPattern(List<Click> clicks, CancellationToken token)
     {
+        if (clicks == null || clicks.Count == 0)
+        {
+            await Task.Delay(100, token); // prevents 100% CPU usage
+            return;
+        }
+
         foreach (var click in clicks)
         {
             Program.Click(click.ClickType, click.MouseButton, click.Position, click.ClickType == ClickTypes.Double);
-            await Task.Delay(click.Delay);
+            await Task.Delay(click.Delay, token);
         }
     }
 
@@ -183,7 +188,6 @@ public partial class Main : Form
         const int step = 50; // refresh every 50ms
         for (int elapsed = 0; elapsed < duration; elapsed += step)
         {
-            if (!_isClicking) return;
             pb_progress.Value = elapsed;
             await Task.Delay(step);
         }
@@ -213,21 +217,14 @@ public partial class Main : Form
     private void btn_stop_Click(object sender, EventArgs e)
     {
         //if (_selectedClickType.Type == ClickTypes.Hold)
-        //StopHolding();
-        //else
-        //StopTimer();
+            //StopHolding();
         Reset();
     }
 
-    //private void StopTimer()
-    //{
-    //    _timer.Stop();
-    //    Reset();
-    //}
-
     private void Reset()
     {
-        _isClicking = false;
+        _cts?.Cancel();
+
         pb_progress.Value = 0;
 
         if (!cb_clickType.Items.Contains(_clickTypeHold))
@@ -237,6 +234,8 @@ public partial class Main : Form
 
         btn_start.Enabled = true;
         btn_stop.Enabled = false;
+
+        _cts = null;
     }
 
     private void nup_KeyPress(object sender, KeyPressEventArgs e)
@@ -310,6 +309,7 @@ public partial class Main : Form
         {
             nup_clickingPos_X.Value = location.Value.X;
             nup_clickingPos_Y.Value = location.Value.Y;
+            rb_XY.Checked = true;
         }
     }
 
@@ -389,16 +389,16 @@ public partial class Main : Form
             throw new InvalidClickPatternException("Starting delay can't be negative!");
         }
 
-        if (pattern.Repeat != null & pattern.Repeat < 1)
+        if (pattern.Repeat != null && pattern.Repeat < 1)
         {
             throw new InvalidClickPatternException("Repeat must be greater 0 if not infinite");
         }
 
         foreach (var click in pattern.Clicks)
         {
-            if (click.Delay < TimeSpan.Zero)
+            if (click.Delay <= TimeSpan.Zero)
             {
-                throw new InvalidClickPatternException("All intervals must not be negative!");
+                throw new InvalidClickPatternException("All intervals must be greater 0!");
             }
         }
     }
