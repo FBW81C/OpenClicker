@@ -12,4 +12,7 @@ public class Click
     public ClickTypes ClickType { get; set; }
     public MouseButtons MouseButton { get; set; }
     public TimeSpan Delay { get; set; } // Delay after next click
+
+    // Only for ClickType = Holding
+    public TimeSpan HoldingDuration { get; set; }
 }
