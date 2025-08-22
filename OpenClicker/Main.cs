@@ -327,19 +327,32 @@ public partial class Main : Form
 
         if (tabControl.SelectedIndex == 0)
         { // Single
-            list.Add(new Click
+            var click = new Click
             {
                 Position = rb_currentPos.Checked ? 
                             null : 
                             new Point((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value),
                 ClickType = _selectedClickType.Type,
                 MouseButton = _selectedMouseButton.Value,
-                Delay = new TimeSpan(0,
+            };
+
+            if (click.ClickType == ClickTypes.Hold)
+            {
+                click.HoldingDuration = new TimeSpan(0,
+                    (int)nup_duration_h.Value,
+                    (int)nup_duration_min.Value,
+                    (int)nup_duration_sec.Value,
+                    (int)nup_duration_mili.Value);
+            } else
+            {
+                click.Delay = new TimeSpan(0,
                     (int)nup_hours.Value,
                     (int)nup_min.Value,
                     (int)nup_sec.Value,
-                    (int)nup_mili.Value)
-            });
+                    (int)nup_mili.Value);
+            }
+
+                list.Add(click);
 
             repeat = rb_infinite.Checked ? null : (int)nup_times.Value;
         }
