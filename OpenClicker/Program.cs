@@ -63,7 +63,7 @@ static class Program
         }
 
         ClickWithButton(button);
-        if (type == ClickTypes.Hold)
+        if (type == ClickTypes.Double)
         {
             ClickWithButton(button);
         }
