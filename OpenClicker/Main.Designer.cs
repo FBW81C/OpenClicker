@@ -91,6 +91,17 @@ partial class Main
         cb_multiple_currentPosition = new CheckBox();
         btn_multiple_addClick = new Button();
         flowLayoutPanel1 = new FlowLayoutPanel();
+        menuStrip1 = new MenuStrip();
+        fileToolStripMenuItem = new ToolStripMenuItem();
+        saveToolStripMenuItem = new ToolStripMenuItem();
+        loadToolStripMenuItem = new ToolStripMenuItem();
+        setAsDefaultToolStripMenuItem = new ToolStripMenuItem();
+        optionsToolStripMenuItem = new ToolStripMenuItem();
+        aboutToolStripMenuItem = new ToolStripMenuItem();
+        gitHubToolStripMenuItem = new ToolStripMenuItem();
+        aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
+        setAsDefaultToolStripMenuItem1 = new ToolStripMenuItem();
+        resetDefaultToolStripMenuItem = new ToolStripMenuItem();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_hours).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_sec).BeginInit();
@@ -117,11 +128,12 @@ partial class Main
         tabPageMultiple.SuspendLayout();
         gb_multiple_repeat.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nud_multiple_times).BeginInit();
+        menuStrip1.SuspendLayout();
         SuspendLayout();
         // 
         // gp_interval
         // 
-        gp_interval.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        gp_interval.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         gp_interval.Controls.Add(nup_hours);
         gp_interval.Controls.Add(nup_sec);
         gp_interval.Controls.Add(nup_min);
@@ -210,7 +222,7 @@ partial class Main
         // 
         // gb_repeatSingle
         // 
-        gb_repeatSingle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        gb_repeatSingle.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         gb_repeatSingle.Controls.Add(nup_times);
         gb_repeatSingle.Controls.Add(label1);
         gb_repeatSingle.Controls.Add(rb_times);
@@ -263,7 +275,7 @@ partial class Main
         // btn_start
         // 
         btn_start.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        btn_start.Location = new Point(13, 470);
+        btn_start.Location = new Point(13, 490);
         btn_start.Name = "btn_start";
         btn_start.Size = new Size(64, 25);
         btn_start.TabIndex = 2;
@@ -274,7 +286,7 @@ partial class Main
         // btn_stop
         // 
         btn_stop.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        btn_stop.Location = new Point(83, 470);
+        btn_stop.Location = new Point(83, 490);
         btn_stop.Name = "btn_stop";
         btn_stop.Size = new Size(64, 25);
         btn_stop.TabIndex = 3;
@@ -284,7 +296,7 @@ partial class Main
         // 
         // gp_options
         // 
-        gp_options.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+        gp_options.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         gp_options.Controls.Add(cb_clickType);
         gp_options.Controls.Add(lbl_clickType);
         gp_options.Controls.Add(lbl_mouseButton);
@@ -345,7 +357,7 @@ partial class Main
         gp_delay.Controls.Add(lbl_delay_sec);
         gp_delay.Controls.Add(lbl_delay_min);
         gp_delay.Controls.Add(lbl_delay_h);
-        gp_delay.Location = new Point(19, 402);
+        gp_delay.Location = new Point(19, 422);
         gp_delay.Name = "gp_delay";
         gp_delay.Size = new Size(518, 62);
         gp_delay.TabIndex = 5;
@@ -424,7 +436,7 @@ partial class Main
         // 
         pb_progress.AccessibleDescription = "";
         pb_progress.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        pb_progress.Location = new Point(153, 470);
+        pb_progress.Location = new Point(153, 490);
         pb_progress.Name = "pb_progress";
         pb_progress.Size = new Size(384, 25);
         pb_progress.TabIndex = 6;
@@ -602,7 +614,7 @@ partial class Main
         tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         tabControl.Controls.Add(tabPageSingle);
         tabControl.Controls.Add(tabPageMultiple);
-        tabControl.Location = new Point(12, 12);
+        tabControl.Location = new Point(12, 32);
         tabControl.Name = "tabControl";
         tabControl.SelectedIndex = 0;
         tabControl.Size = new Size(525, 384);
@@ -720,17 +732,97 @@ partial class Main
         flowLayoutPanel1.TabIndex = 0;
         flowLayoutPanel1.WrapContents = false;
         // 
+        // menuStrip1
+        // 
+        menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, optionsToolStripMenuItem, aboutToolStripMenuItem });
+        menuStrip1.Location = new Point(0, 0);
+        menuStrip1.Name = "menuStrip1";
+        menuStrip1.Size = new Size(546, 24);
+        menuStrip1.TabIndex = 10;
+        menuStrip1.Text = "menuStrip";
+        // 
+        // fileToolStripMenuItem
+        // 
+        fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, loadToolStripMenuItem, setAsDefaultToolStripMenuItem });
+        fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+        fileToolStripMenuItem.Size = new Size(58, 20);
+        fileToolStripMenuItem.Text = "Profiles";
+        // 
+        // saveToolStripMenuItem
+        // 
+        saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+        saveToolStripMenuItem.Size = new Size(180, 22);
+        saveToolStripMenuItem.Text = "Save";
+        saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
+        // 
+        // loadToolStripMenuItem
+        // 
+        loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+        loadToolStripMenuItem.Size = new Size(180, 22);
+        loadToolStripMenuItem.Text = "Load";
+        loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
+        // 
+        // setAsDefaultToolStripMenuItem
+        // 
+        setAsDefaultToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { setAsDefaultToolStripMenuItem1, resetDefaultToolStripMenuItem });
+        setAsDefaultToolStripMenuItem.Name = "setAsDefaultToolStripMenuItem";
+        setAsDefaultToolStripMenuItem.Size = new Size(180, 22);
+        setAsDefaultToolStripMenuItem.Text = "Default";
+        // 
+        // optionsToolStripMenuItem
+        // 
+        optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+        optionsToolStripMenuItem.Size = new Size(61, 20);
+        optionsToolStripMenuItem.Text = "Options";
+        // 
+        // aboutToolStripMenuItem
+        // 
+        aboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gitHubToolStripMenuItem, aboutOpenClickerToolStripMenuItem });
+        aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+        aboutToolStripMenuItem.Size = new Size(52, 20);
+        aboutToolStripMenuItem.Text = "About";
+        // 
+        // gitHubToolStripMenuItem
+        // 
+        gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
+        gitHubToolStripMenuItem.Size = new Size(175, 22);
+        gitHubToolStripMenuItem.Text = "GitHub";
+        gitHubToolStripMenuItem.Click += gitHubToolStripMenuItem_Click;
+        // 
+        // aboutOpenClickerToolStripMenuItem
+        // 
+        aboutOpenClickerToolStripMenuItem.Name = "aboutOpenClickerToolStripMenuItem";
+        aboutOpenClickerToolStripMenuItem.Size = new Size(175, 22);
+        aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
+        aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
+        // 
+        // setAsDefaultToolStripMenuItem1
+        // 
+        setAsDefaultToolStripMenuItem1.Name = "setAsDefaultToolStripMenuItem1";
+        setAsDefaultToolStripMenuItem1.Size = new Size(180, 22);
+        setAsDefaultToolStripMenuItem1.Text = "Set as Default";
+        setAsDefaultToolStripMenuItem1.Click += setAsDefaultToolStripMenuItem1_Click;
+        // 
+        // resetDefaultToolStripMenuItem
+        // 
+        resetDefaultToolStripMenuItem.Name = "resetDefaultToolStripMenuItem";
+        resetDefaultToolStripMenuItem.Size = new Size(180, 22);
+        resetDefaultToolStripMenuItem.Text = "Reset Default";
+        resetDefaultToolStripMenuItem.Click += resetDefaultToolStripMenuItem_Click;
+        // 
         // Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(546, 511);
+        ClientSize = new Size(546, 531);
         Controls.Add(tabControl);
         Controls.Add(gp_delay);
         Controls.Add(pb_progress);
         Controls.Add(btn_stop);
         Controls.Add(btn_start);
+        Controls.Add(menuStrip1);
         Icon = (Icon)resources.GetObject("$this.Icon");
+        MainMenuStrip = menuStrip1;
         MaximumSize = new Size(562, 2000);
         MinimumSize = new Size(562, 550);
         Name = "Main";
@@ -764,7 +856,10 @@ partial class Main
         tabPageMultiple.PerformLayout();
         gb_multiple_repeat.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)nud_multiple_times).EndInit();
+        menuStrip1.ResumeLayout(false);
+        menuStrip1.PerformLayout();
         ResumeLayout(false);
+        PerformLayout();
     }
 
     private System.Windows.Forms.Button btn_pickLocation;
@@ -856,4 +951,15 @@ partial class Main
     private RadioButton rb_multiple_times;
     private RadioButton rb_multiple_infinite;
     private CustomComponents.NumericUpDownNoScroll nup_hours;
+    private MenuStrip menuStrip1;
+    private ToolStripMenuItem fileToolStripMenuItem;
+    private ToolStripMenuItem optionsToolStripMenuItem;
+    private ToolStripMenuItem aboutToolStripMenuItem;
+    private ToolStripMenuItem gitHubToolStripMenuItem;
+    private ToolStripMenuItem aboutOpenClickerToolStripMenuItem;
+    private ToolStripMenuItem saveToolStripMenuItem;
+    private ToolStripMenuItem loadToolStripMenuItem;
+    private ToolStripMenuItem setAsDefaultToolStripMenuItem;
+    private ToolStripMenuItem setAsDefaultToolStripMenuItem1;
+    private ToolStripMenuItem resetDefaultToolStripMenuItem;
 }
