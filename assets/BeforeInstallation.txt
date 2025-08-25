@@ -14,6 +14,9 @@ Features:
 - Starting Delay (Hours, Minutes, Seconds, Milliseconds)
 - Duration (Only for Click Type = Holding)
 - Clicking Position (Current, XY)
+- Pattern
+    - Single
+    - Multiple (Multiple clicks in a row)
 
 Dependencies:
 - .NET 8 (Core)
