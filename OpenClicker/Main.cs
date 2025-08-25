@@ -4,6 +4,7 @@ using OpenClicker.Models;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices.Marshalling;
+using System.Text;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
@@ -14,15 +15,20 @@ public partial class Main : Form
 {
     private CancellationTokenSource _cts;
     private ClickPattern _pattern = new ClickPattern();
+    private bool LoadedFromFile = false;
 
     private MouseButtonItem _selectedMouseButton = new();
     private ClickType _selectedClickType = new(ClickTypes.Single);
-
     private readonly ClickType _clickTypeHold = new(ClickTypes.Hold);
 
-    public Main()
+    public Main(string? filePath = null)
     {
         InitializeComponent();
+
+        if (!string.IsNullOrEmpty(filePath))
+        {
+            MessageBox.Show("OCP-Datei geöffnet: " + filePath);
+        }
     }
 
     private void Main_Load(object sender, EventArgs e)
@@ -75,17 +81,21 @@ public partial class Main : Form
 
     private async void btn_start_Click(object sender, EventArgs e)
     {
-        try
+        if (!LoadedFromFile)
         {
-            _pattern = ParseClicks();
-            if (_pattern.Clicks.Count == 0) throw new InvalidClickPatternException("Pattern is empty");
+            try
+            {
+                _pattern = ParseClicks();
+                if (_pattern.Clicks.Count == 0) throw new InvalidClickPatternException("Pattern is empty");
+            }
+            catch (InvalidClickPatternException ex)
+            {
+                MessageBox.Show(ex.Message);
+                ResetUi();
+                return;
+            }
         }
-        catch (InvalidClickPatternException ex)
-        {
-            MessageBox.Show(ex.Message);
-            ResetUi();
-            return;
-        }
+        LoadedFromFile = false;
 
         // Checks and sets to ensure integrity 
         btn_start.Enabled = false;
@@ -105,7 +115,7 @@ public partial class Main : Form
                 await StartHolding(_cts.Token);
             else
                 await StartClicking(_cts.Token);
-        } 
+        }
         catch (OperationCanceledException)
         {
             // ignore on purpose
@@ -173,11 +183,11 @@ public partial class Main : Form
             await Task.Delay(_pattern.StartingDelay, token);
             Program.ToggleMouseButton(click.MouseButton, true);
             await Task.Delay(click.HoldingDuration, token);
-        } 
-        catch(OperationCanceledException)
+        }
+        catch (OperationCanceledException)
         {
             // Ignore cancellation
-        } 
+        }
         finally
         {
             Program.ToggleMouseButton(click.MouseButton, false);
@@ -314,8 +324,8 @@ public partial class Main : Form
         { // Single
             var click = new Click
             {
-                Position = rb_currentPos.Checked ? 
-                            null : 
+                Position = rb_currentPos.Checked ?
+                            null :
                             new Point((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value),
                 ClickType = _selectedClickType.Type,
                 MouseButton = _selectedMouseButton.Value,
@@ -328,7 +338,8 @@ public partial class Main : Form
                     (int)nup_duration_min.Value,
                     (int)nup_duration_sec.Value,
                     (int)nup_duration_mili.Value);
-            } else
+            }
+            else
             {
                 click.Delay = new TimeSpan(0,
                     (int)nup_hours.Value,
@@ -337,7 +348,7 @@ public partial class Main : Form
                     (int)nup_mili.Value);
             }
 
-                list.Add(click);
+            list.Add(click);
 
             repeat = rb_infinite.Checked ? null : (int)nup_times.Value;
         }
@@ -375,40 +386,9 @@ public partial class Main : Form
             Repeat = repeat
         };
 
-        AssertValidClickPattern(pattern);
+        Clicker.AssertValidClickPattern(pattern);
 
         return pattern;
-    }
-
-    private void AssertValidClickPattern(ClickPattern pattern)
-    {
-        if (pattern.StartingDelay < TimeSpan.Zero)
-        {
-            throw new InvalidClickPatternException("Starting delay can't be negative");
-        }
-
-        if (pattern.Repeat != null && pattern.Repeat < 1)
-        {
-            throw new InvalidClickPatternException("Repeat must be greater 0 if not infinite");
-        }
-
-        foreach (var click in pattern.Clicks)
-        {
-            if (click.ClickType == ClickTypes.Hold)
-            {
-                if (click.HoldingDuration <= TimeSpan.Zero)
-                {
-                    throw new InvalidClickPatternException("Holding duration must be greater 0");
-                }
-            } 
-            else
-            {
-                if (click.Delay <= TimeSpan.Zero)
-                {
-                    throw new InvalidClickPatternException("All intervals must be greater 0");
-                }
-            }
-        }
     }
 
     private void cb_multiple_currentPosition_CheckedChanged(object sender, EventArgs e)
