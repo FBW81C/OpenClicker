@@ -11,5 +11,5 @@ public class ClickPattern
 {
     public List<Click> Clicks { get; set; } = [];
     public TimeSpan StartingDelay { get; set; }
-    public int? Repeat = null; // null = infinite
+    public int? Repeat { get; set; }// null = infinite
 }
