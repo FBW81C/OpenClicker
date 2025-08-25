@@ -11,12 +11,12 @@ static class Program
     private const int MOUSEEVENTF_RIGHTUP = 0x10;
     private const int MOUSEEVENTF_MIDDLEDOWN = 0x20;
     private const int MOUSEEVENTF_MIDDLEUP = 0x40;
-    
+
     [DllImport("user32.dll", SetLastError = true)]
     private static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, IntPtr dwExtraInfo);
     [DllImport("user32.dll")]
     private static extern bool SetCursorPos(int X, int Y);
-    
+
     /// <summary>
     ///  The main entry point for the application.
     /// </summary>
@@ -28,7 +28,7 @@ static class Program
         ApplicationConfiguration.Initialize();
         Application.Run(new Main());
     }
-    
+
     private static void LeftClick()
     {
         PressMouseButton(MOUSEEVENTF_LEFTDOWN);
@@ -81,6 +81,29 @@ static class Program
                 break;
             case MouseButtons.Middle:
                 MiddleClick();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void ToggleMouseButton(MouseButtons button, bool down, Point? point = null)
+    {
+        if (point != null)
+        {
+            SetCursorPos(point.Value.X, point.Value.Y);
+        }
+
+        switch (button)
+        {
+            case MouseButtons.Left:
+                PressMouseButton(down ? MOUSEEVENTF_LEFTDOWN : MOUSEEVENTF_LEFTUP);
+                break;
+            case MouseButtons.Right:
+                PressMouseButton(down ? MOUSEEVENTF_RIGHTDOWN : MOUSEEVENTF_RIGHTUP);
+                break;
+            case MouseButtons.Middle:
+                PressMouseButton(down ? MOUSEEVENTF_MIDDLEDOWN : MOUSEEVENTF_MIDDLEUP);
                 break;
             default:
                 break;
