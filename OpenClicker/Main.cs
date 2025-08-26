@@ -27,7 +27,7 @@ public partial class Main : Form
 
         if (!string.IsNullOrEmpty(filePath))
         {
-            MessageBox.Show("OCP-Datei geöffnet: " + filePath);
+            LoadProfile(filePath);
         }
     }
 
