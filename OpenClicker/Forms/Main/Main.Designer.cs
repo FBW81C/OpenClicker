@@ -142,7 +142,7 @@ partial class Main
         gp_interval.Controls.Add(lb_sec);
         gp_interval.Controls.Add(lb_Minutes);
         gp_interval.Controls.Add(lb_Hours);
-        gp_interval.Location = new Point(17, 16);
+        gp_interval.Location = new Point(17, 6);
         gp_interval.Name = "gp_interval";
         gp_interval.Size = new Size(489, 62);
         gp_interval.TabIndex = 0;
@@ -227,7 +227,7 @@ partial class Main
         gb_repeatSingle.Controls.Add(label1);
         gb_repeatSingle.Controls.Add(rb_times);
         gb_repeatSingle.Controls.Add(rb_infinite);
-        gb_repeatSingle.Location = new Point(17, 86);
+        gb_repeatSingle.Location = new Point(17, 76);
         gb_repeatSingle.Name = "gb_repeatSingle";
         gb_repeatSingle.Size = new Size(264, 97);
         gb_repeatSingle.TabIndex = 1;
@@ -275,7 +275,7 @@ partial class Main
         // btn_start
         // 
         btn_start.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        btn_start.Location = new Point(13, 490);
+        btn_start.Location = new Point(13, 474);
         btn_start.Name = "btn_start";
         btn_start.Size = new Size(64, 25);
         btn_start.TabIndex = 2;
@@ -286,7 +286,7 @@ partial class Main
         // btn_stop
         // 
         btn_stop.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        btn_stop.Location = new Point(83, 490);
+        btn_stop.Location = new Point(83, 474);
         btn_stop.Name = "btn_stop";
         btn_stop.Size = new Size(64, 25);
         btn_stop.TabIndex = 3;
@@ -301,7 +301,7 @@ partial class Main
         gp_options.Controls.Add(lbl_clickType);
         gp_options.Controls.Add(lbl_mouseButton);
         gp_options.Controls.Add(cb_mouseButton);
-        gp_options.Location = new Point(287, 86);
+        gp_options.Location = new Point(287, 76);
         gp_options.Name = "gp_options";
         gp_options.Size = new Size(219, 97);
         gp_options.TabIndex = 4;
@@ -355,7 +355,7 @@ partial class Main
         gp_delay.Controls.Add(lbl_delay_sec);
         gp_delay.Controls.Add(lbl_delay_min);
         gp_delay.Controls.Add(lbl_delay_h);
-        gp_delay.Location = new Point(19, 422);
+        gp_delay.Location = new Point(19, 406);
         gp_delay.Name = "gp_delay";
         gp_delay.Size = new Size(518, 62);
         gp_delay.TabIndex = 5;
@@ -434,7 +434,7 @@ partial class Main
         // 
         pb_progress.AccessibleDescription = "";
         pb_progress.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        pb_progress.Location = new Point(153, 490);
+        pb_progress.Location = new Point(153, 474);
         pb_progress.Name = "pb_progress";
         pb_progress.Size = new Size(384, 25);
         pb_progress.TabIndex = 6;
@@ -450,7 +450,7 @@ partial class Main
         gp_duration.Controls.Add(label3);
         gp_duration.Controls.Add(label4);
         gp_duration.Controls.Add(label5);
-        gp_duration.Location = new Point(17, 189);
+        gp_duration.Location = new Point(17, 179);
         gp_duration.Name = "gp_duration";
         gp_duration.Size = new Size(489, 62);
         gp_duration.TabIndex = 7;
@@ -535,7 +535,7 @@ partial class Main
         gp_clickPos.Controls.Add(lbl_clickingPos_X);
         gp_clickPos.Controls.Add(rb_XY);
         gp_clickPos.Controls.Add(rb_currentPos);
-        gp_clickPos.Location = new Point(17, 257);
+        gp_clickPos.Location = new Point(17, 247);
         gp_clickPos.Name = "gp_clickPos";
         gp_clickPos.Size = new Size(489, 86);
         gp_clickPos.TabIndex = 8;
@@ -612,10 +612,10 @@ partial class Main
         tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         tabControl.Controls.Add(tabPageSingle);
         tabControl.Controls.Add(tabPageMultiple);
-        tabControl.Location = new Point(12, 32);
+        tabControl.Location = new Point(12, 26);
         tabControl.Name = "tabControl";
         tabControl.SelectedIndex = 0;
-        tabControl.Size = new Size(525, 384);
+        tabControl.Size = new Size(525, 374);
         tabControl.TabIndex = 9;
         // 
         // tabPageSingle
@@ -628,7 +628,7 @@ partial class Main
         tabPageSingle.Location = new Point(4, 24);
         tabPageSingle.Name = "tabPageSingle";
         tabPageSingle.Padding = new Padding(3);
-        tabPageSingle.Size = new Size(517, 356);
+        tabPageSingle.Size = new Size(517, 346);
         tabPageSingle.TabIndex = 0;
         tabPageSingle.Text = "Single";
         tabPageSingle.UseVisualStyleBackColor = true;
@@ -642,7 +642,7 @@ partial class Main
         tabPageMultiple.Location = new Point(4, 24);
         tabPageMultiple.Name = "tabPageMultiple";
         tabPageMultiple.Padding = new Padding(3);
-        tabPageMultiple.Size = new Size(517, 356);
+        tabPageMultiple.Size = new Size(517, 346);
         tabPageMultiple.TabIndex = 1;
         tabPageMultiple.Text = "Multiple";
         tabPageMultiple.UseVisualStyleBackColor = true;
@@ -812,7 +812,7 @@ partial class Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(546, 531);
+        ClientSize = new Size(546, 515);
         Controls.Add(tabControl);
         Controls.Add(gp_delay);
         Controls.Add(pb_progress);
@@ -822,7 +822,7 @@ partial class Main
         Icon = (Icon)resources.GetObject("$this.Icon");
         MainMenuStrip = menuStrip1;
         MaximumSize = new Size(562, 2000);
-        MinimumSize = new Size(562, 550);
+        MinimumSize = new Size(562, 554);
         Name = "Main";
         Text = "OpenClicker";
         Load += Main_Load;
