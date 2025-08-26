@@ -54,18 +54,22 @@ public partial class Main
 
     private void loadToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        LoadProfile();
+        LoadProfile(null, true);
         // Should not send MessageBox
-        MessageBox.Show("Successfully loaded profile", "Profile loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
-    private void LoadProfile(string? path = null)
+    private void LoadProfile(string? path = null, bool showSuccessMessage = false)
     {
         try
         {
             var profile = FileReader.GetProfile(path);
             _pattern = profile;
             PraseClicksToUI(_pattern);
+
+            if (showSuccessMessage)
+            {
+                MessageBox.Show("Successfully loaded profile", "Profile loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         catch (OCInvalidFile ex)
         {
