@@ -144,6 +144,9 @@ public partial class Main
 
             // Checkbox: Click at current Pos
             cb_multiple_currentPosition.Checked = pattern.Clicks.All(x => x.Position == null);
+
+            // Show Tab
+            tabControl.SelectedIndex = 1;
         }
     }
 }
