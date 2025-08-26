@@ -111,7 +111,7 @@ public static class FileReader
             } 
             else
             {
-                throw new OperationCanceledException();
+                throw new OCOperationCanceledException();
             }
         }
             
