@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using OpenClicker.Exceptions;
 using OpenClicker.Lib;
-using OpenClicker.Models;
 
-namespace OpenClicker;
+namespace OpenClicker.Forms.Main;
 public partial class Main
 {
     private void aboutOpenClickerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -38,7 +30,7 @@ public partial class Main
     {
         try
         {
-            var pattern = ParseClicks();
+            var pattern = ParseClicksFromUI();
             var path = FileReader.SaveProfile(pattern); ;
             MessageBox.Show($"Successfully saved profile to: {path}", "Profile saved", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
@@ -64,7 +56,7 @@ public partial class Main
     private void loadToolStripMenuItem_Click(object sender, EventArgs e)
     {
         LoadProfile();
-        // TODO: Update UI
+        PraseClicksToUI(_pattern);
     }
 
     private void LoadProfile(string? path = null)

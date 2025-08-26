@@ -10,7 +10,7 @@ public class Click
 {
     public Point? Position { get; set; } = null; // null = at cursor position
     public ClickTypes ClickType { get; set; }
-    public MouseButtons MouseButton { get; set; }
+    public OCMouseButtons MouseButton { get; set; }
     public TimeSpan Delay { get; set; } // Delay after next click
 
     // Only for ClickType = Holding

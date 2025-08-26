@@ -1,6 +1,6 @@
 ﻿using OpenClicker.CustomComponents;
 
-namespace OpenClicker;
+namespace OpenClicker.Forms.Main;
 
 partial class Main
 {
@@ -33,10 +33,10 @@ partial class Main
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
         gp_interval = new GroupBox();
-        nup_hours = new NumericUpDownNoScroll();
-        nup_sec = new NumericUpDownNoScroll();
-        nup_min = new NumericUpDownNoScroll();
-        nup_mili = new NumericUpDownNoScroll();
+        nup_interval_h = new NumericUpDownNoScroll();
+        nup_interval_sec = new NumericUpDownNoScroll();
+        nup_interval_min = new NumericUpDownNoScroll();
+        nup_interval_ms = new NumericUpDownNoScroll();
         lb_msec = new Label();
         lb_sec = new Label();
         lb_Minutes = new Label();
@@ -57,7 +57,7 @@ partial class Main
         nup_delay_sec = new NumericUpDownNoScroll();
         nup_delay_min = new NumericUpDownNoScroll();
         nup_delay_h = new NumericUpDownNoScroll();
-        nup_delay_mili = new NumericUpDownNoScroll();
+        nup_delay_ms = new NumericUpDownNoScroll();
         lbl_delay_mili = new Label();
         lbl_delay_sec = new Label();
         lbl_delay_min = new Label();
@@ -90,23 +90,23 @@ partial class Main
         rb_multiple_infinite = new RadioButton();
         cb_multiple_currentPosition = new CheckBox();
         btn_multiple_addClick = new Button();
-        flowLayoutPanel1 = new FlowLayoutPanel();
+        flowLayoutPanel = new FlowLayoutPanel();
         menuStrip1 = new MenuStrip();
         fileToolStripMenuItem = new ToolStripMenuItem();
         saveToolStripMenuItem = new ToolStripMenuItem();
         loadToolStripMenuItem = new ToolStripMenuItem();
         setAsDefaultToolStripMenuItem = new ToolStripMenuItem();
+        setAsDefaultToolStripMenuItem1 = new ToolStripMenuItem();
+        resetDefaultToolStripMenuItem = new ToolStripMenuItem();
         optionsToolStripMenuItem = new ToolStripMenuItem();
         aboutToolStripMenuItem = new ToolStripMenuItem();
         gitHubToolStripMenuItem = new ToolStripMenuItem();
         aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
-        setAsDefaultToolStripMenuItem1 = new ToolStripMenuItem();
-        resetDefaultToolStripMenuItem = new ToolStripMenuItem();
         gp_interval.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)nup_hours).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)nup_sec).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)nup_min).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)nup_mili).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_interval_h).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_interval_sec).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_interval_min).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_interval_ms).BeginInit();
         gb_repeatSingle.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_times).BeginInit();
         gp_options.SuspendLayout();
@@ -114,7 +114,7 @@ partial class Main
         ((System.ComponentModel.ISupportInitialize)nup_delay_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_delay_min).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_delay_h).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)nup_delay_mili).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_delay_ms).BeginInit();
         gp_duration.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_duration_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_min).BeginInit();
@@ -134,10 +134,10 @@ partial class Main
         // gp_interval
         // 
         gp_interval.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        gp_interval.Controls.Add(nup_hours);
-        gp_interval.Controls.Add(nup_sec);
-        gp_interval.Controls.Add(nup_min);
-        gp_interval.Controls.Add(nup_mili);
+        gp_interval.Controls.Add(nup_interval_h);
+        gp_interval.Controls.Add(nup_interval_sec);
+        gp_interval.Controls.Add(nup_interval_min);
+        gp_interval.Controls.Add(nup_interval_ms);
         gp_interval.Controls.Add(lb_msec);
         gp_interval.Controls.Add(lb_sec);
         gp_interval.Controls.Add(lb_Minutes);
@@ -149,43 +149,43 @@ partial class Main
         gp_interval.TabStop = false;
         gp_interval.Text = "Click Interval";
         // 
-        // nup_hours
+        // nup_interval_h
         // 
-        nup_hours.Location = new Point(10, 25);
-        nup_hours.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-        nup_hours.Name = "nup_hours";
-        nup_hours.Size = new Size(55, 23);
-        nup_hours.TabIndex = 12;
+        nup_interval_h.Location = new Point(10, 25);
+        nup_interval_h.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_interval_h.Name = "nup_interval_h";
+        nup_interval_h.Size = new Size(55, 23);
+        nup_interval_h.TabIndex = 12;
         // 
-        // nup_sec
+        // nup_interval_sec
         // 
-        nup_sec.AutoSize = true;
-        nup_sec.Location = new Point(222, 25);
-        nup_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-        nup_sec.Name = "nup_sec";
-        nup_sec.Size = new Size(54, 23);
-        nup_sec.TabIndex = 11;
-        nup_sec.KeyPress += nup_KeyPress;
+        nup_interval_sec.AutoSize = true;
+        nup_interval_sec.Location = new Point(222, 25);
+        nup_interval_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_interval_sec.Name = "nup_interval_sec";
+        nup_interval_sec.Size = new Size(54, 23);
+        nup_interval_sec.TabIndex = 11;
+        nup_interval_sec.KeyPress += nup_KeyPress;
         // 
-        // nup_min
+        // nup_interval_min
         // 
-        nup_min.Location = new Point(111, 25);
-        nup_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-        nup_min.Name = "nup_min";
-        nup_min.Size = new Size(54, 23);
-        nup_min.TabIndex = 10;
-        nup_min.KeyPress += nup_KeyPress;
+        nup_interval_min.Location = new Point(111, 25);
+        nup_interval_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_interval_min.Name = "nup_interval_min";
+        nup_interval_min.Size = new Size(54, 23);
+        nup_interval_min.TabIndex = 10;
+        nup_interval_min.KeyPress += nup_KeyPress;
         // 
-        // nup_mili
+        // nup_interval_ms
         // 
-        nup_mili.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-        nup_mili.AutoSize = true;
-        nup_mili.Location = new Point(342, 25);
-        nup_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-        nup_mili.Name = "nup_mili";
-        nup_mili.Size = new Size(54, 23);
-        nup_mili.TabIndex = 8;
-        nup_mili.KeyPress += nup_KeyPress;
+        nup_interval_ms.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        nup_interval_ms.AutoSize = true;
+        nup_interval_ms.Location = new Point(342, 25);
+        nup_interval_ms.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_interval_ms.Name = "nup_interval_ms";
+        nup_interval_ms.Size = new Size(54, 23);
+        nup_interval_ms.TabIndex = 8;
+        nup_interval_ms.KeyPress += nup_KeyPress;
         // 
         // lb_msec
         // 
@@ -316,7 +316,6 @@ partial class Main
         cb_clickType.Name = "cb_clickType";
         cb_clickType.Size = new Size(86, 23);
         cb_clickType.TabIndex = 3;
-        cb_clickType.SelectedIndexChanged += cb_clickType_SelectedIndexChanged;
         cb_clickType.SelectionChangeCommitted += cb_clickType_SelectionChangeCommitted;
         // 
         // lbl_clickType
@@ -344,7 +343,6 @@ partial class Main
         cb_mouseButton.Name = "cb_mouseButton";
         cb_mouseButton.Size = new Size(86, 23);
         cb_mouseButton.TabIndex = 0;
-        cb_mouseButton.SelectedIndexChanged += cb_mouseButton_SelectedIndexChanged;
         // 
         // gp_delay
         // 
@@ -352,7 +350,7 @@ partial class Main
         gp_delay.Controls.Add(nup_delay_sec);
         gp_delay.Controls.Add(nup_delay_min);
         gp_delay.Controls.Add(nup_delay_h);
-        gp_delay.Controls.Add(nup_delay_mili);
+        gp_delay.Controls.Add(nup_delay_ms);
         gp_delay.Controls.Add(lbl_delay_mili);
         gp_delay.Controls.Add(lbl_delay_sec);
         gp_delay.Controls.Add(lbl_delay_min);
@@ -391,14 +389,14 @@ partial class Main
         nup_delay_h.TabIndex = 9;
         nup_delay_h.KeyPress += nup_KeyPress;
         // 
-        // nup_delay_mili
+        // nup_delay_ms
         // 
-        nup_delay_mili.Location = new Point(342, 25);
-        nup_delay_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-        nup_delay_mili.Name = "nup_delay_mili";
-        nup_delay_mili.Size = new Size(54, 23);
-        nup_delay_mili.TabIndex = 8;
-        nup_delay_mili.KeyPress += nup_KeyPress;
+        nup_delay_ms.Location = new Point(342, 25);
+        nup_delay_ms.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_delay_ms.Name = "nup_delay_ms";
+        nup_delay_ms.Size = new Size(54, 23);
+        nup_delay_ms.TabIndex = 8;
+        nup_delay_ms.KeyPress += nup_KeyPress;
         // 
         // lbl_delay_mili
         // 
@@ -640,7 +638,7 @@ partial class Main
         tabPageMultiple.Controls.Add(gb_multiple_repeat);
         tabPageMultiple.Controls.Add(cb_multiple_currentPosition);
         tabPageMultiple.Controls.Add(btn_multiple_addClick);
-        tabPageMultiple.Controls.Add(flowLayoutPanel1);
+        tabPageMultiple.Controls.Add(flowLayoutPanel);
         tabPageMultiple.Location = new Point(4, 24);
         tabPageMultiple.Name = "tabPageMultiple";
         tabPageMultiple.Padding = new Padding(3);
@@ -721,16 +719,16 @@ partial class Main
         btn_multiple_addClick.UseVisualStyleBackColor = true;
         btn_multiple_addClick.Click += btn_multiple_addClick_Click;
         // 
-        // flowLayoutPanel1
+        // flowLayoutPanel
         // 
-        flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        flowLayoutPanel1.AutoScroll = true;
-        flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-        flowLayoutPanel1.Location = new Point(3, 3);
-        flowLayoutPanel1.Name = "flowLayoutPanel1";
-        flowLayoutPanel1.Size = new Size(511, 190);
-        flowLayoutPanel1.TabIndex = 0;
-        flowLayoutPanel1.WrapContents = false;
+        flowLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        flowLayoutPanel.AutoScroll = true;
+        flowLayoutPanel.FlowDirection = FlowDirection.TopDown;
+        flowLayoutPanel.Location = new Point(3, 3);
+        flowLayoutPanel.Name = "flowLayoutPanel";
+        flowLayoutPanel.Size = new Size(511, 190);
+        flowLayoutPanel.TabIndex = 0;
+        flowLayoutPanel.WrapContents = false;
         // 
         // menuStrip1
         // 
@@ -751,14 +749,14 @@ partial class Main
         // saveToolStripMenuItem
         // 
         saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-        saveToolStripMenuItem.Size = new Size(180, 22);
+        saveToolStripMenuItem.Size = new Size(112, 22);
         saveToolStripMenuItem.Text = "Save";
         saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
         // 
         // loadToolStripMenuItem
         // 
         loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-        loadToolStripMenuItem.Size = new Size(180, 22);
+        loadToolStripMenuItem.Size = new Size(112, 22);
         loadToolStripMenuItem.Text = "Load";
         loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
         // 
@@ -766,8 +764,22 @@ partial class Main
         // 
         setAsDefaultToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { setAsDefaultToolStripMenuItem1, resetDefaultToolStripMenuItem });
         setAsDefaultToolStripMenuItem.Name = "setAsDefaultToolStripMenuItem";
-        setAsDefaultToolStripMenuItem.Size = new Size(180, 22);
+        setAsDefaultToolStripMenuItem.Size = new Size(112, 22);
         setAsDefaultToolStripMenuItem.Text = "Default";
+        // 
+        // setAsDefaultToolStripMenuItem1
+        // 
+        setAsDefaultToolStripMenuItem1.Name = "setAsDefaultToolStripMenuItem1";
+        setAsDefaultToolStripMenuItem1.Size = new Size(145, 22);
+        setAsDefaultToolStripMenuItem1.Text = "Set as Default";
+        setAsDefaultToolStripMenuItem1.Click += setAsDefaultToolStripMenuItem1_Click;
+        // 
+        // resetDefaultToolStripMenuItem
+        // 
+        resetDefaultToolStripMenuItem.Name = "resetDefaultToolStripMenuItem";
+        resetDefaultToolStripMenuItem.Size = new Size(145, 22);
+        resetDefaultToolStripMenuItem.Text = "Reset Default";
+        resetDefaultToolStripMenuItem.Click += resetDefaultToolStripMenuItem_Click;
         // 
         // optionsToolStripMenuItem
         // 
@@ -796,20 +808,6 @@ partial class Main
         aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
         aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
         // 
-        // setAsDefaultToolStripMenuItem1
-        // 
-        setAsDefaultToolStripMenuItem1.Name = "setAsDefaultToolStripMenuItem1";
-        setAsDefaultToolStripMenuItem1.Size = new Size(180, 22);
-        setAsDefaultToolStripMenuItem1.Text = "Set as Default";
-        setAsDefaultToolStripMenuItem1.Click += setAsDefaultToolStripMenuItem1_Click;
-        // 
-        // resetDefaultToolStripMenuItem
-        // 
-        resetDefaultToolStripMenuItem.Name = "resetDefaultToolStripMenuItem";
-        resetDefaultToolStripMenuItem.Size = new Size(180, 22);
-        resetDefaultToolStripMenuItem.Text = "Reset Default";
-        resetDefaultToolStripMenuItem.Click += resetDefaultToolStripMenuItem_Click;
-        // 
         // Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
@@ -830,10 +828,10 @@ partial class Main
         Load += Main_Load;
         gp_interval.ResumeLayout(false);
         gp_interval.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)nup_hours).EndInit();
-        ((System.ComponentModel.ISupportInitialize)nup_sec).EndInit();
-        ((System.ComponentModel.ISupportInitialize)nup_min).EndInit();
-        ((System.ComponentModel.ISupportInitialize)nup_mili).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_interval_h).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_interval_sec).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_interval_min).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_interval_ms).EndInit();
         gb_repeatSingle.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)nup_times).EndInit();
         gp_options.ResumeLayout(false);
@@ -841,7 +839,7 @@ partial class Main
         ((System.ComponentModel.ISupportInitialize)nup_delay_sec).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_delay_min).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_delay_h).EndInit();
-        ((System.ComponentModel.ISupportInitialize)nup_delay_mili).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_delay_ms).EndInit();
         gp_duration.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)nup_duration_sec).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_min).EndInit();
@@ -889,10 +887,10 @@ partial class Main
     private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_delay_sec;
 
     private System.Windows.Forms.GroupBox gp_delay;
-    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_sec;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_interval_sec;
     private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_delay_min;
     private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_delay_h;
-    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_delay_mili;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_delay_ms;
     private System.Windows.Forms.Label lbl_delay_mili;
     private System.Windows.Forms.Label lbl_delay_sec;
     private System.Windows.Forms.Label lbl_delay_min;
@@ -916,10 +914,10 @@ partial class Main
     private System.Windows.Forms.RadioButton rb_infinite;
     private System.Windows.Forms.RadioButton rb_times;
 
-    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_min;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_interval_min;
     private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_seconds;
 
-    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_mili;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_interval_ms;
 
     private System.Windows.Forms.Button btn_stop;
 
@@ -942,7 +940,7 @@ partial class Main
     private TabControl tabControl;
     private TabPage tabPageSingle;
     private TabPage tabPageMultiple;
-    private FlowLayoutPanel flowLayoutPanel1;
+    private FlowLayoutPanel flowLayoutPanel;
     private Button btn_multiple_addClick;
     private CheckBox cb_multiple_currentPosition;
     private GroupBox gb_multiple_repeat;
@@ -950,7 +948,7 @@ partial class Main
     private Label lbl_multiple_times;
     private RadioButton rb_multiple_times;
     private RadioButton rb_multiple_infinite;
-    private CustomComponents.NumericUpDownNoScroll nup_hours;
+    private CustomComponents.NumericUpDownNoScroll nup_interval_h;
     private MenuStrip menuStrip1;
     private ToolStripMenuItem fileToolStripMenuItem;
     private ToolStripMenuItem optionsToolStripMenuItem;
