@@ -52,7 +52,7 @@ public partial class Main
         } 
         catch (InvalidClickPatternException ex)
         {
-            MessageBox.Show($"Current pattern can't be saved because it's invaid:\n\n" +
+            MessageBox.Show($"Current pattern can't be saved because it's invalid:\n\n" +
                 $"{ex.Message}",
                 "Failed to save profile",
                 MessageBoxButtons.OK,
@@ -63,54 +63,27 @@ public partial class Main
 
     private void loadToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        LoadPatternFromFile();
+        LoadProfile();
+        // TODO: Update UI
     }
 
-    private void LoadPatternFromFile(string? filepath = null)
+    private void LoadProfile(string? path = null)
     {
-        ClickPattern pattern;
-
         try
         {
-            pattern = FileReader.FromFile(filepath);
+            var profile = FileReader.GetProfile(path);
+            _pattern = profile;
+            MessageBox.Show("Successfully loaded profile", "Profile loaded", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
         catch (OCInvalidFile ex)
         {
             MessageBox.Show(ex.Message, "Failed to load profile", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
         }
         catch (OCOperationCanceledException)
         {
             return;
         }
-
-        try
-        {
-            Clicker.AssertValidClickPattern(pattern);
-            _pattern = pattern;
-        }
-        catch (InvalidClickPatternException ex)
-        {
-            var result = MessageBox.Show(
-                "The selected file does not appear to be a valid Open Clicker profile.\n" +
-                "Loading it may cause errors or unexpected behavior.\n" +
-                "Do you want to try loading it anyway?\n\n" +
-                $"{ex.Message}",
-                "Invalid Profile File",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning
-            );
-            if (result == DialogResult.Yes)
-                _pattern = pattern;
-            else
-                return;
-        }
-
-        // TODO:
-        //UpdateUI();
-
         LoadedFromFile = true;
-        MessageBox.Show("Successfully loaded profile", "Profile loaded", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
     }
 
     private void setAsDefaultToolStripMenuItem1_Click(object sender, EventArgs e)
