@@ -1,14 +1,8 @@
 using OpenClicker.Exceptions;
 using OpenClicker.Lib;
 using OpenClicker.Models;
-using System.Diagnostics;
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices.Marshalling;
-using System.Text;
-using System.Windows.Forms;
-using Timer = System.Windows.Forms.Timer;
 
-namespace OpenClicker;
+namespace OpenClicker.Forms.Main;
 
 // dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true
 public partial class Main : Form
@@ -17,13 +11,11 @@ public partial class Main : Form
     private ClickPattern _pattern = new ClickPattern();
     private bool LoadedFromFile = false;
 
-    private MouseButtonItem _selectedMouseButton = new();
-    private ClickType _selectedClickType = new(ClickTypes.Single);
-    private readonly ClickType _clickTypeHold = new(ClickTypes.Hold);
-
     public Main(string? filePath = null)
     {
         InitializeComponent();
+        SetClickTypes();
+        SetMouseButtons();
 
         if (!string.IsNullOrEmpty(filePath))
         {
@@ -35,11 +27,8 @@ public partial class Main : Form
     {
         btn_stop.Enabled = false;
 
-        SetClickTypes();
-        SetMouseButtons();
-
         // Disable duration becasue clickType default is single not holding
-        var isClickTypeHolding = cb_clickType.SelectedItem == _clickTypeHold;
+        var isClickTypeHolding = (ClickTypes)(cb_clickType.SelectedItem ?? ClickTypes.Single) == ClickTypes.Hold;
         nup_duration_h.Enabled = isClickTypeHolding;
         nup_duration_min.Enabled = isClickTypeHolding;
         nup_duration_sec.Enabled = isClickTypeHolding;
@@ -53,29 +42,12 @@ public partial class Main : Form
 
     private void SetClickTypes()
     {
-        cb_clickType.Items.Clear();
-        var clickTypes = new[]
-        {
-            new ClickType(ClickTypes.Single),
-            new ClickType(ClickTypes.Double),
-            _clickTypeHold
-        };
-        cb_clickType.Items.AddRange(clickTypes);
-        cb_clickType.DisplayMember = "DisplayName";
+        cb_clickType.DataSource = Enum.GetValues<ClickTypes>();
         cb_clickType.SelectedIndex = 0;
     }
     private void SetMouseButtons()
     {
-        cb_mouseButton.Items.Clear();
-        var buttons = new[]
-        {
-            new MouseButtonItem {Value = MouseButtons.Left, DisplayName = "Left"},
-            new MouseButtonItem {Value = MouseButtons.Right, DisplayName = "Right"},
-            new MouseButtonItem {Value = MouseButtons.Middle, DisplayName = "Middle"}
-        };
-
-        cb_mouseButton.Items.AddRange(buttons);
-        cb_mouseButton.DisplayMember = "DisplayName";
+        cb_mouseButton.DataSource = Enum.GetValues<OCMouseButtons>();
         cb_mouseButton.SelectedIndex = 0;
     }
 
@@ -85,7 +57,7 @@ public partial class Main : Form
         {
             try
             {
-                _pattern = ParseClicks();
+                _pattern = ParseClicksFromUI();
                 if (_pattern.Clicks.Count == 0) throw new InvalidClickPatternException("Pattern is empty");
             }
             catch (InvalidClickPatternException ex)
@@ -101,17 +73,20 @@ public partial class Main : Form
         btn_start.Enabled = false;
         btn_stop.Enabled = true;
 
-        if (_selectedClickType.Type != ClickTypes.Hold)
-        {
-            cb_clickType.Items.Remove(_clickTypeHold); // Prohibit user from changing to hold while active
-        }
+        cb_mouseButton.Enabled = false;
+        cb_clickType.Enabled = false;
+
+        //if (_selectedClickType.Type != ClickTypes.Hold)
+        //{
+        //    cb_clickType.Items.Remove(_clickTypeHold); // Prohibit user from changing to hold while active
+        //}
 
         // Actual code
 
         _cts = new CancellationTokenSource();
         try
         {
-            if (tabControl.SelectedIndex == 0 && _selectedClickType.Type == ClickTypes.Hold)
+            if (tabControl.SelectedIndex == 0 && _pattern.Clicks[0].ClickType == ClickTypes.Hold)
                 await StartHolding(_cts.Token);
             else
                 await StartClicking(_cts.Token);
@@ -207,13 +182,13 @@ public partial class Main : Form
         _cts?.Dispose();
         _cts = null;
 
-        if (!cb_clickType.Items.Contains(_clickTypeHold))
-            cb_clickType.Items.Add(_clickTypeHold);
-
         pb_progress.Style = ProgressBarStyle.Continuous;
         pb_progress.Value = 0;
-        cb_clickType.Enabled = true;
         pb_progress.Value = 0;
+
+        cb_mouseButton.Enabled = true;
+        cb_clickType.Enabled = true;
+
         btn_start.Enabled = true;
         btn_stop.Enabled = false;
     }
@@ -225,9 +200,10 @@ public partial class Main : Form
 
     private void cb_clickType_SelectionChangeCommitted(object sender, EventArgs e)
     {
-        if (cb_clickType.SelectedItem is not ClickType clickType) return;
+        //if (cb_clickType.SelectedItem is not ClickType clickType) return;
+        var clickType = (ClickTypes)(cb_clickType.SelectedItem ?? ClickTypes.Single);
 
-        if (clickType.Type == ClickTypes.Hold)
+        if (clickType == ClickTypes.Hold)
         {
             EnableInterval(false);
             EnableClickRepeat(false);
@@ -245,10 +221,10 @@ public partial class Main : Form
 
     private void EnableInterval(bool enable)
     {
-        nup_mili.Enabled = enable;
-        nup_sec.Enabled = enable;
-        nup_min.Enabled = enable;
-        nup_hours.Enabled = enable;
+        nup_interval_ms.Enabled = enable;
+        nup_interval_sec.Enabled = enable;
+        nup_interval_min.Enabled = enable;
+        nup_interval_h.Enabled = enable;
     }
     private void EnableClickRepeat(bool enable)
     {
@@ -277,26 +253,6 @@ public partial class Main : Form
         }
     }
 
-    private void cb_mouseButton_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        var button = cb_mouseButton.SelectedItem;
-        if (button is MouseButtonItem buttonItem)
-        {
-            _selectedMouseButton = buttonItem;
-        }
-        else { _selectedMouseButton = new MouseButtonItem(); }
-    }
-
-    private void cb_clickType_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        var clickType = cb_clickType.SelectedItem;
-        if (clickType is ClickType clickType1)
-        {
-            _selectedClickType = clickType1;
-        }
-        else { _selectedClickType = new ClickType(ClickTypes.Single); }
-    }
-
     private void btn_pickLocation_Click(object sender, EventArgs e)
     {
         var location = PickLocation.GetLocation();
@@ -311,89 +267,13 @@ public partial class Main : Form
     // Multiple Clicks
     private void btn_multiple_addClick_Click(object sender, EventArgs e)
     {
-        var clickControl = new ClickControl(flowLayoutPanel1);
-        flowLayoutPanel1.Controls.Add(clickControl);
-    }
-
-    private ClickPattern ParseClicks()
-    {
-        var list = new List<Click>();
-        int? repeat;
-
-        if (tabControl.SelectedIndex == 0)
-        { // Single
-            var click = new Click
-            {
-                Position = rb_currentPos.Checked ?
-                            null :
-                            new Point((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value),
-                ClickType = _selectedClickType.Type,
-                MouseButton = _selectedMouseButton.Value,
-            };
-
-            if (click.ClickType == ClickTypes.Hold)
-            {
-                click.HoldingDuration = new TimeSpan(0,
-                    (int)nup_duration_h.Value,
-                    (int)nup_duration_min.Value,
-                    (int)nup_duration_sec.Value,
-                    (int)nup_duration_mili.Value);
-            }
-            else
-            {
-                click.Delay = new TimeSpan(0,
-                    (int)nup_hours.Value,
-                    (int)nup_min.Value,
-                    (int)nup_sec.Value,
-                    (int)nup_mili.Value);
-            }
-
-            list.Add(click);
-
-            repeat = rb_infinite.Checked ? null : (int)nup_times.Value;
-        }
-        else
-        { // Multiple
-            foreach (ClickControl cc in flowLayoutPanel1.Controls)
-            {
-                var click = new Click
-                {
-                    Position = cc.Position,
-                    ClickType = cc.ClickType.Type,
-                    MouseButton = cc.MouseButton.Value,
-                    Delay = cc.Delay
-                };
-
-                if (cb_multiple_currentPosition.Checked)
-                {
-                    click.Position = null;
-                }
-
-                list.Add(click);
-            }
-
-            repeat = rb_multiple_infinite.Checked ? null : (int)nud_multiple_times.Value;
-        }
-
-        var pattern = new ClickPattern
-        {
-            Clicks = list,
-            StartingDelay = new TimeSpan(0,
-                    (int)nup_delay_h.Value,
-                    (int)nup_delay_min.Value,
-                    (int)nup_delay_sec.Value,
-                    (int)nup_delay_mili.Value),
-            Repeat = repeat
-        };
-
-        Clicker.AssertValidClickPattern(pattern);
-
-        return pattern;
+        var clickControl = new ClickControl(flowLayoutPanel);
+        flowLayoutPanel.Controls.Add(clickControl);
     }
 
     private void cb_multiple_currentPosition_CheckedChanged(object sender, EventArgs e)
     {
-        foreach (ClickControl cc in flowLayoutPanel1.Controls)
+        foreach (ClickControl cc in flowLayoutPanel.Controls)
         {
             cc.PickLocationEnabled = !cb_multiple_currentPosition.Checked;
         }
