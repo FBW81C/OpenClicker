@@ -17,27 +17,32 @@ public partial class Main : Form
         SetClickTypes();
         SetMouseButtons();
 
+        nup_duration_h.Enabled = false;
+        nup_duration_min.Enabled = false;
+        nup_duration_sec.Enabled = false;
+        nup_duration_mili.Enabled = false;
+
+        rb_infinite.Checked = true;
+        rb_currentPos.Checked = true;
+        rb_multiple_infinite.Checked = true;
+        btn_stop.Enabled = false;
+
         if (!string.IsNullOrEmpty(filePath))
         {
             LoadProfile(filePath);
+        }
+        else
+        {
+            if (File.Exists(Constants.DEFAULTPROFILE_PATH))
+            {
+                LoadProfile(Constants.DEFAULTPROFILE_PATH);
+            }
         }
     }
 
     private void Main_Load(object sender, EventArgs e)
     {
-        btn_stop.Enabled = false;
-
-        // Disable duration becasue clickType default is single not holding
-        var isClickTypeHolding = (ClickTypes)(cb_clickType.SelectedItem ?? ClickTypes.Single) == ClickTypes.Hold;
-        nup_duration_h.Enabled = isClickTypeHolding;
-        nup_duration_min.Enabled = isClickTypeHolding;
-        nup_duration_sec.Enabled = isClickTypeHolding;
-        nup_duration_mili.Enabled = isClickTypeHolding;
-
-        rb_infinite.Checked = true;
-        rb_currentPos.Checked = true;
-
-        rb_multiple_infinite.Checked = true;
+        
     }
 
     private void SetClickTypes()

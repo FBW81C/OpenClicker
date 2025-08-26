@@ -7,7 +7,7 @@ public partial class Main
 {
     private void aboutOpenClickerToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        string path = Path.Combine(Application.StartupPath, "assets", "texts", "about.txt");
+        string path = Path.Combine(Constants.TEXTS_PATH, "about.txt");
 
         if (File.Exists(path))
         {
@@ -22,8 +22,7 @@ public partial class Main
 
     private void gitHubToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var url = "https://github.com/FBW81C/OpenClicker";
-        Process.Start("explorer", url);
+        Process.Start("explorer", Constants.LINK_GITHUB);
     }
 
     private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,7 +55,8 @@ public partial class Main
     private void loadToolStripMenuItem_Click(object sender, EventArgs e)
     {
         LoadProfile();
-        PraseClicksToUI(_pattern);
+        // Should not send MessageBox
+        MessageBox.Show("Successfully loaded profile", "Profile loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private void LoadProfile(string? path = null)
@@ -65,7 +65,7 @@ public partial class Main
         {
             var profile = FileReader.GetProfile(path);
             _pattern = profile;
-            MessageBox.Show("Successfully loaded profile", "Profile loaded", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            PraseClicksToUI(_pattern);
         }
         catch (OCInvalidFile ex)
         {
@@ -75,17 +75,55 @@ public partial class Main
         {
             return;
         }
+
         LoadedFromFile = true;
     }
 
     private void setAsDefaultToolStripMenuItem1_Click(object sender, EventArgs e)
     {
-
+        try
+        {
+            var pattern = ParseClicksFromUI();
+            CreateSettingsFolderIfNotExist();
+            FileReader.SaveProfile(pattern, Constants.DEFAULTPROFILE_PATH); ;
+            MessageBox.Show($"Successfully saved default Profile!", "Default Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (OCInvalidFile ex)
+        {
+            MessageBox.Show(ex.Message, "Failed to save profile", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        catch (OCOperationCanceledException)
+        {
+            return;
+        }
+        catch (InvalidClickPatternException ex)
+        {
+            MessageBox.Show($"Current pattern can't be saved because it's invalid:\n\n" +
+                $"{ex.Message}",
+                "Failed to save profile",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+        }
     }
 
     private void resetDefaultToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        CreateSettingsFolderIfNotExist();
 
+        if (File.Exists(Constants.DEFAULTPROFILE_PATH))
+        {
+            File.Delete(Constants.DEFAULTPROFILE_PATH);
+        }
+        MessageBox.Show("Successfully reset default Profile!", "Default Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    private void CreateSettingsFolderIfNotExist()
+    {
+        if (!Directory.Exists(Constants.SETTINGS_PATH))
+        {
+            Directory.CreateDirectory(Constants.SETTINGS_PATH);
+        }
     }
 }
 
