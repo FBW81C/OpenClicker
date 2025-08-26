@@ -1,5 +1,7 @@
+using OpenClicker.Forms.Main;
 using OpenClicker.Models;
 using System.Runtime.InteropServices;
+using OCMouseButtons = OpenClicker.Models.OCMouseButtons;
 
 namespace OpenClicker;
 
@@ -53,7 +55,7 @@ static class Program
         mouse_event(button, 0, 0, 0, IntPtr.Zero);
     }
 
-    public static void Click(ClickTypes type, MouseButtons button, Point? point = null, bool? twice = false)
+    public static void Click(ClickTypes type, OCMouseButtons button, Point? point = null, bool? twice = false)
     {
         if (type == ClickTypes.Hold)
         {
@@ -72,17 +74,17 @@ static class Program
         }
     }
 
-    private static void ClickWithButton(MouseButtons button)
+    private static void ClickWithButton(OCMouseButtons button)
     {
         switch (button)
         {
-            case MouseButtons.Left:
+            case OCMouseButtons.Left:
                 LeftClick();
                 break;
-            case MouseButtons.Right:
+            case OCMouseButtons.Right:
                 RightClick();
                 break;
-            case MouseButtons.Middle:
+            case OCMouseButtons.Middle:
                 MiddleClick();
                 break;
             default:
@@ -90,7 +92,7 @@ static class Program
         }
     }
 
-    public static void ToggleMouseButton(MouseButtons button, bool down, Point? point = null)
+    public static void ToggleMouseButton(OCMouseButtons button, bool down, Point? point = null)
     {
         if (point != null)
         {
@@ -99,13 +101,13 @@ static class Program
 
         switch (button)
         {
-            case MouseButtons.Left:
+            case OCMouseButtons.Left:
                 PressMouseButton(down ? MOUSEEVENTF_LEFTDOWN : MOUSEEVENTF_LEFTUP);
                 break;
-            case MouseButtons.Right:
+            case OCMouseButtons.Right:
                 PressMouseButton(down ? MOUSEEVENTF_RIGHTDOWN : MOUSEEVENTF_RIGHTUP);
                 break;
-            case MouseButtons.Middle:
+            case OCMouseButtons.Middle:
                 PressMouseButton(down ? MOUSEEVENTF_MIDDLEDOWN : MOUSEEVENTF_MIDDLEUP);
                 break;
             default:
