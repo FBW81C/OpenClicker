@@ -15,4 +15,31 @@ public class Click
 
     // Only for ClickType = Holding
     public TimeSpan HoldingDuration { get; set; }
+
+
+
+    // Helper Properties
+    public int? X
+    {
+        get => Position?.X;
+        set
+        {
+            if (value.HasValue)
+                Position = new Point(value.Value, Position?.Y ?? 0);
+            else
+                Position = null;
+        }
+    }
+
+    public int? Y
+    {
+        get => Position?.Y;
+        set
+        {
+            if (value.HasValue)
+                Position = new Point(Position?.X ?? 0, value.Value);
+            else
+                Position = null;
+        }
+    }
 }

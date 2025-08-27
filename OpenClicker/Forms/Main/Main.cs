@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using OpenClicker.Exceptions;
 using OpenClicker.Lib;
 using OpenClicker.Models;
@@ -38,6 +39,13 @@ public partial class Main : Form
                 LoadProfile(Constants.DEFAULTPROFILE_PATH);
             }
         }
+
+
+        // TODO: REMOVE
+        _pattern.Clicks.Add(new Click { X = 321, Y = 802, ClickType = ClickTypes.Single, MouseButton = OCMouseButtons.Left, Delay = TimeSpan.FromMilliseconds(100) });
+        _pattern.Clicks.Add(new Click { X = 321, Y = 802, ClickType = ClickTypes.Single, MouseButton = OCMouseButtons.Left, Delay = TimeSpan.FromMilliseconds(100) });
+        _pattern.Clicks.Add(new Click { X = 321, Y = 802, ClickType = ClickTypes.Single, MouseButton = OCMouseButtons.Left, Delay = TimeSpan.FromMilliseconds(100) });
+        clickBindingSource.DataSource = new BindingList<Click>(_pattern.Clicks);
     }
 
     private void Main_Load(object sender, EventArgs e)
@@ -272,15 +280,15 @@ public partial class Main : Form
     // Multiple Clicks
     private void btn_multiple_addClick_Click(object sender, EventArgs e)
     {
-        var clickControl = new ClickControl(flowLayoutPanel);
-        flowLayoutPanel.Controls.Add(clickControl);
+        //var clickControl = new ClickControl(flowLayoutPanel);
+        //flowLayoutPanel.Controls.Add(clickControl);
     }
 
     private void cb_multiple_currentPosition_CheckedChanged(object sender, EventArgs e)
     {
-        foreach (ClickControl cc in flowLayoutPanel.Controls)
-        {
-            cc.PickLocationEnabled = !cb_multiple_currentPosition.Checked;
-        }
+        //foreach (ClickControl cc in flowLayoutPanel.Controls)
+        //{
+        //    cc.PickLocationEnabled = !cb_multiple_currentPosition.Checked;
+        //}
     }
 }
