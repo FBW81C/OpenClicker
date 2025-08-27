@@ -48,25 +48,25 @@ public partial class Main
             repeat = rb_infinite.Checked ? null : (int)nup_times.Value;
         }
         else
-        { 
+        {
             // Multiple
-            foreach (ClickControl cc in flowLayoutPanel.Controls)
-            {
-                var click = new Click
-                {
-                    Position = cc.Position,
-                    ClickType = cc.ClickType,
-                    MouseButton = cc.MouseButton,
-                    Delay = cc.Delay
-                };
+            //    foreach (ClickControl cc in flowLayoutPanel.Controls)
+            //    {
+            //        var click = new Click
+            //        {
+            //            Position = cc.Position,
+            //            ClickType = cc.ClickType,
+            //            MouseButton = cc.MouseButton,
+            //            Delay = cc.Delay
+            //        };
 
-                if (cb_multiple_currentPosition.Checked)
-                {
-                    click.Position = null;
-                }
+            //        if (cb_multiple_currentPosition.Checked)
+            //        {
+            //            click.Position = null;
+            //        }
 
-                list.Add(click);
-            }
+            //        list.Add(click);
+            //    }
 
             repeat = rb_multiple_infinite.Checked ? null : (int)nud_multiple_times.Value;
         }
@@ -138,8 +138,8 @@ public partial class Main
 
             foreach (var click in pattern.Clicks)
             {
-                var clickControl = new ClickControl(flowLayoutPanel, click);
-                flowLayoutPanel.Controls.Add(clickControl);
+                //var clickControl = new ClickControl(flowLayoutPanel, click);
+                //flowLayoutPanel.Controls.Add(clickControl);
             }
 
             // Checkbox: Click at current Pos
