@@ -1,5 +1,5 @@
-using System.ComponentModel;
 using OpenClicker.Exceptions;
+using OpenClicker.Forms.ClickEditor;
 using OpenClicker.Lib;
 using OpenClicker.Models;
 
@@ -9,7 +9,7 @@ namespace OpenClicker.Forms.Main;
 public partial class Main : Form
 {
     private CancellationTokenSource _cts;
-    private ClickPattern _pattern = new ClickPattern();
+    private readonly ClickPattern _pattern = new();
     private bool LoadedFromFile = false;
 
     public Main(string? filePath = null)
@@ -18,6 +18,8 @@ public partial class Main : Form
         SetClickTypes();
         SetMouseButtons();
 
+        clickBindingSource.DataSource = _pattern.Clicks;
+
         nup_duration_h.Enabled = false;
         nup_duration_min.Enabled = false;
         nup_duration_sec.Enabled = false;
@@ -25,7 +27,6 @@ public partial class Main : Form
 
         rb_infinite.Checked = true;
         rb_currentPos.Checked = true;
-        rb_multiple_infinite.Checked = true;
         btn_stop.Enabled = false;
 
         if (!string.IsNullOrEmpty(filePath))
@@ -40,17 +41,6 @@ public partial class Main : Form
             }
         }
 
-
-        // TODO: REMOVE
-        _pattern.Clicks.Add(new Click { X = 321, Y = 802, ClickType = ClickTypes.Single, MouseButton = OCMouseButtons.Left, Delay = TimeSpan.FromMilliseconds(100) });
-        _pattern.Clicks.Add(new Click { X = 321, Y = 802, ClickType = ClickTypes.Single, MouseButton = OCMouseButtons.Left, Delay = TimeSpan.FromMilliseconds(100) });
-        _pattern.Clicks.Add(new Click { X = 321, Y = 802, ClickType = ClickTypes.Single, MouseButton = OCMouseButtons.Left, Delay = TimeSpan.FromMilliseconds(100) });
-        clickBindingSource.DataSource = new BindingList<Click>(_pattern.Clicks);
-    }
-
-    private void Main_Load(object sender, EventArgs e)
-    {
-        
     }
 
     private void SetClickTypes()
@@ -70,7 +60,7 @@ public partial class Main : Form
         {
             try
             {
-                _pattern = ParseClicksFromUI();
+                ParseClicksFromUI();
                 if (_pattern.Clicks.Count == 0) throw new InvalidClickPatternException("Pattern is empty");
             }
             catch (InvalidClickPatternException ex)
@@ -89,13 +79,7 @@ public partial class Main : Form
         cb_mouseButton.Enabled = false;
         cb_clickType.Enabled = false;
 
-        //if (_selectedClickType.Type != ClickTypes.Hold)
-        //{
-        //    cb_clickType.Items.Remove(_clickTypeHold); // Prohibit user from changing to hold while active
-        //}
-
         // Actual code
-
         _cts = new CancellationTokenSource();
         try
         {
@@ -133,7 +117,7 @@ public partial class Main : Form
             {
                 token.ThrowIfCancellationRequested();
 
-                await PlayPattern(_pattern.Clicks, token);
+                await PlayPattern(_pattern.Clicks.ToList(), token);
                 clickCount++;
                 if (_pattern.Repeat != null) pb_progress.Value = clickCount;
             }
@@ -213,7 +197,6 @@ public partial class Main : Form
 
     private void cb_clickType_SelectionChangeCommitted(object sender, EventArgs e)
     {
-        //if (cb_clickType.SelectedItem is not ClickType clickType) return;
         var clickType = (ClickTypes)(cb_clickType.SelectedItem ?? ClickTypes.Single);
 
         if (clickType == ClickTypes.Hold)
@@ -242,7 +225,7 @@ public partial class Main : Form
     private void EnableClickRepeat(bool enable)
     {
         rb_times.Enabled = enable;
-        nup_times.Enabled = enable;
+        nud_times.Enabled = enable;
         rb_infinite.Enabled = enable;
     }
     private void EnableDuration(bool enable)
@@ -280,15 +263,22 @@ public partial class Main : Form
     // Multiple Clicks
     private void btn_multiple_addClick_Click(object sender, EventArgs e)
     {
-        //var clickControl = new ClickControl(flowLayoutPanel);
-        //flowLayoutPanel.Controls.Add(clickControl);
+        var editor = new ClickEditorForm();
+        if (editor.ShowDialog() == DialogResult.OK)
+        {
+            clickBindingSource.Add(editor.Click);
+        }
     }
 
-    private void cb_multiple_currentPosition_CheckedChanged(object sender, EventArgs e)
+    private void btn_multiple_EditClick_Click(object sender, EventArgs e)
     {
-        //foreach (ClickControl cc in flowLayoutPanel.Controls)
-        //{
-        //    cc.PickLocationEnabled = !cb_multiple_currentPosition.Checked;
-        //}
+        if (clickBindingSource.Current is Click selected)
+        {
+            var editor = new ClickEditorForm(selected);
+            if (editor.ShowDialog() == DialogResult.OK)
+            {
+                dataGridView.Refresh();
+            }
+        }
     }
 }
