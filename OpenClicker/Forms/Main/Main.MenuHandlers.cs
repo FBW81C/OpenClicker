@@ -29,8 +29,8 @@ public partial class Main
     {
         try
         {
-            var pattern = ParseClicksFromUI();
-            var path = FileReader.SaveProfile(pattern); ;
+            ParseClicksFromUI();
+            var path = FileReader.SaveProfile(_pattern);
             MessageBox.Show($"Successfully saved profile to: {path}", "Profile saved", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
         catch (OCInvalidFile ex)
@@ -55,7 +55,6 @@ public partial class Main
     private void loadToolStripMenuItem_Click(object sender, EventArgs e)
     {
         LoadProfile(null, true);
-        // Should not send MessageBox
     }
 
     private void LoadProfile(string? path = null, bool showSuccessMessage = false)
@@ -63,8 +62,7 @@ public partial class Main
         try
         {
             var profile = FileReader.GetProfile(path);
-            _pattern = profile;
-            PraseClicksToUI(_pattern);
+            PraseClicksToUI(profile);
 
             if (showSuccessMessage)
             {
@@ -87,9 +85,9 @@ public partial class Main
     {
         try
         {
-            var pattern = ParseClicksFromUI();
+            ParseClicksFromUI();
             CreateSettingsFolderIfNotExist();
-            FileReader.SaveProfile(pattern, Constants.DEFAULTPROFILE_PATH); ;
+            FileReader.SaveProfile(_pattern, Constants.DEFAULTPROFILE_PATH); ;
             MessageBox.Show($"Successfully saved default Profile!", "Default Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         catch (OCInvalidFile ex)

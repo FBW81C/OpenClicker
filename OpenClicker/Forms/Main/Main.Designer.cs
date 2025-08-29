@@ -42,8 +42,8 @@ partial class Main
         lb_sec = new Label();
         lb_Minutes = new Label();
         lb_Hours = new Label();
-        gb_repeatSingle = new GroupBox();
-        nup_times = new NumericUpDownNoScroll();
+        gb_repeat = new GroupBox();
+        nud_times = new NumericUpDownNoScroll();
         label1 = new Label();
         rb_times = new RadioButton();
         rb_infinite = new RadioButton();
@@ -84,13 +84,14 @@ partial class Main
         tabControl = new TabControl();
         tabPageSingle = new TabPage();
         tabPageMultiple = new TabPage();
+        btn_multiple_EditClick = new Button();
         dataGridView = new DataGridView();
-        gb_multiple_repeat = new GroupBox();
-        nud_multiple_times = new NumericUpDownNoScroll();
-        lbl_multiple_times = new Label();
-        rb_multiple_times = new RadioButton();
-        rb_multiple_infinite = new RadioButton();
-        cb_multiple_currentPosition = new CheckBox();
+        clickTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        mouseButtonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        delayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        xDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        yDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        clickBindingSource = new BindingSource(components);
         btn_multiple_addClick = new Button();
         menuStrip1 = new MenuStrip();
         fileToolStripMenuItem = new ToolStripMenuItem();
@@ -103,20 +104,13 @@ partial class Main
         aboutToolStripMenuItem = new ToolStripMenuItem();
         gitHubToolStripMenuItem = new ToolStripMenuItem();
         aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
-        clickBindingSource = new BindingSource(components);
-        clickTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        mouseButtonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        delayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        holdingDurationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        xDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        yDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_interval_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_min).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_ms).BeginInit();
-        gb_repeatSingle.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)nup_times).BeginInit();
+        gb_repeat.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)nud_times).BeginInit();
         gp_options.SuspendLayout();
         gp_delay.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_delay_sec).BeginInit();
@@ -135,15 +129,13 @@ partial class Main
         tabPageSingle.SuspendLayout();
         tabPageMultiple.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
-        gb_multiple_repeat.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)nud_multiple_times).BeginInit();
-        menuStrip1.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)clickBindingSource).BeginInit();
+        menuStrip1.SuspendLayout();
         SuspendLayout();
         // 
         // gp_interval
         // 
-        gp_interval.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        gp_interval.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         gp_interval.Controls.Add(nup_interval_h);
         gp_interval.Controls.Add(nup_interval_sec);
         gp_interval.Controls.Add(nup_interval_min);
@@ -152,9 +144,9 @@ partial class Main
         gp_interval.Controls.Add(lb_sec);
         gp_interval.Controls.Add(lb_Minutes);
         gp_interval.Controls.Add(lb_Hours);
-        gp_interval.Location = new Point(17, 6);
+        gp_interval.Location = new Point(17, 10);
         gp_interval.Name = "gp_interval";
-        gp_interval.Size = new Size(489, 62);
+        gp_interval.Size = new Size(592, 62);
         gp_interval.TabIndex = 0;
         gp_interval.TabStop = false;
         gp_interval.Text = "Click Interval";
@@ -191,16 +183,16 @@ partial class Main
         nup_interval_ms.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         nup_interval_ms.AutoSize = true;
         nup_interval_ms.Location = new Point(342, 25);
-        nup_interval_ms.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_interval_ms.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
         nup_interval_ms.Name = "nup_interval_ms";
-        nup_interval_ms.Size = new Size(54, 23);
+        nup_interval_ms.Size = new Size(157, 23);
         nup_interval_ms.TabIndex = 8;
         nup_interval_ms.KeyPress += nup_KeyPress;
         // 
         // lb_msec
         // 
         lb_msec.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        lb_msec.Location = new Point(402, 27);
+        lb_msec.Location = new Point(505, 27);
         lb_msec.Name = "lb_msec";
         lb_msec.Size = new Size(73, 16);
         lb_msec.TabIndex = 7;
@@ -230,34 +222,32 @@ partial class Main
         lb_Hours.TabIndex = 1;
         lb_Hours.Text = "Hours";
         // 
-        // gb_repeatSingle
+        // gb_repeat
         // 
-        gb_repeatSingle.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        gb_repeatSingle.Controls.Add(nup_times);
-        gb_repeatSingle.Controls.Add(label1);
-        gb_repeatSingle.Controls.Add(rb_times);
-        gb_repeatSingle.Controls.Add(rb_infinite);
-        gb_repeatSingle.Location = new Point(17, 76);
-        gb_repeatSingle.Name = "gb_repeatSingle";
-        gb_repeatSingle.Size = new Size(264, 97);
-        gb_repeatSingle.TabIndex = 1;
-        gb_repeatSingle.TabStop = false;
-        gb_repeatSingle.Text = "Click Repeat";
+        gb_repeat.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        gb_repeat.Controls.Add(nud_times);
+        gb_repeat.Controls.Add(label1);
+        gb_repeat.Controls.Add(rb_times);
+        gb_repeat.Controls.Add(rb_infinite);
+        gb_repeat.Location = new Point(19, 418);
+        gb_repeat.Name = "gb_repeat";
+        gb_repeat.Size = new Size(792, 97);
+        gb_repeat.TabIndex = 1;
+        gb_repeat.TabStop = false;
+        gb_repeat.Text = "Click Repeat";
         // 
-        // nup_times
+        // nud_times
         // 
-        nup_times.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-        nup_times.Location = new Point(33, 56);
-        nup_times.Maximum = new decimal(new int[] { 1316134912, 2328, 0, 0 });
-        nup_times.Name = "nup_times";
-        nup_times.Size = new Size(132, 23);
-        nup_times.TabIndex = 4;
-        nup_times.KeyPress += nup_KeyPress;
+        nud_times.Location = new Point(33, 56);
+        nud_times.Maximum = new decimal(new int[] { 1316134912, 2328, 0, 0 });
+        nud_times.Name = "nud_times";
+        nud_times.Size = new Size(132, 23);
+        nud_times.TabIndex = 4;
+        nud_times.KeyPress += nup_KeyPress;
         // 
         // label1
         // 
-        label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        label1.Location = new Point(171, 58);
+        label1.Location = new Point(171, 59);
         label1.Name = "label1";
         label1.Size = new Size(56, 19);
         label1.TabIndex = 3;
@@ -306,14 +296,14 @@ partial class Main
         // 
         // gp_options
         // 
-        gp_options.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+        gp_options.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         gp_options.Controls.Add(cb_clickType);
         gp_options.Controls.Add(lbl_clickType);
         gp_options.Controls.Add(lbl_mouseButton);
         gp_options.Controls.Add(cb_mouseButton);
-        gp_options.Location = new Point(287, 76);
+        gp_options.Location = new Point(17, 78);
         gp_options.Name = "gp_options";
-        gp_options.Size = new Size(219, 97);
+        gp_options.Size = new Size(592, 97);
         gp_options.TabIndex = 4;
         gp_options.TabStop = false;
         gp_options.Text = "Click Options";
@@ -367,7 +357,7 @@ partial class Main
         gp_delay.Controls.Add(lbl_delay_h);
         gp_delay.Location = new Point(19, 521);
         gp_delay.Name = "gp_delay";
-        gp_delay.Size = new Size(866, 62);
+        gp_delay.Size = new Size(792, 62);
         gp_delay.TabIndex = 5;
         gp_delay.TabStop = false;
         gp_delay.Text = "Starting Delay";
@@ -446,12 +436,12 @@ partial class Main
         pb_progress.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         pb_progress.Location = new Point(153, 589);
         pb_progress.Name = "pb_progress";
-        pb_progress.Size = new Size(732, 25);
+        pb_progress.Size = new Size(658, 25);
         pb_progress.TabIndex = 6;
         // 
         // gp_duration
         // 
-        gp_duration.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        gp_duration.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         gp_duration.Controls.Add(nup_duration_sec);
         gp_duration.Controls.Add(nup_duration_min);
         gp_duration.Controls.Add(nup_duration_h);
@@ -460,9 +450,9 @@ partial class Main
         gp_duration.Controls.Add(label3);
         gp_duration.Controls.Add(label4);
         gp_duration.Controls.Add(label5);
-        gp_duration.Location = new Point(17, 179);
+        gp_duration.Location = new Point(17, 181);
         gp_duration.Name = "gp_duration";
-        gp_duration.Size = new Size(489, 62);
+        gp_duration.Size = new Size(592, 62);
         gp_duration.TabIndex = 7;
         gp_duration.TabStop = false;
         gp_duration.Text = "Duration (Only for Click Type = Holding)";
@@ -537,7 +527,7 @@ partial class Main
         // 
         // gp_clickPos
         // 
-        gp_clickPos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        gp_clickPos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         gp_clickPos.Controls.Add(btn_pickLocation);
         gp_clickPos.Controls.Add(nup_clickingPos_Y);
         gp_clickPos.Controls.Add(lbl_clickingPos_Y);
@@ -545,9 +535,9 @@ partial class Main
         gp_clickPos.Controls.Add(lbl_clickingPos_X);
         gp_clickPos.Controls.Add(rb_XY);
         gp_clickPos.Controls.Add(rb_currentPos);
-        gp_clickPos.Location = new Point(17, 247);
+        gp_clickPos.Location = new Point(17, 249);
         gp_clickPos.Name = "gp_clickPos";
-        gp_clickPos.Size = new Size(489, 86);
+        gp_clickPos.Size = new Size(592, 86);
         gp_clickPos.TabIndex = 8;
         gp_clickPos.TabStop = false;
         gp_clickPos.Text = "Clicking Position";
@@ -625,120 +615,108 @@ partial class Main
         tabControl.Location = new Point(12, 26);
         tabControl.Name = "tabControl";
         tabControl.SelectedIndex = 0;
-        tabControl.Size = new Size(873, 489);
+        tabControl.Size = new Size(799, 386);
         tabControl.TabIndex = 9;
         // 
         // tabPageSingle
         // 
         tabPageSingle.Controls.Add(gp_interval);
         tabPageSingle.Controls.Add(gp_clickPos);
-        tabPageSingle.Controls.Add(gb_repeatSingle);
         tabPageSingle.Controls.Add(gp_duration);
         tabPageSingle.Controls.Add(gp_options);
         tabPageSingle.Location = new Point(4, 24);
         tabPageSingle.Name = "tabPageSingle";
         tabPageSingle.Padding = new Padding(3);
-        tabPageSingle.Size = new Size(865, 461);
+        tabPageSingle.Size = new Size(791, 358);
         tabPageSingle.TabIndex = 0;
         tabPageSingle.Text = "Single";
         tabPageSingle.UseVisualStyleBackColor = true;
         // 
         // tabPageMultiple
         // 
+        tabPageMultiple.Controls.Add(btn_multiple_EditClick);
         tabPageMultiple.Controls.Add(dataGridView);
-        tabPageMultiple.Controls.Add(gb_multiple_repeat);
-        tabPageMultiple.Controls.Add(cb_multiple_currentPosition);
         tabPageMultiple.Controls.Add(btn_multiple_addClick);
         tabPageMultiple.Location = new Point(4, 24);
         tabPageMultiple.Name = "tabPageMultiple";
         tabPageMultiple.Padding = new Padding(3);
-        tabPageMultiple.Size = new Size(865, 461);
+        tabPageMultiple.Size = new Size(791, 358);
         tabPageMultiple.TabIndex = 1;
         tabPageMultiple.Text = "Multiple";
         tabPageMultiple.UseVisualStyleBackColor = true;
+        // 
+        // btn_multiple_EditClick
+        // 
+        btn_multiple_EditClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        btn_multiple_EditClick.Location = new Point(695, 52);
+        btn_multiple_EditClick.Name = "btn_multiple_EditClick";
+        btn_multiple_EditClick.Size = new Size(90, 40);
+        btn_multiple_EditClick.TabIndex = 5;
+        btn_multiple_EditClick.Text = "Edit";
+        btn_multiple_EditClick.UseVisualStyleBackColor = true;
+        btn_multiple_EditClick.Click += btn_multiple_EditClick_Click;
         // 
         // dataGridView
         // 
         dataGridView.AllowUserToAddRows = false;
         dataGridView.AllowUserToResizeRows = false;
+        dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         dataGridView.AutoGenerateColumns = false;
         dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridView.Columns.AddRange(new DataGridViewColumn[] { clickTypeDataGridViewTextBoxColumn, mouseButtonDataGridViewTextBoxColumn, delayDataGridViewTextBoxColumn, holdingDurationDataGridViewTextBoxColumn, xDataGridViewTextBoxColumn, yDataGridViewTextBoxColumn });
+        dataGridView.Columns.AddRange(new DataGridViewColumn[] { clickTypeDataGridViewTextBoxColumn, mouseButtonDataGridViewTextBoxColumn, delayDataGridViewTextBoxColumn, xDataGridViewTextBoxColumn, yDataGridViewTextBoxColumn });
         dataGridView.DataSource = clickBindingSource;
-        dataGridView.Location = new Point(114, 70);
+        dataGridView.Location = new Point(6, 6);
         dataGridView.Name = "dataGridView";
         dataGridView.ReadOnly = true;
-        dataGridView.Size = new Size(526, 150);
+        dataGridView.Size = new Size(683, 346);
         dataGridView.TabIndex = 4;
         // 
-        // gb_multiple_repeat
+        // clickTypeDataGridViewTextBoxColumn
         // 
-        gb_multiple_repeat.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        gb_multiple_repeat.Controls.Add(nud_multiple_times);
-        gb_multiple_repeat.Controls.Add(lbl_multiple_times);
-        gb_multiple_repeat.Controls.Add(rb_multiple_times);
-        gb_multiple_repeat.Controls.Add(rb_multiple_infinite);
-        gb_multiple_repeat.Location = new Point(13, 343);
-        gb_multiple_repeat.Name = "gb_multiple_repeat";
-        gb_multiple_repeat.Size = new Size(846, 97);
-        gb_multiple_repeat.TabIndex = 3;
-        gb_multiple_repeat.TabStop = false;
-        gb_multiple_repeat.Text = "Repeat Pattern";
+        clickTypeDataGridViewTextBoxColumn.DataPropertyName = "ClickType";
+        clickTypeDataGridViewTextBoxColumn.HeaderText = "ClickType";
+        clickTypeDataGridViewTextBoxColumn.Name = "clickTypeDataGridViewTextBoxColumn";
+        clickTypeDataGridViewTextBoxColumn.ReadOnly = true;
         // 
-        // nud_multiple_times
+        // mouseButtonDataGridViewTextBoxColumn
         // 
-        nud_multiple_times.Location = new Point(33, 57);
-        nud_multiple_times.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
-        nud_multiple_times.Name = "nud_multiple_times";
-        nud_multiple_times.Size = new Size(101, 23);
-        nud_multiple_times.TabIndex = 4;
+        mouseButtonDataGridViewTextBoxColumn.DataPropertyName = "MouseButton";
+        mouseButtonDataGridViewTextBoxColumn.HeaderText = "MouseButton";
+        mouseButtonDataGridViewTextBoxColumn.Name = "mouseButtonDataGridViewTextBoxColumn";
+        mouseButtonDataGridViewTextBoxColumn.ReadOnly = true;
         // 
-        // lbl_multiple_times
+        // delayDataGridViewTextBoxColumn
         // 
-        lbl_multiple_times.Location = new Point(140, 59);
-        lbl_multiple_times.Name = "lbl_multiple_times";
-        lbl_multiple_times.Size = new Size(56, 19);
-        lbl_multiple_times.TabIndex = 3;
-        lbl_multiple_times.Text = "Times";
+        delayDataGridViewTextBoxColumn.DataPropertyName = "Delay";
+        delayDataGridViewTextBoxColumn.HeaderText = "Delay";
+        delayDataGridViewTextBoxColumn.Name = "delayDataGridViewTextBoxColumn";
+        delayDataGridViewTextBoxColumn.ReadOnly = true;
         // 
-        // rb_multiple_times
+        // xDataGridViewTextBoxColumn
         // 
-        rb_multiple_times.Location = new Point(10, 52);
-        rb_multiple_times.Name = "rb_multiple_times";
-        rb_multiple_times.Size = new Size(124, 29);
-        rb_multiple_times.TabIndex = 1;
-        rb_multiple_times.TabStop = true;
-        rb_multiple_times.UseVisualStyleBackColor = true;
+        xDataGridViewTextBoxColumn.DataPropertyName = "X";
+        xDataGridViewTextBoxColumn.HeaderText = "X";
+        xDataGridViewTextBoxColumn.Name = "xDataGridViewTextBoxColumn";
+        xDataGridViewTextBoxColumn.ReadOnly = true;
         // 
-        // rb_multiple_infinite
+        // yDataGridViewTextBoxColumn
         // 
-        rb_multiple_infinite.Location = new Point(10, 22);
-        rb_multiple_infinite.Name = "rb_multiple_infinite";
-        rb_multiple_infinite.Size = new Size(146, 24);
-        rb_multiple_infinite.TabIndex = 0;
-        rb_multiple_infinite.TabStop = true;
-        rb_multiple_infinite.Text = "Infinite (Until stopped)";
-        rb_multiple_infinite.UseVisualStyleBackColor = true;
+        yDataGridViewTextBoxColumn.DataPropertyName = "Y";
+        yDataGridViewTextBoxColumn.HeaderText = "Y";
+        yDataGridViewTextBoxColumn.Name = "yDataGridViewTextBoxColumn";
+        yDataGridViewTextBoxColumn.ReadOnly = true;
         // 
-        // cb_multiple_currentPosition
+        // clickBindingSource
         // 
-        cb_multiple_currentPosition.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        cb_multiple_currentPosition.AutoSize = true;
-        cb_multiple_currentPosition.Location = new Point(6, 446);
-        cb_multiple_currentPosition.Name = "cb_multiple_currentPosition";
-        cb_multiple_currentPosition.Size = new Size(190, 19);
-        cb_multiple_currentPosition.TabIndex = 2;
-        cb_multiple_currentPosition.Text = "Click at current Cursor Position";
-        cb_multiple_currentPosition.UseVisualStyleBackColor = true;
-        cb_multiple_currentPosition.CheckedChanged += cb_multiple_currentPosition_CheckedChanged;
+        clickBindingSource.DataSource = typeof(Models.Click);
         // 
         // btn_multiple_addClick
         // 
-        btn_multiple_addClick.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        btn_multiple_addClick.Location = new Point(23, 314);
+        btn_multiple_addClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        btn_multiple_addClick.Location = new Point(695, 6);
         btn_multiple_addClick.Name = "btn_multiple_addClick";
-        btn_multiple_addClick.Size = new Size(225, 23);
+        btn_multiple_addClick.Size = new Size(90, 40);
         btn_multiple_addClick.TabIndex = 1;
         btn_multiple_addClick.Text = "Add";
         btn_multiple_addClick.UseVisualStyleBackColor = true;
@@ -749,7 +727,7 @@ partial class Main
         menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, optionsToolStripMenuItem, aboutToolStripMenuItem });
         menuStrip1.Location = new Point(0, 0);
         menuStrip1.Name = "menuStrip1";
-        menuStrip1.Size = new Size(894, 24);
+        menuStrip1.Size = new Size(820, 24);
         menuStrip1.TabIndex = 10;
         menuStrip1.Text = "menuStrip";
         // 
@@ -822,59 +800,14 @@ partial class Main
         aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
         aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
         // 
-        // clickBindingSource
-        // 
-        clickBindingSource.DataSource = typeof(Models.Click);
-        // 
-        // clickTypeDataGridViewTextBoxColumn
-        // 
-        clickTypeDataGridViewTextBoxColumn.DataPropertyName = "ClickType";
-        clickTypeDataGridViewTextBoxColumn.HeaderText = "ClickType";
-        clickTypeDataGridViewTextBoxColumn.Name = "clickTypeDataGridViewTextBoxColumn";
-        clickTypeDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // mouseButtonDataGridViewTextBoxColumn
-        // 
-        mouseButtonDataGridViewTextBoxColumn.DataPropertyName = "MouseButton";
-        mouseButtonDataGridViewTextBoxColumn.HeaderText = "MouseButton";
-        mouseButtonDataGridViewTextBoxColumn.Name = "mouseButtonDataGridViewTextBoxColumn";
-        mouseButtonDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // delayDataGridViewTextBoxColumn
-        // 
-        delayDataGridViewTextBoxColumn.DataPropertyName = "Delay";
-        delayDataGridViewTextBoxColumn.HeaderText = "Delay";
-        delayDataGridViewTextBoxColumn.Name = "delayDataGridViewTextBoxColumn";
-        delayDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // holdingDurationDataGridViewTextBoxColumn
-        // 
-        holdingDurationDataGridViewTextBoxColumn.DataPropertyName = "HoldingDuration";
-        holdingDurationDataGridViewTextBoxColumn.HeaderText = "HoldingDuration";
-        holdingDurationDataGridViewTextBoxColumn.Name = "holdingDurationDataGridViewTextBoxColumn";
-        holdingDurationDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // xDataGridViewTextBoxColumn
-        // 
-        xDataGridViewTextBoxColumn.DataPropertyName = "X";
-        xDataGridViewTextBoxColumn.HeaderText = "X";
-        xDataGridViewTextBoxColumn.Name = "xDataGridViewTextBoxColumn";
-        xDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // yDataGridViewTextBoxColumn
-        // 
-        yDataGridViewTextBoxColumn.DataPropertyName = "Y";
-        yDataGridViewTextBoxColumn.HeaderText = "Y";
-        yDataGridViewTextBoxColumn.Name = "yDataGridViewTextBoxColumn";
-        yDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
         // Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(894, 630);
+        ClientSize = new Size(820, 630);
         Controls.Add(tabControl);
         Controls.Add(gp_delay);
+        Controls.Add(gb_repeat);
         Controls.Add(pb_progress);
         Controls.Add(btn_stop);
         Controls.Add(btn_start);
@@ -885,15 +818,14 @@ partial class Main
         MinimumSize = new Size(562, 554);
         Name = "Main";
         Text = "OpenClicker";
-        Load += Main_Load;
         gp_interval.ResumeLayout(false);
         gp_interval.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)nup_interval_h).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_sec).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_min).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_ms).EndInit();
-        gb_repeatSingle.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)nup_times).EndInit();
+        gb_repeat.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)nud_times).EndInit();
         gp_options.ResumeLayout(false);
         gp_delay.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)nup_delay_sec).EndInit();
@@ -911,13 +843,10 @@ partial class Main
         tabControl.ResumeLayout(false);
         tabPageSingle.ResumeLayout(false);
         tabPageMultiple.ResumeLayout(false);
-        tabPageMultiple.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
-        gb_multiple_repeat.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)nud_multiple_times).EndInit();
+        ((System.ComponentModel.ISupportInitialize)clickBindingSource).EndInit();
         menuStrip1.ResumeLayout(false);
         menuStrip1.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)clickBindingSource).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -969,7 +898,7 @@ partial class Main
     private System.Windows.Forms.GroupBox gp_options;
 
     private System.Windows.Forms.Label label1;
-    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_times;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nud_times;
 
     private System.Windows.Forms.TextBox tb_times;
 
@@ -985,7 +914,7 @@ partial class Main
 
     private System.Windows.Forms.Button btn_start;
 
-    private System.Windows.Forms.GroupBox gb_repeatSingle;
+    private System.Windows.Forms.GroupBox gb_repeat;
 
     private System.Windows.Forms.Label lb_msec;
 
@@ -1003,12 +932,6 @@ partial class Main
     private TabPage tabPageSingle;
     private TabPage tabPageMultiple;
     private Button btn_multiple_addClick;
-    private CheckBox cb_multiple_currentPosition;
-    private GroupBox gb_multiple_repeat;
-    private NumericUpDownNoScroll nud_multiple_times;
-    private Label lbl_multiple_times;
-    private RadioButton rb_multiple_times;
-    private RadioButton rb_multiple_infinite;
     private CustomComponents.NumericUpDownNoScroll nup_interval_h;
     private MenuStrip menuStrip1;
     private ToolStripMenuItem fileToolStripMenuItem;
@@ -1027,7 +950,7 @@ partial class Main
     private DataGridViewTextBoxColumn clickTypeDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn mouseButtonDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn delayDataGridViewTextBoxColumn;
-    private DataGridViewTextBoxColumn holdingDurationDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn xDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn yDataGridViewTextBoxColumn;
+    private Button btn_multiple_EditClick;
 }
