@@ -286,4 +286,14 @@ public partial class Main : Form
             }
         }
     }
+
+    private void btn_multiple_delete_Click(object sender, EventArgs e)
+    {
+        if (clickBindingSource.Current is Click selected)
+        {
+            clickBindingSource.Remove(selected);
+            dataGridView.Refresh();
+        }
+    }
+
 }

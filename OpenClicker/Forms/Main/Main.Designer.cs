@@ -104,6 +104,7 @@ partial class Main
         aboutToolStripMenuItem = new ToolStripMenuItem();
         gitHubToolStripMenuItem = new ToolStripMenuItem();
         aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
+        btn_multiple_delete = new Button();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_interval_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_sec).BeginInit();
@@ -146,35 +147,35 @@ partial class Main
         gp_interval.Controls.Add(lb_Hours);
         gp_interval.Location = new Point(17, 10);
         gp_interval.Name = "gp_interval";
-        gp_interval.Size = new Size(592, 62);
+        gp_interval.Size = new Size(768, 62);
         gp_interval.TabIndex = 0;
         gp_interval.TabStop = false;
         gp_interval.Text = "Click Interval";
         // 
         // nup_interval_h
         // 
-        nup_interval_h.Location = new Point(10, 25);
+        nup_interval_h.Location = new Point(6, 25);
         nup_interval_h.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_interval_h.Name = "nup_interval_h";
-        nup_interval_h.Size = new Size(55, 23);
+        nup_interval_h.Size = new Size(100, 23);
         nup_interval_h.TabIndex = 12;
         // 
         // nup_interval_sec
         // 
         nup_interval_sec.AutoSize = true;
-        nup_interval_sec.Location = new Point(222, 25);
+        nup_interval_sec.Location = new Point(328, 25);
         nup_interval_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_interval_sec.Name = "nup_interval_sec";
-        nup_interval_sec.Size = new Size(54, 23);
+        nup_interval_sec.Size = new Size(100, 23);
         nup_interval_sec.TabIndex = 11;
         nup_interval_sec.KeyPress += nup_KeyPress;
         // 
         // nup_interval_min
         // 
-        nup_interval_min.Location = new Point(111, 25);
+        nup_interval_min.Location = new Point(157, 25);
         nup_interval_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_interval_min.Name = "nup_interval_min";
-        nup_interval_min.Size = new Size(54, 23);
+        nup_interval_min.Size = new Size(100, 23);
         nup_interval_min.TabIndex = 10;
         nup_interval_min.KeyPress += nup_KeyPress;
         // 
@@ -182,17 +183,17 @@ partial class Main
         // 
         nup_interval_ms.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         nup_interval_ms.AutoSize = true;
-        nup_interval_ms.Location = new Point(342, 25);
+        nup_interval_ms.Location = new Point(494, 25);
         nup_interval_ms.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
         nup_interval_ms.Name = "nup_interval_ms";
-        nup_interval_ms.Size = new Size(157, 23);
+        nup_interval_ms.Size = new Size(100, 23);
         nup_interval_ms.TabIndex = 8;
         nup_interval_ms.KeyPress += nup_KeyPress;
         // 
         // lb_msec
         // 
         lb_msec.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        lb_msec.Location = new Point(505, 27);
+        lb_msec.Location = new Point(600, 28);
         lb_msec.Name = "lb_msec";
         lb_msec.Size = new Size(73, 16);
         lb_msec.TabIndex = 7;
@@ -200,7 +201,7 @@ partial class Main
         // 
         // lb_sec
         // 
-        lb_sec.Location = new Point(282, 27);
+        lb_sec.Location = new Point(434, 28);
         lb_sec.Name = "lb_sec";
         lb_sec.Size = new Size(54, 16);
         lb_sec.TabIndex = 6;
@@ -208,7 +209,7 @@ partial class Main
         // 
         // lb_Minutes
         // 
-        lb_Minutes.Location = new Point(171, 28);
+        lb_Minutes.Location = new Point(268, 28);
         lb_Minutes.Name = "lb_Minutes";
         lb_Minutes.Size = new Size(54, 16);
         lb_Minutes.TabIndex = 5;
@@ -216,7 +217,7 @@ partial class Main
         // 
         // lb_Hours
         // 
-        lb_Hours.Location = new Point(70, 27);
+        lb_Hours.Location = new Point(112, 28);
         lb_Hours.Name = "lb_Hours";
         lb_Hours.Size = new Size(39, 16);
         lb_Hours.TabIndex = 1;
@@ -259,11 +260,11 @@ partial class Main
         rb_times.Name = "rb_times";
         rb_times.Size = new Size(248, 29);
         rb_times.TabIndex = 1;
-        rb_times.TabStop = true;
         rb_times.UseVisualStyleBackColor = true;
         // 
         // rb_infinite
         // 
+        rb_infinite.Checked = true;
         rb_infinite.Location = new Point(10, 22);
         rb_infinite.Name = "rb_infinite";
         rb_infinite.Size = new Size(248, 24);
@@ -303,7 +304,7 @@ partial class Main
         gp_options.Controls.Add(cb_mouseButton);
         gp_options.Location = new Point(17, 78);
         gp_options.Name = "gp_options";
-        gp_options.Size = new Size(592, 97);
+        gp_options.Size = new Size(768, 97);
         gp_options.TabIndex = 4;
         gp_options.TabStop = false;
         gp_options.Text = "Click Options";
@@ -364,19 +365,19 @@ partial class Main
         // 
         // nup_delay_sec
         // 
-        nup_delay_sec.Location = new Point(222, 25);
+        nup_delay_sec.Location = new Point(327, 25);
         nup_delay_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_delay_sec.Name = "nup_delay_sec";
-        nup_delay_sec.Size = new Size(54, 23);
+        nup_delay_sec.Size = new Size(100, 23);
         nup_delay_sec.TabIndex = 11;
         nup_delay_sec.KeyPress += nup_KeyPress;
         // 
         // nup_delay_min
         // 
-        nup_delay_min.Location = new Point(111, 25);
+        nup_delay_min.Location = new Point(161, 25);
         nup_delay_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_delay_min.Name = "nup_delay_min";
-        nup_delay_min.Size = new Size(54, 23);
+        nup_delay_min.Size = new Size(100, 23);
         nup_delay_min.TabIndex = 10;
         nup_delay_min.KeyPress += nup_KeyPress;
         // 
@@ -385,22 +386,22 @@ partial class Main
         nup_delay_h.Location = new Point(10, 25);
         nup_delay_h.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_delay_h.Name = "nup_delay_h";
-        nup_delay_h.Size = new Size(54, 23);
+        nup_delay_h.Size = new Size(100, 23);
         nup_delay_h.TabIndex = 9;
         nup_delay_h.KeyPress += nup_KeyPress;
         // 
         // nup_delay_ms
         // 
-        nup_delay_ms.Location = new Point(342, 25);
+        nup_delay_ms.Location = new Point(495, 25);
         nup_delay_ms.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_delay_ms.Name = "nup_delay_ms";
-        nup_delay_ms.Size = new Size(54, 23);
+        nup_delay_ms.Size = new Size(100, 23);
         nup_delay_ms.TabIndex = 8;
         nup_delay_ms.KeyPress += nup_KeyPress;
         // 
         // lbl_delay_mili
         // 
-        lbl_delay_mili.Location = new Point(402, 27);
+        lbl_delay_mili.Location = new Point(601, 27);
         lbl_delay_mili.Name = "lbl_delay_mili";
         lbl_delay_mili.Size = new Size(73, 16);
         lbl_delay_mili.TabIndex = 7;
@@ -408,7 +409,7 @@ partial class Main
         // 
         // lbl_delay_sec
         // 
-        lbl_delay_sec.Location = new Point(282, 27);
+        lbl_delay_sec.Location = new Point(435, 28);
         lbl_delay_sec.Name = "lbl_delay_sec";
         lbl_delay_sec.Size = new Size(54, 16);
         lbl_delay_sec.TabIndex = 6;
@@ -416,7 +417,7 @@ partial class Main
         // 
         // lbl_delay_min
         // 
-        lbl_delay_min.Location = new Point(171, 28);
+        lbl_delay_min.Location = new Point(267, 28);
         lbl_delay_min.Name = "lbl_delay_min";
         lbl_delay_min.Size = new Size(54, 16);
         lbl_delay_min.TabIndex = 5;
@@ -424,7 +425,7 @@ partial class Main
         // 
         // lbl_delay_h
         // 
-        lbl_delay_h.Location = new Point(70, 27);
+        lbl_delay_h.Location = new Point(116, 27);
         lbl_delay_h.Name = "lbl_delay_h";
         lbl_delay_h.Size = new Size(39, 16);
         lbl_delay_h.TabIndex = 1;
@@ -452,26 +453,26 @@ partial class Main
         gp_duration.Controls.Add(label5);
         gp_duration.Location = new Point(17, 181);
         gp_duration.Name = "gp_duration";
-        gp_duration.Size = new Size(592, 62);
+        gp_duration.Size = new Size(768, 62);
         gp_duration.TabIndex = 7;
         gp_duration.TabStop = false;
         gp_duration.Text = "Duration (Only for Click Type = Holding)";
         // 
         // nup_duration_sec
         // 
-        nup_duration_sec.Location = new Point(222, 25);
+        nup_duration_sec.Location = new Point(328, 25);
         nup_duration_sec.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_duration_sec.Name = "nup_duration_sec";
-        nup_duration_sec.Size = new Size(54, 23);
+        nup_duration_sec.Size = new Size(100, 23);
         nup_duration_sec.TabIndex = 11;
         nup_duration_sec.KeyPress += nup_KeyPress;
         // 
         // nup_duration_min
         // 
-        nup_duration_min.Location = new Point(111, 25);
+        nup_duration_min.Location = new Point(161, 25);
         nup_duration_min.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_duration_min.Name = "nup_duration_min";
-        nup_duration_min.Size = new Size(54, 23);
+        nup_duration_min.Size = new Size(100, 23);
         nup_duration_min.TabIndex = 10;
         nup_duration_min.KeyPress += nup_KeyPress;
         // 
@@ -480,22 +481,22 @@ partial class Main
         nup_duration_h.Location = new Point(10, 25);
         nup_duration_h.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_duration_h.Name = "nup_duration_h";
-        nup_duration_h.Size = new Size(54, 23);
+        nup_duration_h.Size = new Size(100, 23);
         nup_duration_h.TabIndex = 9;
         nup_duration_h.KeyPress += nup_KeyPress;
         // 
         // nup_duration_mili
         // 
-        nup_duration_mili.Location = new Point(342, 25);
+        nup_duration_mili.Location = new Point(494, 26);
         nup_duration_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
         nup_duration_mili.Name = "nup_duration_mili";
-        nup_duration_mili.Size = new Size(54, 23);
+        nup_duration_mili.Size = new Size(100, 23);
         nup_duration_mili.TabIndex = 8;
         nup_duration_mili.KeyPress += nup_KeyPress;
         // 
         // label2
         // 
-        label2.Location = new Point(402, 27);
+        label2.Location = new Point(600, 29);
         label2.Name = "label2";
         label2.Size = new Size(73, 16);
         label2.TabIndex = 7;
@@ -503,7 +504,7 @@ partial class Main
         // 
         // label3
         // 
-        label3.Location = new Point(282, 27);
+        label3.Location = new Point(434, 28);
         label3.Name = "label3";
         label3.Size = new Size(54, 16);
         label3.TabIndex = 6;
@@ -511,7 +512,7 @@ partial class Main
         // 
         // label4
         // 
-        label4.Location = new Point(171, 28);
+        label4.Location = new Point(268, 29);
         label4.Name = "label4";
         label4.Size = new Size(54, 16);
         label4.TabIndex = 5;
@@ -519,7 +520,7 @@ partial class Main
         // 
         // label5
         // 
-        label5.Location = new Point(70, 27);
+        label5.Location = new Point(116, 29);
         label5.Name = "label5";
         label5.Size = new Size(39, 16);
         label5.TabIndex = 1;
@@ -537,7 +538,7 @@ partial class Main
         gp_clickPos.Controls.Add(rb_currentPos);
         gp_clickPos.Location = new Point(17, 249);
         gp_clickPos.Name = "gp_clickPos";
-        gp_clickPos.Size = new Size(592, 86);
+        gp_clickPos.Size = new Size(768, 86);
         gp_clickPos.TabIndex = 8;
         gp_clickPos.TabStop = false;
         gp_clickPos.Text = "Clicking Position";
@@ -634,6 +635,7 @@ partial class Main
         // 
         // tabPageMultiple
         // 
+        tabPageMultiple.Controls.Add(btn_multiple_delete);
         tabPageMultiple.Controls.Add(btn_multiple_EditClick);
         tabPageMultiple.Controls.Add(dataGridView);
         tabPageMultiple.Controls.Add(btn_multiple_addClick);
@@ -800,6 +802,16 @@ partial class Main
         aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
         aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
         // 
+        // btn_multiple_delete
+        // 
+        btn_multiple_delete.Location = new Point(695, 98);
+        btn_multiple_delete.Name = "btn_multiple_delete";
+        btn_multiple_delete.Size = new Size(90, 40);
+        btn_multiple_delete.TabIndex = 6;
+        btn_multiple_delete.Text = "Delete";
+        btn_multiple_delete.UseVisualStyleBackColor = true;
+        btn_multiple_delete.Click += btn_multiple_delete_Click;
+        // 
         // Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
@@ -953,4 +965,5 @@ partial class Main
     private DataGridViewTextBoxColumn xDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn yDataGridViewTextBoxColumn;
     private Button btn_multiple_EditClick;
+    private Button btn_multiple_delete;
 }
