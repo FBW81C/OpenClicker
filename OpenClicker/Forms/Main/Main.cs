@@ -56,12 +56,17 @@ public partial class Main : Form
 
     private async void btn_start_Click(object sender, EventArgs e)
     {
-        if (!LoadedFromFile)
+        ClickPattern pattern;
+        if (LoadedFromFile)
+        {
+            pattern = _pattern;
+        }
+        else
         {
             try
             {
-                ParseClicksFromUI();
-                if (_pattern.Clicks.Count == 0) throw new InvalidClickPatternException("Pattern is empty");
+                pattern = ParseClicksFromUI();
+                if (pattern.Clicks.Count == 0) throw new InvalidClickPatternException("Pattern is empty");
             }
             catch (InvalidClickPatternException ex)
             {
@@ -83,10 +88,10 @@ public partial class Main : Form
         _cts = new CancellationTokenSource();
         try
         {
-            if (tabControl.SelectedIndex == 0 && _pattern.Clicks[0].ClickType == ClickTypes.Hold)
-                await StartHolding(_cts.Token);
+            if (tabControl.SelectedIndex == 0 && pattern.Clicks[0].ClickType == ClickTypes.Hold)
+                await StartHolding(_cts.Token, pattern);
             else
-                await StartClicking(_cts.Token);
+                await StartClicking(_cts.Token, pattern);
         }
         catch (OperationCanceledException)
         {
@@ -94,18 +99,18 @@ public partial class Main : Form
         }
     }
 
-    private async Task StartClicking(CancellationToken token)
+    private async Task StartClicking(CancellationToken token, ClickPattern pattern)
     {
-        await Task.Delay(_pattern.StartingDelay, token);
+        await Task.Delay(pattern.StartingDelay, token);
 
-        if (_pattern.Repeat == null)
+        if (pattern.Repeat == null)
         {
             pb_progress.Style = ProgressBarStyle.Marquee;
         }
         else
         {
             pb_progress.Style = ProgressBarStyle.Continuous;
-            pb_progress.Maximum = _pattern.Repeat.Value;
+            pb_progress.Maximum = pattern.Repeat.Value;
             pb_progress.Value = 0;
         }
 
@@ -113,13 +118,13 @@ public partial class Main : Form
 
         try
         {
-            while (_pattern.Repeat == null || clickCount < _pattern.Repeat)
+            while (pattern.Repeat == null || clickCount < pattern.Repeat)
             {
                 token.ThrowIfCancellationRequested();
 
-                await PlayPattern(_pattern.Clicks.ToList(), token);
+                await PlayPattern(pattern.Clicks.ToList(), token);
                 clickCount++;
-                if (_pattern.Repeat != null) pb_progress.Value = clickCount;
+                if (pattern.Repeat != null) pb_progress.Value = clickCount;
             }
         }
         finally
@@ -144,15 +149,15 @@ public partial class Main : Form
         }
     }
 
-    private async Task StartHolding(CancellationToken token)
+    private async Task StartHolding(CancellationToken token, ClickPattern pattern)
     {
         cb_clickType.Enabled = false;
         pb_progress.Style = ProgressBarStyle.Marquee;
-        var click = _pattern.Clicks[0];
+        var click = pattern.Clicks[0];
 
         try
         {
-            await Task.Delay(_pattern.StartingDelay, token);
+            await Task.Delay(pattern.StartingDelay, token);
             Program.ToggleMouseButton(click.MouseButton, true);
             await Task.Delay(click.HoldingDuration, token);
         }

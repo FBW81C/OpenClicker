@@ -4,22 +4,21 @@ using OpenClicker.Models;
 namespace OpenClicker.Forms.Main;
 public partial class Main
 {
-    private void ParseClicksFromUI()
+    private ClickPattern ParseClicksFromUI()
     {
-        Clicker.AssertValidClickPattern(_pattern);
+        var pattern = new ClickPattern();
 
         // Starting Delay
-        _pattern.StartingDelay = new TimeSpan(0,
+        pattern.StartingDelay = new TimeSpan(0,
             (int)nup_delay_h.Value,
             (int)nup_delay_min.Value,
             (int)nup_delay_sec.Value,
             (int)nup_delay_ms.Value);
         // Click Repeat
-        _pattern.Repeat = rb_infinite.Checked ? null : (int?)nud_times.Value;
+        pattern.Repeat = rb_infinite.Checked ? null : (int?)nud_times.Value;
 
         if (tabControl.SelectedIndex == 0)
-        {
-            _pattern.Clicks.Clear();
+        { // Single
             var click = new Click
             {
                 Delay = new TimeSpan(0,
@@ -31,7 +30,17 @@ public partial class Main
                 MouseButton = (OCMouseButtons)(cb_mouseButton.SelectedItem ?? OCMouseButtons.Left),
                 Position = rb_currentPos.Checked ? null : new Point((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value)
             };
-            _pattern.Clicks.Add(click);
+            pattern.Clicks.Add(click);
+
+            Clicker.AssertValidClickPattern(pattern);
+            return pattern;
+        }
+        else
+        { // Multiple
+            pattern.Clicks = _pattern.Clicks;
+
+            Clicker.AssertValidClickPattern(pattern);
+            return pattern;
         }
     }
 
