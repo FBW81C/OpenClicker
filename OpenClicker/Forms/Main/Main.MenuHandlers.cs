@@ -29,8 +29,8 @@ public partial class Main
     {
         try
         {
-            ParseClicksFromUI();
-            var path = FileReader.SaveProfile(_pattern);
+            var pattern = ParseClicksFromUI();
+            var path = FileReader.SaveProfile(pattern);
             MessageBox.Show($"Successfully saved profile to: {path}", "Profile saved", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
         catch (OCInvalidFile ex)
@@ -85,9 +85,9 @@ public partial class Main
     {
         try
         {
-            ParseClicksFromUI();
+            var pattern = ParseClicksFromUI();
             CreateSettingsFolderIfNotExist();
-            FileReader.SaveProfile(_pattern, Constants.DEFAULTPROFILE_PATH); ;
+            FileReader.SaveProfile(pattern, Constants.DEFAULTPROFILE_PATH); ;
             MessageBox.Show($"Successfully saved default Profile!", "Default Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         catch (OCInvalidFile ex)
