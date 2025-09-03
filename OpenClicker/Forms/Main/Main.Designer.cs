@@ -105,6 +105,7 @@ partial class Main
         aboutToolStripMenuItem = new ToolStripMenuItem();
         gitHubToolStripMenuItem = new ToolStripMenuItem();
         aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
+        hotkeysToolStripMenuItem = new ToolStripMenuItem();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_interval_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_sec).BeginInit();
@@ -786,6 +787,7 @@ partial class Main
         // 
         // optionsToolStripMenuItem
         // 
+        optionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { hotkeysToolStripMenuItem });
         optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
         optionsToolStripMenuItem.Size = new Size(61, 20);
         optionsToolStripMenuItem.Text = "Options";
@@ -810,6 +812,13 @@ partial class Main
         aboutOpenClickerToolStripMenuItem.Size = new Size(175, 22);
         aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
         aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
+        // 
+        // hotkeysToolStripMenuItem
+        // 
+        hotkeysToolStripMenuItem.Name = "hotkeysToolStripMenuItem";
+        hotkeysToolStripMenuItem.Size = new Size(180, 22);
+        hotkeysToolStripMenuItem.Text = "Hotkeys";
+        hotkeysToolStripMenuItem.Click += hotkeysToolStripMenuItem_Click;
         // 
         // Main
         // 
@@ -965,4 +974,5 @@ partial class Main
     private DataGridViewTextBoxColumn yDataGridViewTextBoxColumn;
     private Button btn_multiple_EditClick;
     private Button btn_multiple_delete;
+    private ToolStripMenuItem hotkeysToolStripMenuItem;
 }
