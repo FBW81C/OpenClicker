@@ -127,5 +127,10 @@ public partial class Main
             Directory.CreateDirectory(Constants.SETTINGS_PATH);
         }
     }
+
+    private void hotkeysToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
+    }
 }
 
