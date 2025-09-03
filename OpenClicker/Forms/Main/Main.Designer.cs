@@ -84,6 +84,7 @@ partial class Main
         tabControl = new TabControl();
         tabPageSingle = new TabPage();
         tabPageMultiple = new TabPage();
+        btn_multiple_delete = new Button();
         btn_multiple_EditClick = new Button();
         dataGridView = new DataGridView();
         clickTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -104,7 +105,6 @@ partial class Main
         aboutToolStripMenuItem = new ToolStripMenuItem();
         gitHubToolStripMenuItem = new ToolStripMenuItem();
         aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
-        btn_multiple_delete = new Button();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_interval_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_sec).BeginInit();
@@ -147,7 +147,7 @@ partial class Main
         gp_interval.Controls.Add(lb_Hours);
         gp_interval.Location = new Point(17, 10);
         gp_interval.Name = "gp_interval";
-        gp_interval.Size = new Size(768, 62);
+        gp_interval.Size = new Size(687, 62);
         gp_interval.TabIndex = 0;
         gp_interval.TabStop = false;
         gp_interval.Text = "Click Interval";
@@ -181,7 +181,6 @@ partial class Main
         // 
         // nup_interval_ms
         // 
-        nup_interval_ms.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         nup_interval_ms.AutoSize = true;
         nup_interval_ms.Location = new Point(494, 25);
         nup_interval_ms.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
@@ -192,7 +191,6 @@ partial class Main
         // 
         // lb_msec
         // 
-        lb_msec.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         lb_msec.Location = new Point(600, 28);
         lb_msec.Name = "lb_msec";
         lb_msec.Size = new Size(73, 16);
@@ -225,14 +223,14 @@ partial class Main
         // 
         // gb_repeat
         // 
-        gb_repeat.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        gb_repeat.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         gb_repeat.Controls.Add(nud_times);
         gb_repeat.Controls.Add(label1);
         gb_repeat.Controls.Add(rb_times);
         gb_repeat.Controls.Add(rb_infinite);
-        gb_repeat.Location = new Point(19, 418);
+        gb_repeat.Location = new Point(19, 404);
         gb_repeat.Name = "gb_repeat";
-        gb_repeat.Size = new Size(792, 97);
+        gb_repeat.Size = new Size(711, 97);
         gb_repeat.TabIndex = 1;
         gb_repeat.TabStop = false;
         gb_repeat.Text = "Click Repeat";
@@ -276,7 +274,7 @@ partial class Main
         // btn_start
         // 
         btn_start.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        btn_start.Location = new Point(13, 589);
+        btn_start.Location = new Point(13, 575);
         btn_start.Name = "btn_start";
         btn_start.Size = new Size(64, 25);
         btn_start.TabIndex = 2;
@@ -287,7 +285,7 @@ partial class Main
         // btn_stop
         // 
         btn_stop.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        btn_stop.Location = new Point(83, 589);
+        btn_stop.Location = new Point(83, 575);
         btn_stop.Name = "btn_stop";
         btn_stop.Size = new Size(64, 25);
         btn_stop.TabIndex = 3;
@@ -304,7 +302,7 @@ partial class Main
         gp_options.Controls.Add(cb_mouseButton);
         gp_options.Location = new Point(17, 78);
         gp_options.Name = "gp_options";
-        gp_options.Size = new Size(768, 97);
+        gp_options.Size = new Size(687, 97);
         gp_options.TabIndex = 4;
         gp_options.TabStop = false;
         gp_options.Text = "Click Options";
@@ -356,9 +354,9 @@ partial class Main
         gp_delay.Controls.Add(lbl_delay_sec);
         gp_delay.Controls.Add(lbl_delay_min);
         gp_delay.Controls.Add(lbl_delay_h);
-        gp_delay.Location = new Point(19, 521);
+        gp_delay.Location = new Point(19, 507);
         gp_delay.Name = "gp_delay";
-        gp_delay.Size = new Size(792, 62);
+        gp_delay.Size = new Size(711, 62);
         gp_delay.TabIndex = 5;
         gp_delay.TabStop = false;
         gp_delay.Text = "Starting Delay";
@@ -435,9 +433,9 @@ partial class Main
         // 
         pb_progress.AccessibleDescription = "";
         pb_progress.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        pb_progress.Location = new Point(153, 589);
+        pb_progress.Location = new Point(153, 575);
         pb_progress.Name = "pb_progress";
-        pb_progress.Size = new Size(658, 25);
+        pb_progress.Size = new Size(577, 25);
         pb_progress.TabIndex = 6;
         // 
         // gp_duration
@@ -453,7 +451,7 @@ partial class Main
         gp_duration.Controls.Add(label5);
         gp_duration.Location = new Point(17, 181);
         gp_duration.Name = "gp_duration";
-        gp_duration.Size = new Size(768, 62);
+        gp_duration.Size = new Size(687, 62);
         gp_duration.TabIndex = 7;
         gp_duration.TabStop = false;
         gp_duration.Text = "Duration (Only for Click Type = Holding)";
@@ -538,7 +536,7 @@ partial class Main
         gp_clickPos.Controls.Add(rb_currentPos);
         gp_clickPos.Location = new Point(17, 249);
         gp_clickPos.Name = "gp_clickPos";
-        gp_clickPos.Size = new Size(768, 86);
+        gp_clickPos.Size = new Size(687, 86);
         gp_clickPos.TabIndex = 8;
         gp_clickPos.TabStop = false;
         gp_clickPos.Text = "Clicking Position";
@@ -616,7 +614,7 @@ partial class Main
         tabControl.Location = new Point(12, 26);
         tabControl.Name = "tabControl";
         tabControl.SelectedIndex = 0;
-        tabControl.Size = new Size(799, 386);
+        tabControl.Size = new Size(718, 372);
         tabControl.TabIndex = 9;
         // 
         // tabPageSingle
@@ -628,7 +626,7 @@ partial class Main
         tabPageSingle.Location = new Point(4, 24);
         tabPageSingle.Name = "tabPageSingle";
         tabPageSingle.Padding = new Padding(3);
-        tabPageSingle.Size = new Size(791, 358);
+        tabPageSingle.Size = new Size(710, 344);
         tabPageSingle.TabIndex = 0;
         tabPageSingle.Text = "Single";
         tabPageSingle.UseVisualStyleBackColor = true;
@@ -642,15 +640,26 @@ partial class Main
         tabPageMultiple.Location = new Point(4, 24);
         tabPageMultiple.Name = "tabPageMultiple";
         tabPageMultiple.Padding = new Padding(3);
-        tabPageMultiple.Size = new Size(791, 358);
+        tabPageMultiple.Size = new Size(774, 344);
         tabPageMultiple.TabIndex = 1;
         tabPageMultiple.Text = "Multiple";
         tabPageMultiple.UseVisualStyleBackColor = true;
         // 
+        // btn_multiple_delete
+        // 
+        btn_multiple_delete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        btn_multiple_delete.Location = new Point(650, 98);
+        btn_multiple_delete.Name = "btn_multiple_delete";
+        btn_multiple_delete.Size = new Size(90, 40);
+        btn_multiple_delete.TabIndex = 6;
+        btn_multiple_delete.Text = "Delete";
+        btn_multiple_delete.UseVisualStyleBackColor = true;
+        btn_multiple_delete.Click += btn_multiple_delete_Click;
+        // 
         // btn_multiple_EditClick
         // 
         btn_multiple_EditClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_multiple_EditClick.Location = new Point(695, 52);
+        btn_multiple_EditClick.Location = new Point(650, 52);
         btn_multiple_EditClick.Name = "btn_multiple_EditClick";
         btn_multiple_EditClick.Size = new Size(90, 40);
         btn_multiple_EditClick.TabIndex = 5;
@@ -671,7 +680,7 @@ partial class Main
         dataGridView.Location = new Point(6, 6);
         dataGridView.Name = "dataGridView";
         dataGridView.ReadOnly = true;
-        dataGridView.Size = new Size(683, 346);
+        dataGridView.Size = new Size(638, 346);
         dataGridView.TabIndex = 4;
         // 
         // clickTypeDataGridViewTextBoxColumn
@@ -716,7 +725,7 @@ partial class Main
         // btn_multiple_addClick
         // 
         btn_multiple_addClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_multiple_addClick.Location = new Point(695, 6);
+        btn_multiple_addClick.Location = new Point(650, 6);
         btn_multiple_addClick.Name = "btn_multiple_addClick";
         btn_multiple_addClick.Size = new Size(90, 40);
         btn_multiple_addClick.TabIndex = 1;
@@ -729,7 +738,7 @@ partial class Main
         menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, optionsToolStripMenuItem, aboutToolStripMenuItem });
         menuStrip1.Location = new Point(0, 0);
         menuStrip1.Name = "menuStrip1";
-        menuStrip1.Size = new Size(820, 24);
+        menuStrip1.Size = new Size(739, 24);
         menuStrip1.TabIndex = 10;
         menuStrip1.Text = "menuStrip";
         // 
@@ -802,21 +811,11 @@ partial class Main
         aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
         aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
         // 
-        // btn_multiple_delete
-        // 
-        btn_multiple_delete.Location = new Point(695, 98);
-        btn_multiple_delete.Name = "btn_multiple_delete";
-        btn_multiple_delete.Size = new Size(90, 40);
-        btn_multiple_delete.TabIndex = 6;
-        btn_multiple_delete.Text = "Delete";
-        btn_multiple_delete.UseVisualStyleBackColor = true;
-        btn_multiple_delete.Click += btn_multiple_delete_Click;
-        // 
         // Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(820, 630);
+        ClientSize = new Size(739, 616);
         Controls.Add(tabControl);
         Controls.Add(gp_delay);
         Controls.Add(gb_repeat);
@@ -827,7 +826,7 @@ partial class Main
         Icon = (Icon)resources.GetObject("$this.Icon");
         MainMenuStrip = menuStrip1;
         MaximumSize = new Size(1000, 2000);
-        MinimumSize = new Size(562, 554);
+        MinimumSize = new Size(755, 655);
         Name = "Main";
         Text = "OpenClicker";
         gp_interval.ResumeLayout(false);
