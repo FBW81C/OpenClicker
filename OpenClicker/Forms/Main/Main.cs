@@ -295,5 +295,4 @@ public partial class Main : Form
             dataGridView.Refresh();
         }
     }
-
 }
