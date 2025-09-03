@@ -1,5 +1,6 @@
 using OpenClicker.Exceptions;
 using OpenClicker.Forms.ClickEditor;
+using OpenClicker.Forms.Hotkeys;
 using OpenClicker.Lib;
 using OpenClicker.Models;
 
@@ -11,12 +12,17 @@ public partial class Main : Form
     private CancellationTokenSource _cts;
     private readonly ClickPattern _pattern = new();
     private bool LoadedFromFile = false;
+    private HotkeyManager _hotkeyManager;
 
-    public Main(string? filePath = null)
+    public Main(HotkeyManager hotkeyManager, string? filePath = null)
     {
         InitializeComponent();
+
+        _hotkeyManager = hotkeyManager;
+        
         SetClickTypes();
         SetMouseButtons();
+        RegsiterHotkeysHandler(_hotkeyManager);
 
         clickBindingSource.DataSource = _pattern.Clicks;
 

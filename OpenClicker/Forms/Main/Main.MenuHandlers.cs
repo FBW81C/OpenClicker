@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using OpenClicker.Exceptions;
+using OpenClicker.Forms.Hotkeys;
 using OpenClicker.Lib;
 
 namespace OpenClicker.Forms.Main;
@@ -130,7 +131,8 @@ public partial class Main
 
     private void hotkeysToolStripMenuItem_Click(object sender, EventArgs e)
     {
-
+        var form = new HotkeyEditor(_hotkeyManager);
+        form.ShowDialog();
     }
 }
 

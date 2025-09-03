@@ -1,4 +1,6 @@
+using OpenClicker.Forms.Hotkeys;
 using OpenClicker.Forms.Main;
+using OpenClicker.Models;
 using OpenClicker.Models;
 using System.Runtime.InteropServices;
 using OCMouseButtons = OpenClicker.Models.OCMouseButtons;
@@ -29,9 +31,15 @@ static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
 
+        using var hotkeyManager = new HotkeyManager();
+
+        // Set standard hotkeys
+        hotkeyManager.RegisterHotKey(Keys.F8, 0, HotKeys.Start);
+
+        // Determine if file needs to be opened
         string? fileToOpen = args.Length > 0 ? args[0] : null;
 
-        Application.Run(new Main(fileToOpen));
+        Application.Run(new Main(hotkeyManager, fileToOpen));
     }
 
     private static void LeftClick()
