@@ -87,7 +87,7 @@ public partial class Main
         try
         {
             var pattern = ParseClicksFromUI();
-            CreateSettingsFolderIfNotExist();
+            Program.CreateSettingsFolderIfNotExist();
             FileReader.SaveProfile(pattern, Constants.DEFAULTPROFILE_PATH); ;
             MessageBox.Show($"Successfully saved default Profile!", "Default Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -112,7 +112,7 @@ public partial class Main
 
     private void resetDefaultToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        CreateSettingsFolderIfNotExist();
+        Program.CreateSettingsFolderIfNotExist();
 
         if (File.Exists(Constants.DEFAULTPROFILE_PATH))
         {
@@ -121,13 +121,7 @@ public partial class Main
         MessageBox.Show("Successfully reset default Profile!", "Default Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
-    private void CreateSettingsFolderIfNotExist()
-    {
-        if (!Directory.Exists(Constants.SETTINGS_PATH))
-        {
-            Directory.CreateDirectory(Constants.SETTINGS_PATH);
-        }
-    }
+
 
     private void hotkeysToolStripMenuItem_Click(object sender, EventArgs e)
     {

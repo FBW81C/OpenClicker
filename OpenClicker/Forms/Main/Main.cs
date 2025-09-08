@@ -10,6 +10,7 @@ namespace OpenClicker.Forms.Main;
 public partial class Main : Form
 {
     private CancellationTokenSource _cts;
+    private bool _isRunning => _cts != null;
     private readonly ClickPattern _pattern = new();
     private bool LoadedFromFile = false;
     private HotkeyManager _hotkeyManager;
@@ -46,7 +47,6 @@ public partial class Main : Form
                 LoadProfile(Constants.DEFAULTPROFILE_PATH);
             }
         }
-
     }
 
     private void SetClickTypes()
@@ -94,7 +94,7 @@ public partial class Main : Form
         _cts = new CancellationTokenSource();
         try
         {
-            if (tabControl.SelectedIndex == 0 && pattern.Clicks[0].ClickType == ClickTypes.Hold)
+            if (tabControl.SelectedIndex == 0 && pattern.Clicks.Count > 0 && pattern.Clicks[0].ClickType == ClickTypes.Hold)
                 await StartHolding(_cts.Token, pattern);
             else
                 await StartClicking(_cts.Token, pattern);

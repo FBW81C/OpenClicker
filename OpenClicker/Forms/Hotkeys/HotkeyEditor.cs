@@ -1,4 +1,5 @@
-﻿using OpenClicker.Models;
+﻿using OpenClicker.models;
+using OpenClicker.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace OpenClicker.Forms.Hotkeys;
 public partial class HotkeyEditor : Form
 {
     private readonly HotkeyManager _hotkeyManager;
+    private Dictionary<HotKeys, HotkeyConfig> _hotkeys = [];
 
     public HotkeyEditor(HotkeyManager hotkeyManager)
     {
@@ -21,13 +23,20 @@ public partial class HotkeyEditor : Form
         _hotkeyManager = hotkeyManager;
     }
 
+    private void HotkeyEditor_Load(object sender, EventArgs e)
+    {
+        this.ActiveControl = null;
+        _hotkeys = _hotkeyManager.GetHotKeys();
+
+        UpdateUI(_hotkeys);
+    }
+
     private void tb_start_KeyDown(object? sender, KeyEventArgs e)
     {
         Keys pressedKey = e.KeyCode;
-        int pressedMod = GetModfier(e);
+        int pressedMod = _hotkeyManager.GetModifier(e);
 
-        _hotkeyManager.UnregisterHotKey(HotKeys.Start);
-        _hotkeyManager.RegisterHotKey(pressedKey, pressedMod, HotKeys.Start);
+        _hotkeys[HotKeys.Start] = new HotkeyConfig(pressedKey, pressedMod);
 
         tb_start.Text = $"{(e.Modifiers != Keys.None ? $"{e.Modifiers} + " : "")}{pressedKey}";
         e.SuppressKeyPress = true;
@@ -36,10 +45,9 @@ public partial class HotkeyEditor : Form
     private void tb_stop_KeyDown(object sender, KeyEventArgs e)
     {
         Keys pressedKey = e.KeyCode;
-        int pressedMod = GetModfier(e);
+        int pressedMod = _hotkeyManager.GetModifier(e);
 
-        _hotkeyManager.UnregisterHotKey(HotKeys.Stop);
-        _hotkeyManager.RegisterHotKey(pressedKey, pressedMod, HotKeys.Stop);
+        _hotkeys[HotKeys.Stop] = new HotkeyConfig(pressedKey, pressedMod);
 
         tb_stop.Text = $"{(e.Modifiers != Keys.None ? $"{e.Modifiers} + " : "")}{pressedKey}";
         e.SuppressKeyPress = true;
@@ -48,24 +56,51 @@ public partial class HotkeyEditor : Form
     private void tb_toggle_KeyDown(object sender, KeyEventArgs e)
     {
         Keys pressedKey = e.KeyCode;
-        int pressedMod = GetModfier(e);
+        int pressedMod = _hotkeyManager.GetModifier(e);
 
-        _hotkeyManager.UnregisterHotKey(HotKeys.Toggle);
-        _hotkeyManager.RegisterHotKey(pressedKey, pressedMod, HotKeys.Toggle);
+        _hotkeys[HotKeys.Toggle] = new HotkeyConfig(pressedKey, pressedMod);
 
         tb_toggle.Text = $"{(e.Modifiers != Keys.None ? $"{e.Modifiers} + " : "")}{pressedKey}";
         e.SuppressKeyPress = true;
     }
 
-    private int GetModfier(KeyEventArgs e)
+    private void btn_ok_Click(object sender, EventArgs e)
     {
-        int pressedMod = 0;
-        if (e.Control) pressedMod |= 0x2;  // STRG
-        if (e.Alt) pressedMod |= 0x1;      // ALT
-        if (e.Shift) pressedMod |= 0x4;    // SHIFT
-        if ((e.KeyData & Keys.LWin) == Keys.LWin || (e.KeyData & Keys.RWin) == Keys.RWin)
-            pressedMod |= 0x8;             // WIN
+        try
+        {
+            foreach (HotKeys key in _hotkeys.Keys)
+            {
+                _hotkeyManager.RegisterHotkey(_hotkeys[key], key);
+            }
+            _hotkeyManager.SaveHotKeys();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Failed to save hotkeys", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
-        return pressedMod;
+        this.Close();
+    }
+
+    private void btn_restore_Click(object sender, EventArgs e)
+    {
+        _hotkeys.Clear();
+        foreach (var value in Constants.DEFAULT_HOTKEYS)
+        {
+            _hotkeys.Add(value.Key, value.Value);
+        }
+
+        UpdateUI(_hotkeys);
+    }
+
+    private void UpdateUI(Dictionary<HotKeys, HotkeyConfig> hotkeys)
+    {
+        hotkeys.TryGetValue(HotKeys.Start, out var startHotKey);
+        hotkeys.TryGetValue(HotKeys.Stop, out var stopHotKey);
+        hotkeys.TryGetValue(HotKeys.Toggle, out var toggleHotKey);
+
+        tb_start.Text = $"{((startHotKey != null && startHotKey.Modifier != 0) ? $"{_hotkeyManager.GetModifierFromInt(startHotKey.Modifier)} + " : "")}{startHotKey?.Key.ToString() ?? ""}";
+        tb_stop.Text = $"{((stopHotKey != null && stopHotKey.Modifier != 0) ? $"{_hotkeyManager.GetModifierFromInt(stopHotKey.Modifier)} + " : "")}{stopHotKey?.Key.ToString() ?? ""}";
+        tb_toggle.Text = $"{((toggleHotKey != null && toggleHotKey.Modifier != 0) ? $"{_hotkeyManager.GetModifierFromInt(toggleHotKey.Modifier)} + " : "")}{toggleHotKey?.Key.ToString() ?? ""}";
     }
 }

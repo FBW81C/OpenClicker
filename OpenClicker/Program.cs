@@ -34,7 +34,14 @@ static class Program
         using var hotkeyManager = new HotkeyManager();
 
         // Set standard hotkeys
-        hotkeyManager.RegisterHotKey(Keys.F8, 0, HotKeys.Start);
+        try
+        {
+            hotkeyManager.LoadHotKeys();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Couldn't load hotkeys from settings.\n Using default hokeys and restoring file.\nDetails:\n\n{ex.Message}", "Error loading hotkeys", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
         // Determine if file needs to be opened
         string? fileToOpen = args.Length > 0 ? args[0] : null;
@@ -120,6 +127,14 @@ static class Program
                 break;
             default:
                 break;
+        }
+    }
+
+    public static void CreateSettingsFolderIfNotExist()
+    {
+        if (!Directory.Exists(Constants.SETTINGS_PATH))
+        {
+            Directory.CreateDirectory(Constants.SETTINGS_PATH);
         }
     }
 }
