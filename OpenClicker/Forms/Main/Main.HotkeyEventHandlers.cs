@@ -11,24 +11,45 @@ public partial class Main
 {
     public void RegsiterHotkeysHandler(HotkeyManager hotkeyManager)
     {
-        hotkeyManager.HotkeyPressed += (hotkey, key, mod) =>
+        hotkeyManager.HotkeyPressed += (hotkey) =>
         {
 
             switch (hotkey)
             {
                 case (HotKeys.Start):
-                    MessageBox.Show($"START: {mod} + {key}");
+                    OnHotKeyStartPress();
                     break;
                 case (HotKeys.Stop):
-                    MessageBox.Show($"STOP: {mod} + {key}");
+                    OnHotKeyStopPress();
                     break;
                 case (HotKeys.Toggle):
-                    MessageBox.Show($"TOGGLE: {mod} + {key}");
+                    OnHotKeyTogglePress();
                     break;
                 default:
-                    MessageBox.Show($"{mod} + {key}");
                     break;
             }
         };
+    }
+    private void OnHotKeyStartPress()
+    {
+        if (_isRunning)
+        {
+            return;
+        }
+
+        btn_start_Click(null, EventArgs.Empty);
+    }
+    private void OnHotKeyStopPress()
+    {
+        btn_stop_Click(null, EventArgs.Empty);
+    }
+    private void OnHotKeyTogglePress()
+    {
+        if (_isRunning)
+        {
+            OnHotKeyStopPress();
+        }
+
+        OnHotKeyStartPress();
     }
 }
