@@ -17,6 +17,9 @@ Features:
 - Pattern
     - Single
     - Multiple (Multiple clicks in a row)
+- Hotkeys
+    - Start, Stop, Toggle
+    - Hotkey Settings
 
 Dependencies:
 - .NET 8 (Core)
