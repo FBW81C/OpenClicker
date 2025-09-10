@@ -14,13 +14,14 @@ public partial class Main : Form
     private readonly ClickPattern _pattern = new();
     private bool LoadedFromFile = false;
     private HotkeyManager _hotkeyManager;
+    private ClickRecorder _clickRecorder;
 
     public Main(HotkeyManager hotkeyManager, string? filePath = null)
     {
         InitializeComponent();
 
         _hotkeyManager = hotkeyManager;
-        
+
         SetClickTypes();
         SetMouseButtons();
         RegsiterHotkeysHandler(_hotkeyManager);
@@ -300,5 +301,50 @@ public partial class Main : Form
             clickBindingSource.Remove(selected);
             dataGridView.Refresh();
         }
+    }
+
+    private void btn_deleteAll_Click(object sender, EventArgs e)
+    {
+        clickBindingSource.Clear();
+        dataGridView.Refresh();
+    }
+
+    private void btn_record_Click(object sender, EventArgs e)
+    {
+        btn_record.Enabled = false;
+
+        if (_clickRecorder == null)
+        {
+            // start recording
+            btn_record.Text = "Stop Recording";
+            btn_start.Enabled = false;
+            _clickRecorder = new ClickRecorder();
+            _clickRecorder.Start();
+        }
+        else
+        {
+            btn_record.Text = "Record";
+            // is recording = stop
+            var clicks = _clickRecorder.Stop();
+
+            // remove last click, last click is clicking Stop button
+            if (clicks.Count > 0)
+            {
+                clicks.RemoveAt(clicks.Count - 1);
+            }
+
+            foreach (var click in clicks)
+            {
+                _pattern.Clicks.Add(click);
+            }
+            dataGridView.Refresh();
+
+            _clickRecorder.Dispose();
+            _clickRecorder = null;
+
+            btn_start.Enabled = true;
+        }
+
+        btn_record.Enabled = true;
     }
 }
