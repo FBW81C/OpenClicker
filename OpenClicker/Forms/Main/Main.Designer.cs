@@ -84,6 +84,7 @@ partial class Main
         tabControl = new TabControl();
         tabPageSingle = new TabPage();
         tabPageMultiple = new TabPage();
+        btn_record = new Button();
         btn_multiple_delete = new Button();
         btn_multiple_EditClick = new Button();
         dataGridView = new DataGridView();
@@ -102,10 +103,11 @@ partial class Main
         setAsDefaultToolStripMenuItem1 = new ToolStripMenuItem();
         resetDefaultToolStripMenuItem = new ToolStripMenuItem();
         optionsToolStripMenuItem = new ToolStripMenuItem();
+        hotkeysToolStripMenuItem = new ToolStripMenuItem();
         aboutToolStripMenuItem = new ToolStripMenuItem();
         gitHubToolStripMenuItem = new ToolStripMenuItem();
         aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
-        hotkeysToolStripMenuItem = new ToolStripMenuItem();
+        btn_deleteAll = new Button();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_interval_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_sec).BeginInit();
@@ -634,6 +636,8 @@ partial class Main
         // 
         // tabPageMultiple
         // 
+        tabPageMultiple.Controls.Add(btn_deleteAll);
+        tabPageMultiple.Controls.Add(btn_record);
         tabPageMultiple.Controls.Add(btn_multiple_delete);
         tabPageMultiple.Controls.Add(btn_multiple_EditClick);
         tabPageMultiple.Controls.Add(dataGridView);
@@ -641,15 +645,26 @@ partial class Main
         tabPageMultiple.Location = new Point(4, 24);
         tabPageMultiple.Name = "tabPageMultiple";
         tabPageMultiple.Padding = new Padding(3);
-        tabPageMultiple.Size = new Size(774, 344);
+        tabPageMultiple.Size = new Size(710, 344);
         tabPageMultiple.TabIndex = 1;
         tabPageMultiple.Text = "Multiple";
         tabPageMultiple.UseVisualStyleBackColor = true;
         // 
+        // btn_record
+        // 
+        btn_record.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        btn_record.Location = new Point(614, 190);
+        btn_record.Name = "btn_record";
+        btn_record.Size = new Size(90, 40);
+        btn_record.TabIndex = 7;
+        btn_record.Text = "Record";
+        btn_record.UseVisualStyleBackColor = true;
+        btn_record.Click += btn_record_Click;
+        // 
         // btn_multiple_delete
         // 
         btn_multiple_delete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_multiple_delete.Location = new Point(650, 98);
+        btn_multiple_delete.Location = new Point(614, 98);
         btn_multiple_delete.Name = "btn_multiple_delete";
         btn_multiple_delete.Size = new Size(90, 40);
         btn_multiple_delete.TabIndex = 6;
@@ -660,7 +675,7 @@ partial class Main
         // btn_multiple_EditClick
         // 
         btn_multiple_EditClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_multiple_EditClick.Location = new Point(650, 52);
+        btn_multiple_EditClick.Location = new Point(614, 52);
         btn_multiple_EditClick.Name = "btn_multiple_EditClick";
         btn_multiple_EditClick.Size = new Size(90, 40);
         btn_multiple_EditClick.TabIndex = 5;
@@ -681,7 +696,7 @@ partial class Main
         dataGridView.Location = new Point(6, 6);
         dataGridView.Name = "dataGridView";
         dataGridView.ReadOnly = true;
-        dataGridView.Size = new Size(638, 346);
+        dataGridView.Size = new Size(602, 332);
         dataGridView.TabIndex = 4;
         // 
         // clickTypeDataGridViewTextBoxColumn
@@ -726,7 +741,7 @@ partial class Main
         // btn_multiple_addClick
         // 
         btn_multiple_addClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_multiple_addClick.Location = new Point(650, 6);
+        btn_multiple_addClick.Location = new Point(614, 6);
         btn_multiple_addClick.Name = "btn_multiple_addClick";
         btn_multiple_addClick.Size = new Size(90, 40);
         btn_multiple_addClick.TabIndex = 1;
@@ -792,6 +807,13 @@ partial class Main
         optionsToolStripMenuItem.Size = new Size(61, 20);
         optionsToolStripMenuItem.Text = "Options";
         // 
+        // hotkeysToolStripMenuItem
+        // 
+        hotkeysToolStripMenuItem.Name = "hotkeysToolStripMenuItem";
+        hotkeysToolStripMenuItem.Size = new Size(117, 22);
+        hotkeysToolStripMenuItem.Text = "Hotkeys";
+        hotkeysToolStripMenuItem.Click += hotkeysToolStripMenuItem_Click;
+        // 
         // aboutToolStripMenuItem
         // 
         aboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gitHubToolStripMenuItem, aboutOpenClickerToolStripMenuItem });
@@ -813,12 +835,16 @@ partial class Main
         aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
         aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
         // 
-        // hotkeysToolStripMenuItem
+        // btn_deleteAll
         // 
-        hotkeysToolStripMenuItem.Name = "hotkeysToolStripMenuItem";
-        hotkeysToolStripMenuItem.Size = new Size(180, 22);
-        hotkeysToolStripMenuItem.Text = "Hotkeys";
-        hotkeysToolStripMenuItem.Click += hotkeysToolStripMenuItem_Click;
+        btn_deleteAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        btn_deleteAll.Location = new Point(614, 144);
+        btn_deleteAll.Name = "btn_deleteAll";
+        btn_deleteAll.Size = new Size(90, 40);
+        btn_deleteAll.TabIndex = 8;
+        btn_deleteAll.Text = "Delete All";
+        btn_deleteAll.UseVisualStyleBackColor = true;
+        btn_deleteAll.Click += btn_deleteAll_Click;
         // 
         // Main
         // 
@@ -975,4 +1001,6 @@ partial class Main
     private Button btn_multiple_EditClick;
     private Button btn_multiple_delete;
     private ToolStripMenuItem hotkeysToolStripMenuItem;
+    private Button btn_record;
+    private Button btn_deleteAll;
 }

@@ -20,6 +20,7 @@ Features:
 - Hotkeys
     - Start, Stop, Toggle
     - Hotkey Settings
+- Click Recorder
 
 Dependencies:
 - .NET 8 (Core)
