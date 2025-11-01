@@ -151,7 +151,10 @@ public partial class Main : Form
         foreach (var click in clicks)
         {
             token.ThrowIfCancellationRequested();
-            Program.Click(click.ClickType, click.MouseButton, click.Position, click.ClickType == ClickTypes.Double);
+            if (click.ClickType == ClickTypes.Hold)
+                await Hold(token, click);
+            else
+                Program.Click(click.ClickType, click.MouseButton, click.Position, click.ClickType == ClickTypes.Double);
             await Task.Delay(click.Delay, token);
         }
     }
@@ -162,9 +165,16 @@ public partial class Main : Form
         pb_progress.Style = ProgressBarStyle.Marquee;
         var click = pattern.Clicks[0];
 
+        await Task.Delay(pattern.StartingDelay, token);
+        await Hold(token, click);
+
+        ResetUi();
+    }
+
+    private async Task Hold(CancellationToken token, Click click)
+    {
         try
         {
-            await Task.Delay(pattern.StartingDelay, token);
             Program.ToggleMouseButton(click.MouseButton, true);
             await Task.Delay(click.HoldingDuration, token);
         }
@@ -176,8 +186,6 @@ public partial class Main : Form
         {
             Program.ToggleMouseButton(click.MouseButton, false);
         }
-
-        ResetUi();
     }
 
     private void btn_stop_Click(object sender, EventArgs e)
