@@ -154,7 +154,7 @@ public partial class Main : Form
             if (click.ClickType == ClickTypes.Hold)
                 await Hold(token, click);
             else
-                Program.Click(click.ClickType, click.MouseButton, click.Position, click.ClickType == ClickTypes.Double);
+                Input.Click(click.ClickType, click.MouseButton, click.Position);
             await Task.Delay(click.Delay, token);
         }
     }
@@ -175,7 +175,7 @@ public partial class Main : Form
     {
         try
         {
-            Program.ToggleMouseButton(click.MouseButton, true);
+            Input.Hold(click.MouseButton);
             await Task.Delay(click.HoldingDuration, token);
         }
         catch (OperationCanceledException)
@@ -184,7 +184,7 @@ public partial class Main : Form
         }
         finally
         {
-            Program.ToggleMouseButton(click.MouseButton, false);
+            Input.Release(click.MouseButton);
         }
     }
 
