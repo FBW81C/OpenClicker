@@ -19,7 +19,7 @@ public partial class Main
 
         if (tabControl.SelectedIndex == 0)
         { // Single
-            var click = new Click
+            var click = new InputAction
             {
                 Delay = new TimeSpan(0,
                     (int)nup_interval_h.Value,

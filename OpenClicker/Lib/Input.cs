@@ -50,21 +50,21 @@ public static class Input
         ToggleMouseButton(button, false);
     }
 
-    //public static void KeyDown(ushort vk)
-    //{
-    //    SendKeyboard(vk, false);
-    //}
+    public static void KeyDown(ushort vk)
+    {
+        SendKeyboard(vk, false);
+    }
 
-    //public static void KeyUp(ushort vk)
-    //{
-    //    SendKeyboard(vk, true);
-    //}
+    public static void KeyUp(ushort vk)
+    {
+        SendKeyboard(vk, true);
+    }
 
-    //public static void KeyPress(ushort vk)
-    //{
-    //    KeyDown(vk);
-    //    KeyUp(vk);
-    //}
+    public static void KeyPress(ushort vk)
+    {
+        KeyDown(vk);
+        KeyUp(vk);
+    }
 
     /// <summary>
     /// Abosult mouse movement (Multi-Monitor)

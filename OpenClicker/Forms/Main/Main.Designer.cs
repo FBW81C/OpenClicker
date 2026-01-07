@@ -736,7 +736,7 @@ partial class Main
         // 
         // clickBindingSource
         // 
-        clickBindingSource.DataSource = typeof(Models.Click);
+        clickBindingSource.DataSource = typeof(Models.InputAction);
         // 
         // btn_multiple_addClick
         // 

@@ -13,20 +13,20 @@ namespace OpenClicker.Models;
 [JsonUnmappedMemberHandling(JsonUnmappedMemberHandling.Disallow)]
 public class ClickPattern
 {
-    private BindingList<Click> _clicks = [];
+    private BindingList<InputAction> _clicks = [];
 
-    public BindingList<Click> Clicks
+    public BindingList<InputAction> Clicks
     {
         get => _clicks;
         set
         {
-            if (value is BindingList<Click> bindingList)
+            if (value is BindingList<InputAction> bindingList)
             {
                 _clicks = bindingList;
             }
             else if (value != null)
             {
-                _clicks = new BindingList<Click>(value.ToList());
+                _clicks = new BindingList<InputAction>(value.ToList());
             }
             else
             {
