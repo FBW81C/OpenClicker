@@ -140,22 +140,52 @@ public partial class Main : Form
         }
     }
 
-    private async Task PlayPattern(List<Click> clicks, CancellationToken token)
+    private async Task PlayPattern(List<InputAction> actions, CancellationToken token)
     {
-        if (clicks == null || clicks.Count == 0)
+        if (actions == null || actions.Count == 0)
         {
             await Task.Delay(100, token); // prevents 100% CPU usage
             return;
         }
 
-        foreach (var click in clicks)
+        //foreach (var click in clicks)
+        //{
+        //    token.ThrowIfCancellationRequested();
+        //    if (click.ClickType == ClickTypes.Hold)
+        //        await Hold(token, click);
+        //    else
+        //        Input.Click(click.ClickType, click.MouseButton, click.Position);
+        //    await Task.Delay(click.Delay, token);
+        //}
+
+        foreach (var action in actions)
         {
-            token.ThrowIfCancellationRequested();
-            if (click.ClickType == ClickTypes.Hold)
-                await Hold(token, click);
-            else
-                Input.Click(click.ClickType, click.MouseButton, click.Position);
-            await Task.Delay(click.Delay, token);
+            if (action.Type == InputType.Mouse)
+            {
+                if (action.ClickType == ClickTypes.Hold)
+                {
+                    Input.Hold(action.MouseButton);
+                    await Task.Delay(action.HoldingDuration, token);
+                    Input.Release(action.MouseButton);
+
+                } else
+                    Input.Click(action.ClickType, action.MouseButton, action.Position);
+            }
+            else if (action.Type == InputType.Keyboard && action.Key.HasValue)
+            {
+                if (action.KeyDown.HasValue)
+                {
+                    if (action.KeyDown.Value)
+                        Input.KeyDown(action.Key.Value);
+                    else
+                        Input.KeyUp(action.Key.Value);
+                } 
+                else
+                    Input.KeyPress(action.Key.Value);    
+            }
+
+            if (action.Delay > TimeSpan.Zero)
+                await Task.Delay(action.Delay, token);
         }
     }
 
@@ -171,7 +201,7 @@ public partial class Main : Form
         ResetUi();
     }
 
-    private async Task Hold(CancellationToken token, Click click)
+    private async Task Hold(CancellationToken token, InputAction click)
     {
         try
         {
@@ -292,7 +322,7 @@ public partial class Main : Form
 
     private void btn_multiple_EditClick_Click(object sender, EventArgs e)
     {
-        if (clickBindingSource.Current is Click selected)
+        if (clickBindingSource.Current is InputAction selected)
         {
             var editor = new ClickEditorForm(selected);
             if (editor.ShowDialog() == DialogResult.OK)
@@ -304,7 +334,7 @@ public partial class Main : Form
 
     private void btn_multiple_delete_Click(object sender, EventArgs e)
     {
-        if (clickBindingSource.Current is Click selected)
+        if (clickBindingSource.Current is InputAction selected)
         {
             clickBindingSource.Remove(selected);
             dataGridView.Refresh();

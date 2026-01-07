@@ -13,9 +13,9 @@ using OpenClicker.Models;
 namespace OpenClicker.Forms.ClickEditor;
 public partial class ClickEditorForm : Form
 {
-    public Click Click { get; private set; }
+    public InputAction Click { get; private set; }
 
-    public ClickEditorForm(Click? existing = null)
+    public ClickEditorForm(InputAction? existing = null)
     {
         InitializeComponent();
         SetClickTypes();
@@ -49,7 +49,7 @@ public partial class ClickEditorForm : Form
         }
         else
         {
-            Click = new Click();
+            Click = new InputAction();
         }
     }
 
