@@ -103,6 +103,10 @@ public partial class Main : Form
         catch (OperationCanceledException)
         {
             // ignore on purpose
+        } 
+        finally
+        {
+            ResetUi();
         }
     }
 
@@ -123,20 +127,13 @@ public partial class Main : Form
 
         var clickCount = 0;
 
-        try
+        while (pattern.Repeat == null || clickCount < pattern.Repeat)
         {
-            while (pattern.Repeat == null || clickCount < pattern.Repeat)
-            {
-                token.ThrowIfCancellationRequested();
+            token.ThrowIfCancellationRequested();
 
-                await PlayPattern(pattern.Clicks.ToList(), token);
-                clickCount++;
-                if (pattern.Repeat != null) pb_progress.Value = clickCount;
-            }
-        }
-        finally
-        {
-            ResetUi();
+            await PlayPattern(pattern.Clicks.ToList(), token);
+            clickCount++;
+            if (pattern.Repeat != null) pb_progress.Value = clickCount;
         }
     }
 
@@ -148,28 +145,22 @@ public partial class Main : Form
             return;
         }
 
-        //foreach (var click in clicks)
-        //{
-        //    token.ThrowIfCancellationRequested();
-        //    if (click.ClickType == ClickTypes.Hold)
-        //        await Hold(token, click);
-        //    else
-        //        Input.Click(click.ClickType, click.MouseButton, click.Position);
-        //    await Task.Delay(click.Delay, token);
-        //}
-
         foreach (var action in actions)
         {
             if (action.Type == InputType.Mouse)
             {
-                if (action.ClickType == ClickTypes.Hold)
+                if (action.MouseButton.HasValue && action.ClickType.HasValue)
                 {
-                    Input.Hold(action.MouseButton);
-                    await Task.Delay(action.HoldingDuration, token);
-                    Input.Release(action.MouseButton);
+                    if (action.ClickType == ClickTypes.Hold && action.HoldingDuration.HasValue)
+                    {
+                        Input.Hold(action.MouseButton.Value);
+                        await Task.Delay(action.HoldingDuration.Value, token);
+                        Input.Release(action.MouseButton.Value);
 
-                } else
-                    Input.Click(action.ClickType, action.MouseButton, action.Position);
+                    }
+                    else
+                        Input.Click(action.ClickType.Value, action.MouseButton.Value, action.Position);
+                }
             }
             else if (action.Type == InputType.Keyboard && action.Key.HasValue)
             {
@@ -191,22 +182,27 @@ public partial class Main : Form
 
     private async Task StartHolding(CancellationToken token, ClickPattern pattern)
     {
+        // Integrity
+        var click = pattern.Clicks[0];
+
+        if (!click.MouseButton.HasValue || click.HoldingDuration.HasValue)
+        {
+            return;
+        }
+
         cb_clickType.Enabled = false;
         pb_progress.Style = ProgressBarStyle.Marquee;
-        var click = pattern.Clicks[0];
 
         await Task.Delay(pattern.StartingDelay, token);
         await Hold(token, click);
-
-        ResetUi();
     }
 
     private async Task Hold(CancellationToken token, InputAction click)
     {
         try
         {
-            Input.Hold(click.MouseButton);
-            await Task.Delay(click.HoldingDuration, token);
+            Input.Hold(click.MouseButton.Value);
+            await Task.Delay(click.HoldingDuration.Value, token);
         }
         catch (OperationCanceledException)
         {
@@ -214,7 +210,7 @@ public partial class Main : Form
         }
         finally
         {
-            Input.Release(click.MouseButton);
+            Input.Release(click.MouseButton.Value);
         }
     }
 
