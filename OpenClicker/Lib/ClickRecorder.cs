@@ -22,7 +22,7 @@ public class ClickRecorder : IDisposable
         // Keyboard
         _globalHook.KeyDown += GlobalHook_KeyDown;
         _globalHook.KeyUp += GlobalHook_KeyUp;
-        
+
         _stopwatch.Restart();
     }
     public List<InputAction> Stop()
@@ -114,3 +114,4 @@ public class ClickRecorder : IDisposable
 
         _actions.Add(action);
     }
+}

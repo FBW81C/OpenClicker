@@ -39,11 +39,17 @@ public partial class ClickEditorForm : Form
             nud_X.Value = existing.Position?.X ?? 0;
             nud_Y.Value = existing.Position?.Y ?? 0;
             // Duration
-            gb_duration.Enabled = existing.ClickType == ClickTypes.Hold;
-            nud_duration_h.Value = existing.HoldingDuration.Hours + existing.HoldingDuration.Days * 24;
-            nud_duration_min.Value = existing.HoldingDuration.Minutes;
-            nud_duration_sec.Value = existing.HoldingDuration.Seconds;
-            nud_duration_ms.Value = existing.HoldingDuration.Milliseconds;
+            if (existing.ClickType.HasValue)
+            {
+                gb_duration.Enabled = existing.ClickType.Value == ClickTypes.Hold;
+            }
+            if (existing.HoldingDuration.HasValue)
+            {
+                nud_duration_h.Value = existing.HoldingDuration.Value.Hours + existing.HoldingDuration.Value.Days * 24;
+                nud_duration_min.Value = existing.HoldingDuration.Value.Minutes;
+                nud_duration_sec.Value = existing.HoldingDuration.Value.Seconds;
+                nud_duration_ms.Value = existing.HoldingDuration.Value.Milliseconds;
+            }
 
             Click = existing;
         }

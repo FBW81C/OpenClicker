@@ -84,15 +84,19 @@ partial class Main
         tabControl = new TabControl();
         tabPageSingle = new TabPage();
         tabPageMultiple = new TabPage();
+        btn_deleteAll = new Button();
         btn_record = new Button();
         btn_multiple_delete = new Button();
         btn_multiple_EditClick = new Button();
         dataGridView = new DataGridView();
+        Type = new DataGridViewTextBoxColumn();
+        delayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        Position = new DataGridViewTextBoxColumn();
         clickTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
         mouseButtonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        delayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        xDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        yDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        HoldingDuration = new DataGridViewTextBoxColumn();
+        Key = new DataGridViewTextBoxColumn();
+        KeyDown = new DataGridViewTextBoxColumn();
         clickBindingSource = new BindingSource(components);
         btn_multiple_addClick = new Button();
         menuStrip1 = new MenuStrip();
@@ -107,7 +111,6 @@ partial class Main
         aboutToolStripMenuItem = new ToolStripMenuItem();
         gitHubToolStripMenuItem = new ToolStripMenuItem();
         aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
-        btn_deleteAll = new Button();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_interval_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_sec).BeginInit();
@@ -233,7 +236,7 @@ partial class Main
         gb_repeat.Controls.Add(rb_infinite);
         gb_repeat.Location = new Point(19, 404);
         gb_repeat.Name = "gb_repeat";
-        gb_repeat.Size = new Size(711, 97);
+        gb_repeat.Size = new Size(787, 97);
         gb_repeat.TabIndex = 1;
         gb_repeat.TabStop = false;
         gb_repeat.Text = "Click Repeat";
@@ -359,7 +362,7 @@ partial class Main
         gp_delay.Controls.Add(lbl_delay_h);
         gp_delay.Location = new Point(19, 507);
         gp_delay.Name = "gp_delay";
-        gp_delay.Size = new Size(711, 62);
+        gp_delay.Size = new Size(787, 62);
         gp_delay.TabIndex = 5;
         gp_delay.TabStop = false;
         gp_delay.Text = "Starting Delay";
@@ -438,7 +441,7 @@ partial class Main
         pb_progress.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         pb_progress.Location = new Point(153, 575);
         pb_progress.Name = "pb_progress";
-        pb_progress.Size = new Size(577, 25);
+        pb_progress.Size = new Size(653, 25);
         pb_progress.TabIndex = 6;
         // 
         // gp_duration
@@ -617,7 +620,7 @@ partial class Main
         tabControl.Location = new Point(12, 26);
         tabControl.Name = "tabControl";
         tabControl.SelectedIndex = 0;
-        tabControl.Size = new Size(718, 372);
+        tabControl.Size = new Size(794, 372);
         tabControl.TabIndex = 9;
         // 
         // tabPageSingle
@@ -645,15 +648,26 @@ partial class Main
         tabPageMultiple.Location = new Point(4, 24);
         tabPageMultiple.Name = "tabPageMultiple";
         tabPageMultiple.Padding = new Padding(3);
-        tabPageMultiple.Size = new Size(710, 344);
+        tabPageMultiple.Size = new Size(786, 344);
         tabPageMultiple.TabIndex = 1;
         tabPageMultiple.Text = "Multiple";
         tabPageMultiple.UseVisualStyleBackColor = true;
         // 
+        // btn_deleteAll
+        // 
+        btn_deleteAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        btn_deleteAll.Location = new Point(690, 144);
+        btn_deleteAll.Name = "btn_deleteAll";
+        btn_deleteAll.Size = new Size(90, 40);
+        btn_deleteAll.TabIndex = 8;
+        btn_deleteAll.Text = "Delete All";
+        btn_deleteAll.UseVisualStyleBackColor = true;
+        btn_deleteAll.Click += btn_deleteAll_Click;
+        // 
         // btn_record
         // 
         btn_record.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_record.Location = new Point(614, 190);
+        btn_record.Location = new Point(690, 190);
         btn_record.Name = "btn_record";
         btn_record.Size = new Size(90, 40);
         btn_record.TabIndex = 7;
@@ -664,7 +678,7 @@ partial class Main
         // btn_multiple_delete
         // 
         btn_multiple_delete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_multiple_delete.Location = new Point(614, 98);
+        btn_multiple_delete.Location = new Point(690, 98);
         btn_multiple_delete.Name = "btn_multiple_delete";
         btn_multiple_delete.Size = new Size(90, 40);
         btn_multiple_delete.TabIndex = 6;
@@ -675,7 +689,7 @@ partial class Main
         // btn_multiple_EditClick
         // 
         btn_multiple_EditClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_multiple_EditClick.Location = new Point(614, 52);
+        btn_multiple_EditClick.Location = new Point(690, 52);
         btn_multiple_EditClick.Name = "btn_multiple_EditClick";
         btn_multiple_EditClick.Size = new Size(90, 40);
         btn_multiple_EditClick.TabIndex = 5;
@@ -691,13 +705,34 @@ partial class Main
         dataGridView.AutoGenerateColumns = false;
         dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridView.Columns.AddRange(new DataGridViewColumn[] { clickTypeDataGridViewTextBoxColumn, mouseButtonDataGridViewTextBoxColumn, delayDataGridViewTextBoxColumn, xDataGridViewTextBoxColumn, yDataGridViewTextBoxColumn });
+        dataGridView.Columns.AddRange(new DataGridViewColumn[] { Type, delayDataGridViewTextBoxColumn, Position, clickTypeDataGridViewTextBoxColumn, mouseButtonDataGridViewTextBoxColumn, HoldingDuration, Key, KeyDown });
         dataGridView.DataSource = clickBindingSource;
         dataGridView.Location = new Point(6, 6);
         dataGridView.Name = "dataGridView";
         dataGridView.ReadOnly = true;
-        dataGridView.Size = new Size(602, 332);
+        dataGridView.Size = new Size(681, 332);
         dataGridView.TabIndex = 4;
+        // 
+        // Type
+        // 
+        Type.DataPropertyName = "Type";
+        Type.HeaderText = "Type";
+        Type.Name = "Type";
+        Type.ReadOnly = true;
+        // 
+        // delayDataGridViewTextBoxColumn
+        // 
+        delayDataGridViewTextBoxColumn.DataPropertyName = "Delay";
+        delayDataGridViewTextBoxColumn.HeaderText = "Delay";
+        delayDataGridViewTextBoxColumn.Name = "delayDataGridViewTextBoxColumn";
+        delayDataGridViewTextBoxColumn.ReadOnly = true;
+        // 
+        // Position
+        // 
+        Position.DataPropertyName = "Position";
+        Position.HeaderText = "Position";
+        Position.Name = "Position";
+        Position.ReadOnly = true;
         // 
         // clickTypeDataGridViewTextBoxColumn
         // 
@@ -713,26 +748,26 @@ partial class Main
         mouseButtonDataGridViewTextBoxColumn.Name = "mouseButtonDataGridViewTextBoxColumn";
         mouseButtonDataGridViewTextBoxColumn.ReadOnly = true;
         // 
-        // delayDataGridViewTextBoxColumn
+        // HoldingDuration
         // 
-        delayDataGridViewTextBoxColumn.DataPropertyName = "Delay";
-        delayDataGridViewTextBoxColumn.HeaderText = "Delay";
-        delayDataGridViewTextBoxColumn.Name = "delayDataGridViewTextBoxColumn";
-        delayDataGridViewTextBoxColumn.ReadOnly = true;
+        HoldingDuration.DataPropertyName = "HoldingDuration";
+        HoldingDuration.HeaderText = "HoldingDuration";
+        HoldingDuration.Name = "HoldingDuration";
+        HoldingDuration.ReadOnly = true;
         // 
-        // xDataGridViewTextBoxColumn
+        // Key
         // 
-        xDataGridViewTextBoxColumn.DataPropertyName = "X";
-        xDataGridViewTextBoxColumn.HeaderText = "X";
-        xDataGridViewTextBoxColumn.Name = "xDataGridViewTextBoxColumn";
-        xDataGridViewTextBoxColumn.ReadOnly = true;
+        Key.DataPropertyName = "Key";
+        Key.HeaderText = "Key";
+        Key.Name = "Key";
+        Key.ReadOnly = true;
         // 
-        // yDataGridViewTextBoxColumn
+        // KeyDown
         // 
-        yDataGridViewTextBoxColumn.DataPropertyName = "Y";
-        yDataGridViewTextBoxColumn.HeaderText = "Y";
-        yDataGridViewTextBoxColumn.Name = "yDataGridViewTextBoxColumn";
-        yDataGridViewTextBoxColumn.ReadOnly = true;
+        KeyDown.DataPropertyName = "KeyDown";
+        KeyDown.HeaderText = "KeyDown";
+        KeyDown.Name = "KeyDown";
+        KeyDown.ReadOnly = true;
         // 
         // clickBindingSource
         // 
@@ -741,7 +776,7 @@ partial class Main
         // btn_multiple_addClick
         // 
         btn_multiple_addClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_multiple_addClick.Location = new Point(614, 6);
+        btn_multiple_addClick.Location = new Point(690, 6);
         btn_multiple_addClick.Name = "btn_multiple_addClick";
         btn_multiple_addClick.Size = new Size(90, 40);
         btn_multiple_addClick.TabIndex = 1;
@@ -754,7 +789,7 @@ partial class Main
         menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, optionsToolStripMenuItem, aboutToolStripMenuItem });
         menuStrip1.Location = new Point(0, 0);
         menuStrip1.Name = "menuStrip1";
-        menuStrip1.Size = new Size(739, 24);
+        menuStrip1.Size = new Size(815, 24);
         menuStrip1.TabIndex = 10;
         menuStrip1.Text = "menuStrip";
         // 
@@ -835,22 +870,11 @@ partial class Main
         aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
         aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
         // 
-        // btn_deleteAll
-        // 
-        btn_deleteAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        btn_deleteAll.Location = new Point(614, 144);
-        btn_deleteAll.Name = "btn_deleteAll";
-        btn_deleteAll.Size = new Size(90, 40);
-        btn_deleteAll.TabIndex = 8;
-        btn_deleteAll.Text = "Delete All";
-        btn_deleteAll.UseVisualStyleBackColor = true;
-        btn_deleteAll.Click += btn_deleteAll_Click;
-        // 
         // Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(739, 616);
+        ClientSize = new Size(815, 616);
         Controls.Add(tabControl);
         Controls.Add(gp_delay);
         Controls.Add(gb_repeat);
@@ -993,14 +1017,17 @@ partial class Main
     private DataGridView dataGridView1;
     private DataGridView dataGridView;
     private BindingSource clickBindingSource;
-    private DataGridViewTextBoxColumn clickTypeDataGridViewTextBoxColumn;
-    private DataGridViewTextBoxColumn mouseButtonDataGridViewTextBoxColumn;
-    private DataGridViewTextBoxColumn delayDataGridViewTextBoxColumn;
-    private DataGridViewTextBoxColumn xDataGridViewTextBoxColumn;
-    private DataGridViewTextBoxColumn yDataGridViewTextBoxColumn;
     private Button btn_multiple_EditClick;
     private Button btn_multiple_delete;
     private ToolStripMenuItem hotkeysToolStripMenuItem;
     private Button btn_record;
     private Button btn_deleteAll;
+    private DataGridViewTextBoxColumn Type;
+    private DataGridViewTextBoxColumn delayDataGridViewTextBoxColumn;
+    private DataGridViewTextBoxColumn Position;
+    private DataGridViewTextBoxColumn clickTypeDataGridViewTextBoxColumn;
+    private DataGridViewTextBoxColumn mouseButtonDataGridViewTextBoxColumn;
+    private DataGridViewTextBoxColumn HoldingDuration;
+    private DataGridViewTextBoxColumn Key;
+    private DataGridViewTextBoxColumn KeyDown;
 }

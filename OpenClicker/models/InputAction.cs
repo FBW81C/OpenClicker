@@ -19,13 +19,13 @@ public class InputAction
 
     // Mouse
     public Point? Position { get; set; } = null; // null = at cursor position
-    public ClickTypes ClickType { get; set; }
-    public OCMouseButtons MouseButton { get; set; }
-    public TimeSpan HoldingDuration { get; set; }
+    public ClickTypes? ClickType { get; set; }
+    public OCMouseButtons? MouseButton { get; set; }
+    public TimeSpan? HoldingDuration { get; set; }
 
     // Keyboard
     public ushort? Key { get; set; } // Virtual-Key Code
-    public bool? KeyDown { get; set; } // null = Press
+    public bool? KeyDown { get; set; }
 
     // Only for ClickType = Holding
     // Timing
