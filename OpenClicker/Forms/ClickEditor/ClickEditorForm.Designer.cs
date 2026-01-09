@@ -63,6 +63,14 @@
             label3 = new Label();
             nud_duration_ms = new OpenClicker.CustomComponents.NumericUpDownNoScroll();
             label4 = new Label();
+            tabControl = new TabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
+            lbl_key = new Label();
+            tb_key = new TextBox();
+            gp_keyDown = new GroupBox();
+            rb_keyUp = new RadioButton();
+            rb_keyDown = new RadioButton();
             gp_clickPos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nud_Y).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nud_X).BeginInit();
@@ -79,12 +87,16 @@
             ((System.ComponentModel.ISupportInitialize)nud_duration_min).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nud_duration_sec).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nud_duration_ms).BeginInit();
+            tabControl.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            gp_keyDown.SuspendLayout();
             SuspendLayout();
             // 
             // btn_ok
             // 
             btn_ok.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btn_ok.Location = new Point(507, 402);
+            btn_ok.Location = new Point(530, 413);
             btn_ok.Name = "btn_ok";
             btn_ok.Size = new Size(75, 23);
             btn_ok.TabIndex = 0;
@@ -95,7 +107,7 @@
             // btn_cancel
             // 
             btn_cancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btn_cancel.Location = new Point(426, 402);
+            btn_cancel.Location = new Point(449, 413);
             btn_cancel.Name = "btn_cancel";
             btn_cancel.Size = new Size(75, 23);
             btn_cancel.TabIndex = 1;
@@ -111,7 +123,7 @@
             gp_clickPos.Controls.Add(lbl_clickingPos_X);
             gp_clickPos.Controls.Add(rb_XY);
             gp_clickPos.Controls.Add(rb_currentPos);
-            gp_clickPos.Location = new Point(15, 195);
+            gp_clickPos.Location = new Point(12, 109);
             gp_clickPos.Name = "gp_clickPos";
             gp_clickPos.Size = new Size(564, 86);
             gp_clickPos.TabIndex = 9;
@@ -276,7 +288,7 @@
             // gb_delay
             // 
             gb_delay.Controls.Add(flp_delay);
-            gb_delay.Location = new Point(12, 12);
+            gb_delay.Location = new Point(13, 13);
             gb_delay.Name = "gb_delay";
             gb_delay.Size = new Size(570, 74);
             gb_delay.TabIndex = 10;
@@ -289,7 +301,7 @@
             gp_options.Controls.Add(lbl_clickType);
             gp_options.Controls.Add(lbl_mouseButton);
             gp_options.Controls.Add(cb_mouseButton);
-            gp_options.Location = new Point(15, 92);
+            gp_options.Location = new Point(12, 6);
             gp_options.Name = "gp_options";
             gp_options.Size = new Size(564, 97);
             gp_options.TabIndex = 11;
@@ -335,7 +347,7 @@
             // gb_duration
             // 
             gb_duration.Controls.Add(flp_duration);
-            gb_duration.Location = new Point(15, 287);
+            gb_duration.Location = new Point(12, 201);
             gb_duration.Name = "gb_duration";
             gb_duration.Size = new Size(570, 74);
             gb_duration.TabIndex = 11;
@@ -434,24 +446,113 @@
             label4.TabIndex = 7;
             label4.Text = "ms";
             // 
+            // tabControl
+            // 
+            tabControl.Controls.Add(tabPage1);
+            tabControl.Controls.Add(tabPage2);
+            tabControl.Location = new Point(13, 93);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(596, 314);
+            tabControl.TabIndex = 12;
+            tabControl.SelectedIndexChanged += tabControl_SelectedIndexChanged;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(gb_duration);
+            tabPage1.Controls.Add(gp_options);
+            tabPage1.Controls.Add(gp_clickPos);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(588, 286);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Mouse";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(lbl_key);
+            tabPage2.Controls.Add(tb_key);
+            tabPage2.Controls.Add(gp_keyDown);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(588, 286);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Keyboard";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lbl_key
+            // 
+            lbl_key.AutoSize = true;
+            lbl_key.Location = new Point(12, 26);
+            lbl_key.Name = "lbl_key";
+            lbl_key.Size = new Size(26, 15);
+            lbl_key.TabIndex = 2;
+            lbl_key.Text = "Key";
+            // 
+            // tb_key
+            // 
+            tb_key.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_key.Location = new Point(44, 23);
+            tb_key.Name = "tb_key";
+            tb_key.PlaceholderText = "Press key";
+            tb_key.ReadOnly = true;
+            tb_key.Size = new Size(144, 23);
+            tb_key.TabIndex = 1;
+            tb_key.KeyDown += tb_key_KeyDown;
+            // 
+            // gp_keyDown
+            // 
+            gp_keyDown.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gp_keyDown.Controls.Add(rb_keyUp);
+            gp_keyDown.Controls.Add(rb_keyDown);
+            gp_keyDown.Location = new Point(6, 62);
+            gp_keyDown.Name = "gp_keyDown";
+            gp_keyDown.Size = new Size(576, 78);
+            gp_keyDown.TabIndex = 0;
+            gp_keyDown.TabStop = false;
+            gp_keyDown.Text = "Action";
+            // 
+            // rb_keyUp
+            // 
+            rb_keyUp.AutoSize = true;
+            rb_keyUp.Location = new Point(12, 47);
+            rb_keyUp.Name = "rb_keyUp";
+            rb_keyUp.Size = new Size(62, 19);
+            rb_keyUp.TabIndex = 1;
+            rb_keyUp.Text = "Key Up";
+            rb_keyUp.UseVisualStyleBackColor = true;
+            // 
+            // rb_keyDown
+            // 
+            rb_keyDown.AutoSize = true;
+            rb_keyDown.Checked = true;
+            rb_keyDown.Location = new Point(12, 22);
+            rb_keyDown.Name = "rb_keyDown";
+            rb_keyDown.Size = new Size(78, 19);
+            rb_keyDown.TabIndex = 0;
+            rb_keyDown.TabStop = true;
+            rb_keyDown.Text = "Key Down";
+            rb_keyDown.UseVisualStyleBackColor = true;
+            // 
             // ClickEditorForm
             // 
             AcceptButton = btn_ok;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btn_cancel;
-            ClientSize = new Size(593, 437);
-            Controls.Add(gb_duration);
-            Controls.Add(gp_options);
+            ClientSize = new Size(613, 448);
             Controls.Add(gb_delay);
-            Controls.Add(gp_clickPos);
+            Controls.Add(tabControl);
             Controls.Add(btn_cancel);
             Controls.Add(btn_ok);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
-            MaximumSize = new Size(609, 487);
+            MaximumSize = new Size(629, 487);
             MinimizeBox = false;
-            MinimumSize = new Size(609, 200);
+            MinimumSize = new Size(629, 487);
             Name = "ClickEditorForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "ClickEditorForm";
@@ -475,6 +576,12 @@
             ((System.ComponentModel.ISupportInitialize)nud_duration_min).EndInit();
             ((System.ComponentModel.ISupportInitialize)nud_duration_sec).EndInit();
             ((System.ComponentModel.ISupportInitialize)nud_duration_ms).EndInit();
+            tabControl.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            gp_keyDown.ResumeLayout(false);
+            gp_keyDown.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -515,5 +622,13 @@
         private Label label3;
         private CustomComponents.NumericUpDownNoScroll nud_duration_ms;
         private Label label4;
+        private TabControl tabControl;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private GroupBox gp_keyDown;
+        private TextBox tb_key;
+        private Label lbl_key;
+        private RadioButton rb_keyUp;
+        private RadioButton rb_keyDown;
     }
 }

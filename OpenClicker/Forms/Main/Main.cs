@@ -172,7 +172,7 @@ public partial class Main : Form
                         Input.KeyUp(action.Key.Value);
                 } 
                 else
-                    Input.KeyPress(action.Key.Value);    
+                    Input.KeyPress(action.Key.Value);
             }
 
             if (action.Delay > TimeSpan.Zero)

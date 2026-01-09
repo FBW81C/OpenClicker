@@ -25,6 +25,7 @@ public class InputAction
 
     // Keyboard
     public ushort? Key { get; set; } // Virtual-Key Code
+    public int? Modifiers { get; set; }
     public bool? KeyDown { get; set; }
 
     // Only for ClickType = Holding
