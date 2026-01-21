@@ -1,26 +1,29 @@
 Welcome to the OpenClicker Installer!
 
-OpenClicker is a simple free and open-source Open Clicker for Windows by FBW81C.
+OpenClicker is a simple free and open-source Open Clicker and Key Presser for Windows by FBW81C.
 
 GitHub: https://github.com/FBW81C/OpenClicker
 YouTube: https://www.youtube.com/@FBW81C
 
 Features:
-- Click Interval (Hours, Minutes, Seconds, Milliseconds)
-- Click Repeat (Infinite, Amount)
+- Action Interval (Hours, Minutes, Seconds, Milliseconds)
+- Action Repeat (Infinite, Amount)
 - Click Options
     - Mouse Button (Left, Right, Middle)
     - Click Type (Single, Double, Hold)
+    - Clicking Position (Current, XY)
+- Key Options
+    - Key
+    - Up / Down
 - Starting Delay (Hours, Minutes, Seconds, Milliseconds)
 - Duration (Only for Click Type = Holding)
-- Clicking Position (Current, XY)
 - Pattern
-    - Single
-    - Multiple (Multiple clicks in a row)
+    - Single (only Mouse)
+    - Multiple (Multiple actions in a row)
 - Hotkeys
     - Start, Stop, Toggle
     - Hotkey Settings
-- Click Recorder
+- Action Recorder
 
 Dependencies:
 - .NET 8 (Core)
