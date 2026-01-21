@@ -4,6 +4,10 @@
 
 ![Logo OpenClicker](https://github.com/FBW81C/OpenClicker/blob/main/assets/Logo.png)
 
+[![Release Version Badge](https://img.shields.io/github/v/release/FBW81C/OpenClicker)](https://github.com/FBW81C/OpenClicker/releases)
+[![Downloads@latest](https://img.shields.io/github/downloads/FBW81C/OpenClicker/latest/total)](https://github.com/FBW81C/OpenClicker/releases/latest)
+[![Total Downloads](https://img.shields.io/github/downloads/FBW81C/OpenClicker/total)](https://github.com/FBW81C/OpenClicker/releases)
+
 ## Overview
 
 OpenClicker allows automated execution of mouse clicks and key presses with fully configurable intervals, repetitions, delays, and action patterns.  
