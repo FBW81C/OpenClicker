@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -56,7 +57,16 @@ public partial class ClickEditorForm : Form
             }
             else
             {
-                rb_keyDown.Checked = existing.KeyDown ?? false;
+                if (existing.KeyDown.HasValue && existing.KeyDown.Value)
+                {
+                    rb_keyDown.Checked = true;
+                    rb_keyUp.Checked = false;
+                } 
+                else
+                {
+                    rb_keyUp.Checked = true;
+                    rb_keyDown.Checked = false;
+                }
                 // TODO: Load pressed key
 
                 tabControl.SelectedIndex = 1;
@@ -182,17 +192,36 @@ public partial class ClickEditorForm : Form
         // Delete Mouse or Keyboard if tab changes
         if (tabControl.SelectedIndex == 0)
         { // Delete keyboard
-            // TODO: Reset UI
+            ResetKeyboardUI();
             Click.Key = null;
             Click.Modifiers = null;
             Click.KeyDown = null;
         } else
         { // Delete mouse
-            // TODO: Reset UI
+            ResetClickUI();
             Click.Position = null;
             Click.ClickType = null;
             Click.MouseButton = null;
             Click.HoldingDuration = null;
         }
+    }
+
+    private void ResetClickUI()
+    {
+        cb_mouseButton.SelectedIndex = 0;
+        cb_clickType.SelectedIndex = 0;
+        rb_currentPos.Checked = true;
+        rb_XY.Checked = false;
+        nud_duration_h.Value = 0;
+        nud_duration_min.Value = 0;
+        nud_duration_sec.Value = 0;
+        nud_duration_ms.Value = 0;
+        gb_duration.Enabled = false;
+    }
+    private void ResetKeyboardUI()
+    {
+        rb_keyDown.Checked = true;
+        rb_keyUp.Checked = false;
+        tb_key.Text = "";
     }
 }
