@@ -35,27 +35,10 @@ public class InputAction
 
 
     // Helper Properties
-    public int? X
-    {
-        get => Position?.X;
-        set
-        {
-            if (value.HasValue)
-                Position = new Point(value.Value, Position?.Y ?? 0);
-            else
-                Position = null;
-        }
-    }
-
-    public int? Y
-    {
-        get => Position?.Y;
-        set
-        {
-            if (value.HasValue)
-                Position = new Point(Position?.X ?? 0, value.Value);
-            else
-                Position = null;
-        }
-    }
+    public string DisplayPosition =>
+        Type == InputType.Mouse ? (Position.HasValue ? $"{Position.Value.X}; {Position.Value.Y}" : "Current") : "";
+    public string DisplayKey => 
+        Key.HasValue ? ((Keys)Key.Value).ToString() : "";
+    public string DisplayKeyDown => 
+        KeyDown.HasValue ? (KeyDown.Value ? "Down" : "Up") : "";
 }

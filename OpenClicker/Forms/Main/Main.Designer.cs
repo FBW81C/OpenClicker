@@ -89,14 +89,6 @@ partial class Main
         btn_multiple_delete = new Button();
         btn_multiple_EditClick = new Button();
         dataGridView = new DataGridView();
-        Type = new DataGridViewTextBoxColumn();
-        delayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        Position = new DataGridViewTextBoxColumn();
-        clickTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        mouseButtonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        HoldingDuration = new DataGridViewTextBoxColumn();
-        Key = new DataGridViewTextBoxColumn();
-        KeyDown = new DataGridViewTextBoxColumn();
         clickBindingSource = new BindingSource(components);
         btn_multiple_addClick = new Button();
         menuStrip1 = new MenuStrip();
@@ -111,6 +103,14 @@ partial class Main
         aboutToolStripMenuItem = new ToolStripMenuItem();
         gitHubToolStripMenuItem = new ToolStripMenuItem();
         aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
+        Type = new DataGridViewTextBoxColumn();
+        delayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        DisplayPosition = new DataGridViewTextBoxColumn();
+        clickTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        mouseButtonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        HoldingDuration = new DataGridViewTextBoxColumn();
+        DisplayKey = new DataGridViewTextBoxColumn();
+        DisplayKeyDown = new DataGridViewTextBoxColumn();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_interval_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_sec).BeginInit();
@@ -705,69 +705,13 @@ partial class Main
         dataGridView.AutoGenerateColumns = false;
         dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridView.Columns.AddRange(new DataGridViewColumn[] { Type, delayDataGridViewTextBoxColumn, Position, clickTypeDataGridViewTextBoxColumn, mouseButtonDataGridViewTextBoxColumn, HoldingDuration, Key, KeyDown });
+        dataGridView.Columns.AddRange(new DataGridViewColumn[] { Type, delayDataGridViewTextBoxColumn, DisplayPosition, clickTypeDataGridViewTextBoxColumn, mouseButtonDataGridViewTextBoxColumn, HoldingDuration, DisplayKey, DisplayKeyDown });
         dataGridView.DataSource = clickBindingSource;
         dataGridView.Location = new Point(6, 6);
         dataGridView.Name = "dataGridView";
         dataGridView.ReadOnly = true;
         dataGridView.Size = new Size(681, 332);
         dataGridView.TabIndex = 4;
-        // 
-        // Type
-        // 
-        Type.DataPropertyName = "Type";
-        Type.HeaderText = "Type";
-        Type.Name = "Type";
-        Type.ReadOnly = true;
-        // 
-        // delayDataGridViewTextBoxColumn
-        // 
-        delayDataGridViewTextBoxColumn.DataPropertyName = "Delay";
-        delayDataGridViewTextBoxColumn.HeaderText = "Delay";
-        delayDataGridViewTextBoxColumn.Name = "delayDataGridViewTextBoxColumn";
-        delayDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // Position
-        // 
-        Position.DataPropertyName = "Position";
-        Position.HeaderText = "Position";
-        Position.Name = "Position";
-        Position.ReadOnly = true;
-        // 
-        // clickTypeDataGridViewTextBoxColumn
-        // 
-        clickTypeDataGridViewTextBoxColumn.DataPropertyName = "ClickType";
-        clickTypeDataGridViewTextBoxColumn.HeaderText = "ClickType";
-        clickTypeDataGridViewTextBoxColumn.Name = "clickTypeDataGridViewTextBoxColumn";
-        clickTypeDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // mouseButtonDataGridViewTextBoxColumn
-        // 
-        mouseButtonDataGridViewTextBoxColumn.DataPropertyName = "MouseButton";
-        mouseButtonDataGridViewTextBoxColumn.HeaderText = "MouseButton";
-        mouseButtonDataGridViewTextBoxColumn.Name = "mouseButtonDataGridViewTextBoxColumn";
-        mouseButtonDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // HoldingDuration
-        // 
-        HoldingDuration.DataPropertyName = "HoldingDuration";
-        HoldingDuration.HeaderText = "HoldingDuration";
-        HoldingDuration.Name = "HoldingDuration";
-        HoldingDuration.ReadOnly = true;
-        // 
-        // Key
-        // 
-        Key.DataPropertyName = "Key";
-        Key.HeaderText = "Key";
-        Key.Name = "Key";
-        Key.ReadOnly = true;
-        // 
-        // KeyDown
-        // 
-        KeyDown.DataPropertyName = "KeyDown";
-        KeyDown.HeaderText = "KeyDown";
-        KeyDown.Name = "KeyDown";
-        KeyDown.ReadOnly = true;
         // 
         // clickBindingSource
         // 
@@ -869,6 +813,62 @@ partial class Main
         aboutOpenClickerToolStripMenuItem.Size = new Size(175, 22);
         aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
         aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
+        // 
+        // Type
+        // 
+        Type.DataPropertyName = "Type";
+        Type.HeaderText = "Type";
+        Type.Name = "Type";
+        Type.ReadOnly = true;
+        // 
+        // delayDataGridViewTextBoxColumn
+        // 
+        delayDataGridViewTextBoxColumn.DataPropertyName = "Delay";
+        delayDataGridViewTextBoxColumn.HeaderText = "Delay";
+        delayDataGridViewTextBoxColumn.Name = "delayDataGridViewTextBoxColumn";
+        delayDataGridViewTextBoxColumn.ReadOnly = true;
+        // 
+        // DisplayPosition
+        // 
+        DisplayPosition.DataPropertyName = "DisplayPosition";
+        DisplayPosition.HeaderText = "Position";
+        DisplayPosition.Name = "DisplayPosition";
+        DisplayPosition.ReadOnly = true;
+        // 
+        // clickTypeDataGridViewTextBoxColumn
+        // 
+        clickTypeDataGridViewTextBoxColumn.DataPropertyName = "ClickType";
+        clickTypeDataGridViewTextBoxColumn.HeaderText = "ClickType";
+        clickTypeDataGridViewTextBoxColumn.Name = "clickTypeDataGridViewTextBoxColumn";
+        clickTypeDataGridViewTextBoxColumn.ReadOnly = true;
+        // 
+        // mouseButtonDataGridViewTextBoxColumn
+        // 
+        mouseButtonDataGridViewTextBoxColumn.DataPropertyName = "MouseButton";
+        mouseButtonDataGridViewTextBoxColumn.HeaderText = "MouseButton";
+        mouseButtonDataGridViewTextBoxColumn.Name = "mouseButtonDataGridViewTextBoxColumn";
+        mouseButtonDataGridViewTextBoxColumn.ReadOnly = true;
+        // 
+        // HoldingDuration
+        // 
+        HoldingDuration.DataPropertyName = "HoldingDuration";
+        HoldingDuration.HeaderText = "HoldingDuration";
+        HoldingDuration.Name = "HoldingDuration";
+        HoldingDuration.ReadOnly = true;
+        // 
+        // DisplayKey
+        // 
+        DisplayKey.DataPropertyName = "DisplayKey";
+        DisplayKey.HeaderText = "Key";
+        DisplayKey.Name = "DisplayKey";
+        DisplayKey.ReadOnly = true;
+        // 
+        // DisplayKeyDown
+        // 
+        DisplayKeyDown.DataPropertyName = "DisplayKeyDown";
+        DisplayKeyDown.HeaderText = "Up/Down";
+        DisplayKeyDown.Name = "DisplayKeyDown";
+        DisplayKeyDown.ReadOnly = true;
         // 
         // Main
         // 
@@ -1024,10 +1024,10 @@ partial class Main
     private Button btn_deleteAll;
     private DataGridViewTextBoxColumn Type;
     private DataGridViewTextBoxColumn delayDataGridViewTextBoxColumn;
-    private DataGridViewTextBoxColumn Position;
+    private DataGridViewTextBoxColumn DisplayPosition;
     private DataGridViewTextBoxColumn clickTypeDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn mouseButtonDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn HoldingDuration;
-    private DataGridViewTextBoxColumn Key;
-    private DataGridViewTextBoxColumn KeyDown;
+    private DataGridViewTextBoxColumn DisplayKey;
+    private DataGridViewTextBoxColumn DisplayKeyDown;
 }
