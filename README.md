@@ -2,6 +2,8 @@
 
 **OpenClicker** is a free and open-source auto clicker and key presser for Windows.  
 
+![Logo OpenClicker](https://github.com/FBW81C/OpenClicker/blob/main/assets/Logo.png)
+
 ## Overview
 
 OpenClicker allows automated execution of mouse clicks and key presses with fully configurable intervals, repetitions, delays, and action patterns.  
