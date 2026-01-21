@@ -1,18 +1,19 @@
-﻿using System;
+﻿using OpenClicker.Forms.Hotkeys;
+using OpenClicker.Lib;
+using OpenClicker.models;
+using OpenClicker.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OpenClicker.Forms.Hotkeys;
-using OpenClicker.Lib;
-using OpenClicker.models;
-using OpenClicker.Models;
 
 namespace OpenClicker.Forms.ClickEditor;
 public partial class ClickEditorForm : Form
@@ -67,7 +68,9 @@ public partial class ClickEditorForm : Form
                     rb_keyUp.Checked = true;
                     rb_keyDown.Checked = false;
                 }
-                // TODO: Load pressed key
+                // TODO: Load pressed key as text
+                tb_key.Text = (existing.Key.HasValue ? (Keys)existing.Key.Value : Keys.None).ToString();
+
 
                 tabControl.SelectedIndex = 1;
             }
