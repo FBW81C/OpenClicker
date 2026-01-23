@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using OpenClicker.Exceptions;
 using OpenClicker.Models;
 
-namespace OpenClicker.Lib;
+namespace OpenClicker.Lib.File;
 public static class FileReader
 {
     public static ClickPattern GetProfile(string? filepath = null)
@@ -19,7 +19,7 @@ public static class FileReader
 
         try
         {
-            Clicker.AssertValidClickPattern(pattern);
+            ClickPattern.AssertValidClickPattern(pattern);
             return pattern;
         }
         catch (InvalidClickPatternException ex)

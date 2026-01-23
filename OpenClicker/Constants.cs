@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenClicker.models;
-using OpenClicker.Models;
+using OpenClicker.models.Hotkeys;
 
 namespace OpenClicker;
 public static class Constants

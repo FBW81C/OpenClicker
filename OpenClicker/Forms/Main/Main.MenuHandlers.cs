@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using OpenClicker.Exceptions;
 using OpenClicker.Forms.Hotkeys;
-using OpenClicker.Lib;
+using OpenClicker.Lib.File;
 
 namespace OpenClicker.Forms.Main;
 public partial class Main

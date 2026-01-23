@@ -1,6 +1,5 @@
 ﻿using OpenClicker.Exceptions;
-using OpenClicker.models;
-using OpenClicker.Models;
+using OpenClicker.models.Hotkeys;
 using System;
 using System.Collections.Generic;
 using System.Linq;

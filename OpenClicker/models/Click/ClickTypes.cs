@@ -1,4 +1,4 @@
-﻿namespace OpenClicker.Models;
+﻿namespace OpenClicker.models.Click;
 
 public enum ClickTypes
 {

@@ -2,6 +2,8 @@ using OpenClicker.Exceptions;
 using OpenClicker.Forms.ClickEditor;
 using OpenClicker.Forms.Hotkeys;
 using OpenClicker.Lib;
+using OpenClicker.Lib.NativeAPI;
+using OpenClicker.models.Click;
 using OpenClicker.Models;
 
 namespace OpenClicker.Forms.Main;
@@ -14,7 +16,7 @@ public partial class Main : Form
     private readonly ClickPattern _pattern = new();
     private bool LoadedFromFile = false;
     private HotkeyManager _hotkeyManager;
-    private ClickRecorder _clickRecorder;
+    private ActionRecorder _clickRecorder;
 
     public Main(HotkeyManager hotkeyManager, string? filePath = null)
     {
@@ -352,7 +354,7 @@ public partial class Main : Form
             // start recording
             btn_record.Text = "Stop Recording";
             btn_start.Enabled = false;
-            _clickRecorder = new ClickRecorder();
+            _clickRecorder = new ActionRecorder();
             _clickRecorder.Start();
         }
         else

@@ -1,4 +1,5 @@
 ﻿using OpenClicker.Lib;
+using OpenClicker.models.Click;
 using OpenClicker.Models;
 
 namespace OpenClicker.Forms.Main;
@@ -32,21 +33,21 @@ public partial class Main
             };
             pattern.Clicks.Add(click);
 
-            Clicker.AssertValidClickPattern(pattern);
+            ClickPattern.AssertValidClickPattern(pattern);
             return pattern;
         }
         else
         { // Multiple
             pattern.Clicks = _pattern.Clicks;
 
-            Clicker.AssertValidClickPattern(pattern);
+            ClickPattern.AssertValidClickPattern(pattern);
             return pattern;
         }
     }
 
     public void PraseClicksToUI(ClickPattern pattern)
     {
-        Clicker.AssertValidClickPattern(pattern);
+        ClickPattern.AssertValidClickPattern(pattern);
 
         // Click Repeat
         rb_infinite.Checked = pattern.Repeat == null;

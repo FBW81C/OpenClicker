@@ -4,5 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenClicker.models;
-public record HotkeyConfig(Keys Key, int Modifier);
+namespace OpenClicker.models.Hotkeys;
+public enum HotKeys
+{
+    Start = 0,
+    Stop = 1,
+    Toggle = 2,
+}
