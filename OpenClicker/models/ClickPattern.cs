@@ -53,16 +53,19 @@ public class ClickPattern
 
         foreach (var click in pattern.Clicks)
         {
-            if (click.Delay <= TimeSpan.Zero)
+            if (click.Type == InputType.Mouse)
             {
-                throw new InvalidClickPatternException("All intervals must be greater 0");
-            }
-
-            if (click.ClickType == ClickTypes.Hold)
-            {
-                if (click.HoldingDuration <= TimeSpan.Zero)
+                if (click.Delay <= TimeSpan.Zero && click.ClickType != ClickTypes.Hold)
                 {
-                    throw new InvalidClickPatternException("Holding duration must be greater 0");
+                    throw new InvalidClickPatternException("All intervals must be greater 0");
+                }
+
+                if (click.ClickType == ClickTypes.Hold)
+                {
+                    if (click.HoldingDuration <= TimeSpan.Zero)
+                    {
+                        throw new InvalidClickPatternException("Holding duration must be greater 0");
+                    }
                 }
             }
         }

@@ -33,7 +33,7 @@ public partial class Main : Form
         nup_duration_h.Enabled = false;
         nup_duration_min.Enabled = false;
         nup_duration_sec.Enabled = false;
-        nup_duration_mili.Enabled = false;
+        nup_duration_ms.Enabled = false;
 
         rb_infinite.Checked = true;
         rb_currentPos.Checked = true;
@@ -187,8 +187,11 @@ public partial class Main : Form
         // Integrity
         var click = pattern.Clicks[0];
 
-        if (!click.MouseButton.HasValue || click.HoldingDuration.HasValue)
+        if (!click.MouseButton.HasValue || 
+            !click.HoldingDuration.HasValue ||
+            click.HoldingDuration.Value <= TimeSpan.Zero)
         {
+            MessageBox.Show("here");
             return;
         }
 
@@ -281,7 +284,7 @@ public partial class Main : Form
         nup_duration_h.Enabled = enable;
         nup_duration_min.Enabled = enable;
         nup_duration_sec.Enabled = enable;
-        nup_duration_mili.Enabled = enable;
+        nup_duration_ms.Enabled = enable;
     }
 
     private void EnableClickingPostition(bool enable)
