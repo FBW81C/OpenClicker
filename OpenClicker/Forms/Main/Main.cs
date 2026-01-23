@@ -79,7 +79,7 @@ public partial class Main : Form
             }
             catch (InvalidClickPatternException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Invalid Pattern", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 ResetUi();
                 return;
             }

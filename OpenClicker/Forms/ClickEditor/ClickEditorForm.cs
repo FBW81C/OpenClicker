@@ -139,6 +139,12 @@ public partial class ClickEditorForm : Form
                                    (int)nud_delay_sec.Value,
                                    (int)nud_delay_ms.Value);
 
+        if (Click.Delay == TimeSpan.Zero)
+        {
+            MessageBox.Show("Interval must be longer than 0 ms", "Invalid Interval", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            return;
+        }
+
         DialogResult = DialogResult.OK;
     }
 
