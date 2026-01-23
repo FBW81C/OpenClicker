@@ -191,7 +191,6 @@ public partial class Main : Form
             !click.HoldingDuration.HasValue ||
             click.HoldingDuration.Value <= TimeSpan.Zero)
         {
-            MessageBox.Show("here");
             return;
         }
 
