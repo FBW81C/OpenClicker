@@ -68,7 +68,7 @@ partial class Main
         nup_duration_sec = new NumericUpDownNoScroll();
         nup_duration_min = new NumericUpDownNoScroll();
         nup_duration_h = new NumericUpDownNoScroll();
-        nup_duration_mili = new NumericUpDownNoScroll();
+        nup_duration_ms = new NumericUpDownNoScroll();
         label2 = new Label();
         label3 = new Label();
         label4 = new Label();
@@ -89,6 +89,14 @@ partial class Main
         btn_multiple_delete = new Button();
         btn_multiple_EditClick = new Button();
         dataGridView = new DataGridView();
+        Type = new DataGridViewTextBoxColumn();
+        delayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        DisplayPosition = new DataGridViewTextBoxColumn();
+        clickTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        mouseButtonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+        HoldingDuration = new DataGridViewTextBoxColumn();
+        DisplayKey = new DataGridViewTextBoxColumn();
+        DisplayKeyDown = new DataGridViewTextBoxColumn();
         clickBindingSource = new BindingSource(components);
         btn_multiple_addClick = new Button();
         menuStrip1 = new MenuStrip();
@@ -103,14 +111,6 @@ partial class Main
         aboutToolStripMenuItem = new ToolStripMenuItem();
         gitHubToolStripMenuItem = new ToolStripMenuItem();
         aboutOpenClickerToolStripMenuItem = new ToolStripMenuItem();
-        Type = new DataGridViewTextBoxColumn();
-        delayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        DisplayPosition = new DataGridViewTextBoxColumn();
-        clickTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        mouseButtonDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-        HoldingDuration = new DataGridViewTextBoxColumn();
-        DisplayKey = new DataGridViewTextBoxColumn();
-        DisplayKeyDown = new DataGridViewTextBoxColumn();
         gp_interval.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_interval_h).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_interval_sec).BeginInit();
@@ -128,7 +128,7 @@ partial class Main
         ((System.ComponentModel.ISupportInitialize)nup_duration_sec).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_min).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_h).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)nup_duration_mili).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)nup_duration_ms).BeginInit();
         gp_clickPos.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)nup_clickingPos_Y).BeginInit();
         ((System.ComponentModel.ISupportInitialize)nup_clickingPos_X).BeginInit();
@@ -450,7 +450,7 @@ partial class Main
         gp_duration.Controls.Add(nup_duration_sec);
         gp_duration.Controls.Add(nup_duration_min);
         gp_duration.Controls.Add(nup_duration_h);
-        gp_duration.Controls.Add(nup_duration_mili);
+        gp_duration.Controls.Add(nup_duration_ms);
         gp_duration.Controls.Add(label2);
         gp_duration.Controls.Add(label3);
         gp_duration.Controls.Add(label4);
@@ -489,14 +489,14 @@ partial class Main
         nup_duration_h.TabIndex = 9;
         nup_duration_h.KeyPress += nup_KeyPress;
         // 
-        // nup_duration_mili
+        // nup_duration_ms
         // 
-        nup_duration_mili.Location = new Point(494, 26);
-        nup_duration_mili.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-        nup_duration_mili.Name = "nup_duration_mili";
-        nup_duration_mili.Size = new Size(100, 23);
-        nup_duration_mili.TabIndex = 8;
-        nup_duration_mili.KeyPress += nup_KeyPress;
+        nup_duration_ms.Location = new Point(494, 26);
+        nup_duration_ms.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+        nup_duration_ms.Name = "nup_duration_ms";
+        nup_duration_ms.Size = new Size(100, 23);
+        nup_duration_ms.TabIndex = 8;
+        nup_duration_ms.KeyPress += nup_KeyPress;
         // 
         // label2
         // 
@@ -713,6 +713,62 @@ partial class Main
         dataGridView.Size = new Size(681, 332);
         dataGridView.TabIndex = 4;
         // 
+        // Type
+        // 
+        Type.DataPropertyName = "Type";
+        Type.HeaderText = "Type";
+        Type.Name = "Type";
+        Type.ReadOnly = true;
+        // 
+        // delayDataGridViewTextBoxColumn
+        // 
+        delayDataGridViewTextBoxColumn.DataPropertyName = "Delay";
+        delayDataGridViewTextBoxColumn.HeaderText = "Delay";
+        delayDataGridViewTextBoxColumn.Name = "delayDataGridViewTextBoxColumn";
+        delayDataGridViewTextBoxColumn.ReadOnly = true;
+        // 
+        // DisplayPosition
+        // 
+        DisplayPosition.DataPropertyName = "DisplayPosition";
+        DisplayPosition.HeaderText = "Position";
+        DisplayPosition.Name = "DisplayPosition";
+        DisplayPosition.ReadOnly = true;
+        // 
+        // clickTypeDataGridViewTextBoxColumn
+        // 
+        clickTypeDataGridViewTextBoxColumn.DataPropertyName = "ClickType";
+        clickTypeDataGridViewTextBoxColumn.HeaderText = "ClickType";
+        clickTypeDataGridViewTextBoxColumn.Name = "clickTypeDataGridViewTextBoxColumn";
+        clickTypeDataGridViewTextBoxColumn.ReadOnly = true;
+        // 
+        // mouseButtonDataGridViewTextBoxColumn
+        // 
+        mouseButtonDataGridViewTextBoxColumn.DataPropertyName = "MouseButton";
+        mouseButtonDataGridViewTextBoxColumn.HeaderText = "MouseButton";
+        mouseButtonDataGridViewTextBoxColumn.Name = "mouseButtonDataGridViewTextBoxColumn";
+        mouseButtonDataGridViewTextBoxColumn.ReadOnly = true;
+        // 
+        // HoldingDuration
+        // 
+        HoldingDuration.DataPropertyName = "HoldingDuration";
+        HoldingDuration.HeaderText = "HoldingDuration";
+        HoldingDuration.Name = "HoldingDuration";
+        HoldingDuration.ReadOnly = true;
+        // 
+        // DisplayKey
+        // 
+        DisplayKey.DataPropertyName = "DisplayKey";
+        DisplayKey.HeaderText = "Key";
+        DisplayKey.Name = "DisplayKey";
+        DisplayKey.ReadOnly = true;
+        // 
+        // DisplayKeyDown
+        // 
+        DisplayKeyDown.DataPropertyName = "DisplayKeyDown";
+        DisplayKeyDown.HeaderText = "Up/Down";
+        DisplayKeyDown.Name = "DisplayKeyDown";
+        DisplayKeyDown.ReadOnly = true;
+        // 
         // clickBindingSource
         // 
         clickBindingSource.DataSource = typeof(Models.InputAction);
@@ -814,62 +870,6 @@ partial class Main
         aboutOpenClickerToolStripMenuItem.Text = "About OpenClicker";
         aboutOpenClickerToolStripMenuItem.Click += aboutOpenClickerToolStripMenuItem_Click;
         // 
-        // Type
-        // 
-        Type.DataPropertyName = "Type";
-        Type.HeaderText = "Type";
-        Type.Name = "Type";
-        Type.ReadOnly = true;
-        // 
-        // delayDataGridViewTextBoxColumn
-        // 
-        delayDataGridViewTextBoxColumn.DataPropertyName = "Delay";
-        delayDataGridViewTextBoxColumn.HeaderText = "Delay";
-        delayDataGridViewTextBoxColumn.Name = "delayDataGridViewTextBoxColumn";
-        delayDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // DisplayPosition
-        // 
-        DisplayPosition.DataPropertyName = "DisplayPosition";
-        DisplayPosition.HeaderText = "Position";
-        DisplayPosition.Name = "DisplayPosition";
-        DisplayPosition.ReadOnly = true;
-        // 
-        // clickTypeDataGridViewTextBoxColumn
-        // 
-        clickTypeDataGridViewTextBoxColumn.DataPropertyName = "ClickType";
-        clickTypeDataGridViewTextBoxColumn.HeaderText = "ClickType";
-        clickTypeDataGridViewTextBoxColumn.Name = "clickTypeDataGridViewTextBoxColumn";
-        clickTypeDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // mouseButtonDataGridViewTextBoxColumn
-        // 
-        mouseButtonDataGridViewTextBoxColumn.DataPropertyName = "MouseButton";
-        mouseButtonDataGridViewTextBoxColumn.HeaderText = "MouseButton";
-        mouseButtonDataGridViewTextBoxColumn.Name = "mouseButtonDataGridViewTextBoxColumn";
-        mouseButtonDataGridViewTextBoxColumn.ReadOnly = true;
-        // 
-        // HoldingDuration
-        // 
-        HoldingDuration.DataPropertyName = "HoldingDuration";
-        HoldingDuration.HeaderText = "HoldingDuration";
-        HoldingDuration.Name = "HoldingDuration";
-        HoldingDuration.ReadOnly = true;
-        // 
-        // DisplayKey
-        // 
-        DisplayKey.DataPropertyName = "DisplayKey";
-        DisplayKey.HeaderText = "Key";
-        DisplayKey.Name = "DisplayKey";
-        DisplayKey.ReadOnly = true;
-        // 
-        // DisplayKeyDown
-        // 
-        DisplayKeyDown.DataPropertyName = "DisplayKeyDown";
-        DisplayKeyDown.HeaderText = "Up/Down";
-        DisplayKeyDown.Name = "DisplayKeyDown";
-        DisplayKeyDown.ReadOnly = true;
-        // 
         // Main
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
@@ -906,7 +906,7 @@ partial class Main
         ((System.ComponentModel.ISupportInitialize)nup_duration_sec).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_min).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_duration_h).EndInit();
-        ((System.ComponentModel.ISupportInitialize)nup_duration_mili).EndInit();
+        ((System.ComponentModel.ISupportInitialize)nup_duration_ms).EndInit();
         gp_clickPos.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)nup_clickingPos_Y).EndInit();
         ((System.ComponentModel.ISupportInitialize)nup_clickingPos_X).EndInit();
@@ -937,7 +937,7 @@ partial class Main
     private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_duration_sec;
     private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_duration_min;
     private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_duration_h;
-    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_duration_mili;
+    private OpenClicker.CustomComponents.NumericUpDownNoScroll nup_duration_ms;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.Label label4;

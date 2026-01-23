@@ -29,8 +29,18 @@ public partial class Main
                     (int)nup_interval_ms.Value),
                 ClickType = (ClickTypes)(cb_clickType.SelectedItem ?? ClickTypes.Single),
                 MouseButton = (OCMouseButtons)(cb_mouseButton.SelectedItem ?? OCMouseButtons.Left),
-                Position = rb_currentPos.Checked ? null : new Point((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value)
+                Position = rb_currentPos.Checked ? null : new Point((int)nup_clickingPos_X.Value, (int)nup_clickingPos_Y.Value),
             };
+
+            if (click.ClickType == ClickTypes.Hold)
+            {
+                click.HoldingDuration = new TimeSpan(0,
+                    (int)nup_duration_h.Value,
+                    (int)nup_duration_min.Value,
+                    (int)nup_duration_sec.Value,
+                    (int)nup_duration_ms.Value);
+            }
+
             pattern.Clicks.Add(click);
 
             ClickPattern.AssertValidClickPattern(pattern);
