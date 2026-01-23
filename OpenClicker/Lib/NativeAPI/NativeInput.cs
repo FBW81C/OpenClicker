@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
-namespace OpenClicker.Lib;
+namespace OpenClicker.Lib.NativeAPI;
 
 public static class NativeInput
 {
@@ -33,6 +33,7 @@ public static class NativeInput
         INPUT[] pInputs,
         int cbSize);
 
+    // deprecated
     //[DllImport("user32.dll")]
     //public static extern bool SetCursorPos(int x, int y);
 
@@ -59,7 +60,7 @@ public static class NativeInput
         public uint mouseData;
         public uint dwFlags;
         public uint time;
-        public IntPtr dwExtraInfo;
+        public nint dwExtraInfo;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -69,7 +70,7 @@ public static class NativeInput
         public ushort wScan;
         public uint dwFlags;
         public uint time;
-        public IntPtr dwExtraInfo;
+        public nint dwExtraInfo;
     }
 
     [StructLayout(LayoutKind.Sequential)]

@@ -1,9 +1,10 @@
 ﻿using Gma.System.MouseKeyHook;
+using OpenClicker.models.Click;
 using OpenClicker.Models;
 using System.Diagnostics;
 
 namespace OpenClicker.Lib;
-public class ClickRecorder : IDisposable
+public class ActionRecorder : IDisposable
 {
     private IKeyboardMouseEvents _globalHook;
     private Stopwatch _stopwatch = new();
@@ -52,7 +53,7 @@ public class ClickRecorder : IDisposable
     }
 
     // -------------------------------
-    // Maus Event-Handler
+    // Mouse Event-Handler
     // -------------------------------
     private void GlobalHook_MouseDownExt(object? sender, MouseEventExtArgs e)
     {

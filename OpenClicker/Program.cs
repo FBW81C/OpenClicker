@@ -1,10 +1,8 @@
 using OpenClicker.Forms.Hotkeys;
 using OpenClicker.Forms.Main;
 using OpenClicker.Lib;
-using OpenClicker.Models;
-using OpenClicker.Models;
 using System.Runtime.InteropServices;
-using OCMouseButtons = OpenClicker.Models.OCMouseButtons;
+using OCMouseButtons = OpenClicker.models.Click.OCMouseButtons;
 
 namespace OpenClicker;
 

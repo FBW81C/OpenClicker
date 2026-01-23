@@ -1,4 +1,4 @@
-﻿using OpenClicker.Models;
+﻿using OpenClicker.models.Click;
 
 namespace OpenClicker.Lib;
 public static class Mapper

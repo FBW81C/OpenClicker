@@ -4,10 +4,5 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenClicker.Models;
-public enum OCMouseButtons
-{
-    Left,
-    Middle,
-    Right
-}
+namespace OpenClicker.models.Hotkeys;
+public record HotkeyConfig(Keys Key, int Modifier);

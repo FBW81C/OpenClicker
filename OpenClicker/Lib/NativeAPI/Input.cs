@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using OpenClicker.Models;
+using OpenClicker.models.Click;
 
-namespace OpenClicker.Lib;
+namespace OpenClicker.Lib.NativeAPI;
 
 public static class Input
 {

@@ -1,6 +1,7 @@
 ﻿using OpenClicker.Forms.Hotkeys;
 using OpenClicker.Lib;
 using OpenClicker.models;
+using OpenClicker.models.Click;
 using OpenClicker.Models;
 using System;
 using System.Collections.Generic;

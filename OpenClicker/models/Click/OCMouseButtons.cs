@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenClicker.Models;
-public enum HotKeys
+namespace OpenClicker.models.Click;
+public enum OCMouseButtons
 {
-    Start = 0,
-    Stop = 1,
-    Toggle = 2,
+    Left,
+    Middle,
+    Right
 }
