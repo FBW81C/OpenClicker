@@ -71,7 +71,8 @@ public static class FileReader
 
         try
         {
-            string content = File.ReadAllText(filePath);
+            string content = System.IO.File.ReadAllText(filePath);
+            
             var pattern = JsonSerializer.Deserialize<ClickPattern>(content);
 
             return pattern ?? throw new OCInvalidFile("file corrupted");
@@ -118,7 +119,7 @@ public static class FileReader
             
         try
         {
-            File.WriteAllText(filepath, json);
+            System.IO.File.WriteAllText(filepath, json);
             return filepath;
         } 
         catch (Exception ex)
