@@ -153,7 +153,7 @@ partial class Main
         gp_interval.Controls.Add(lb_Hours);
         gp_interval.Location = new Point(17, 10);
         gp_interval.Name = "gp_interval";
-        gp_interval.Size = new Size(682, 62);
+        gp_interval.Size = new Size(763, 62);
         gp_interval.TabIndex = 0;
         gp_interval.TabStop = false;
         gp_interval.Text = "Click Interval";
@@ -308,7 +308,7 @@ partial class Main
         gp_options.Controls.Add(cb_mouseButton);
         gp_options.Location = new Point(17, 78);
         gp_options.Name = "gp_options";
-        gp_options.Size = new Size(682, 97);
+        gp_options.Size = new Size(763, 97);
         gp_options.TabIndex = 4;
         gp_options.TabStop = false;
         gp_options.Text = "Click Options";
@@ -457,7 +457,7 @@ partial class Main
         gp_duration.Controls.Add(label5);
         gp_duration.Location = new Point(17, 181);
         gp_duration.Name = "gp_duration";
-        gp_duration.Size = new Size(682, 62);
+        gp_duration.Size = new Size(763, 62);
         gp_duration.TabIndex = 7;
         gp_duration.TabStop = false;
         gp_duration.Text = "Duration (Only for Click Type = Holding)";
@@ -542,7 +542,7 @@ partial class Main
         gp_clickPos.Controls.Add(rb_currentPos);
         gp_clickPos.Location = new Point(17, 249);
         gp_clickPos.Name = "gp_clickPos";
-        gp_clickPos.Size = new Size(682, 86);
+        gp_clickPos.Size = new Size(763, 86);
         gp_clickPos.TabIndex = 8;
         gp_clickPos.TabStop = false;
         gp_clickPos.Text = "Clicking Position";
@@ -701,7 +701,7 @@ partial class Main
         // 
         dataGridView.AllowUserToAddRows = false;
         dataGridView.AllowUserToResizeRows = false;
-        dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         dataGridView.AutoGenerateColumns = false;
         dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
