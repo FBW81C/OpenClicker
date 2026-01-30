@@ -126,7 +126,12 @@ public partial class Main
     private void hotkeysToolStripMenuItem_Click(object sender, EventArgs e)
     {
         var form = new HotkeyEditor(_hotkeyManager);
-        form.ShowDialog();
+        var result = form.ShowDialog();
+
+        if (result == DialogResult.OK)
+        {
+            UpdateHotkeyButtonLabeling();
+        }
     }
 }
 

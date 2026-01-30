@@ -1,4 +1,5 @@
-﻿using OpenClicker.Forms.Hotkeys;
+﻿using Gma.System.MouseKeyHook.HotKeys;
+using OpenClicker.Forms.Hotkeys;
 using OpenClicker.models.Hotkeys;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,10 @@ public partial class Main
 {
     public void RegsiterHotkeysHandler(HotkeyManager hotkeyManager)
     {
+        UpdateHotkeyButtonLabeling();
+
         hotkeyManager.HotkeyPressed += (hotkey) =>
         {
-
             switch (hotkey)
             {
                 case (HotKeys.Start):

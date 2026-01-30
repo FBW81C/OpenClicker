@@ -63,6 +63,7 @@
             // btn_ok
             // 
             btn_ok.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_ok.DialogResult = DialogResult.OK;
             btn_ok.Location = new Point(164, 180);
             btn_ok.Name = "btn_ok";
             btn_ok.Size = new Size(75, 23);

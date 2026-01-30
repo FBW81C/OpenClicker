@@ -1,9 +1,11 @@
+using System.ComponentModel.Design.Serialization;
 using OpenClicker.Exceptions;
 using OpenClicker.Forms.ClickEditor;
 using OpenClicker.Forms.Hotkeys;
 using OpenClicker.Lib;
 using OpenClicker.Lib.NativeAPI;
 using OpenClicker.models.Click;
+using OpenClicker.models.Hotkeys;
 using OpenClicker.Models;
 
 namespace OpenClicker.Forms.Main;
@@ -49,6 +51,22 @@ public partial class Main : Form
             {
                 LoadProfile(Constants.DEFAULTPROFILE_PATH);
             }
+        }
+    }
+
+    public void UpdateHotkeyButtonLabeling()
+    {
+        var hotkeys = _hotkeyManager.GetHotKeys();
+        hotkeys.TryGetValue(HotKeys.Start, out var startHotKey);
+        hotkeys.TryGetValue(HotKeys.Stop, out var stopHotKey);
+
+        if (startHotKey != null)
+        {
+            btn_start.Text = $"Start ({(startHotKey.Modifier != 0 ? $"{_hotkeyManager.GetModifierFromInt(startHotKey.Modifier)} + " : "")}{startHotKey.Key})";
+        }
+        if (stopHotKey != null)
+        {
+            btn_stop.Text = $"Stop ({((stopHotKey.Modifier != 0) ? $"{_hotkeyManager.GetModifierFromInt(stopHotKey.Modifier)} + " : "")}{stopHotKey.Key})";
         }
     }
 
