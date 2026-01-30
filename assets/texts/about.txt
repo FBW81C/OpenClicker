@@ -1,4 +1,4 @@
-OpenClicker Version 2.5 by FBW81C
+OpenClicker Version 2.6 by FBW81C
 
 OpenClicker Repository:
 https://github.com/FBW81C/OpenClicker

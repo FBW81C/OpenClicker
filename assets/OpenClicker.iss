@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OpenClicker"
-#define MyAppVersion "2.5"
+#define MyAppVersion "2.6"
 #define MyAppPublisher "FBW81C"
 #define MyAppURL "https://github.com/FBW81C/OpenClicker"
 #define MyAppExeName "OpenClicker.exe"
