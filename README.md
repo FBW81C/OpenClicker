@@ -63,6 +63,5 @@ see LICENSE.txt
 
 ## Links
 - GitHub: https://github.com/FBW81C/OpenClicker  
-- YouTube: https://www.youtube.com/@FBW81C  
 
 Free Software, Hell Yeah!
